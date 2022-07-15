@@ -3,6 +3,8 @@ from django.db.models import (
     AutoField,
     FloatField,
     ForeignKey,
+    IntegerChoices,
+    IntegerField,
     ManyToManyField,
     OneToOneField,
     TextChoices,
@@ -286,3 +288,32 @@ class Gammagraphy(TimeStampedModel):
     def __str__(self):
         """Returns the str representation for the model."""
         return f"Gammagrafía de {str(self.patient)}"
+
+
+class TherapyTypeChoice(IntegerChoices):
+    AMBULATORY = 2, "Ambulatoria"
+    ENTRY = 3, "Ingreso"
+
+
+class Therapy(TimeStampedModel):
+    """Model representation of a Therapy."""
+
+    patient = ForeignKey(Patient, verbose_name="Paciente", on_delete=CASCADE)
+    activity = FloatField(verbose_name="Actividad")
+    radio_isotope = ForeignKey(
+        RadioIsotope, verbose_name="Radio isotopo", on_delete=CASCADE
+    )
+    drug = ForeignKey(NuclearMedicineDrug, verbose_name="Fármaco", on_delete=CASCADE)
+    race = IntegerField(
+        verbose_name="Tipo de terapia", choices=TherapyTypeChoice.choices
+    )
+
+    class Meta:
+        verbose_name = "Terapia"
+        verbose_name_plural = "Terapias"
+        ordering = ["pk"]
+        default_permissions = ()
+
+    def __str__(self):
+        """Returns the str representation for the model."""
+        return f"Terapia de {str(self.patient)}"
