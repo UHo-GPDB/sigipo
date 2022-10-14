@@ -295,6 +295,19 @@ class TherapyTypeChoice(IntegerChoices):
     ENTRY = 3, "Ingreso"
 
 
+class TherapyQuerysetManager(Manager):
+    """Manager to handle patient, activity, drug,radio_isotope ."""
+
+    def get_queryset(self):
+        """Fetch the related patient."""
+        return (
+            super()
+            .get_queryset()
+            .select_related("patient", "activity", "radio_isotope", "drug")
+            .prefetch_related("activity")
+        )
+
+
 class Therapy(TimeStampedModel):
     """Model representation of a Therapy."""
 
