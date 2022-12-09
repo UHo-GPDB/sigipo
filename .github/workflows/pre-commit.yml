@@ -31,6 +31,8 @@ jobs:
               with:
                   token: ${{ secrets.GITHUB_TOKEN }}
 
+    push-pre-commit:
+        steps:
             - uses: stefanzweifel/git-auto-commit-action@v4
               with:
                   commit_message: pre-commit-fix
