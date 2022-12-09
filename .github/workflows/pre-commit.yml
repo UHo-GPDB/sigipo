@@ -31,12 +31,8 @@ jobs:
               with:
                   token: ${{ secrets.GITHUB_TOKEN }}
 
-    push-pre-commit:
-        runs-on: ubuntu-latest
-        if: ${{ always() }}
-        needs: [pre-commit]
-
-        steps:
+            - name: Push changes
+              if: success() || failure()
             - uses: stefanzweifel/git-auto-commit-action@v4
               with:
                   commit_message: pre-commit-fix
