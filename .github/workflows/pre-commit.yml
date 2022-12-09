@@ -33,6 +33,6 @@ jobs:
 
             - name: Push changes
               if: success() || failure()
-            - uses: stefanzweifel/git-auto-commit-action@v4
+              uses: stefanzweifel/git-auto-commit-action@v4
               with:
                   commit_message: pre-commit-fix
