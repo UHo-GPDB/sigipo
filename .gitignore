@@ -136,3 +136,4 @@ dmypy.json
 
 # secrets config
 secrets.json
+.vscode/settings.json
