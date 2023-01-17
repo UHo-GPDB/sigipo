@@ -1,5 +1,6 @@
 from datetime import datetime
 from random import randint
+
 from django.core.management.base import BaseCommand
 from apps.patient.factories import *
 from apps.geographic_location.factories import *
@@ -10,7 +11,7 @@ from apps.chemotherapy.factories import *
 from apps.nuclear_medicine.factories import *
 
 class Command(BaseCommand):
-    help = 'Generates 5 instances of all models'
+    help = "Generates 5 instances of all models"
 
     def handle(self, *args, **options):
         
