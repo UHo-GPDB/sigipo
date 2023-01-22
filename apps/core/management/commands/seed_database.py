@@ -1,4 +1,5 @@
 from django.core.management.base import BaseCommand
+
 from apps.accounts.factories import UserFactory
 from apps.cancer_registry.factories import (
     DoctorFactory,
@@ -35,7 +36,7 @@ class Command(BaseCommand):
     help = "Generates 5 instances of all models"
 
     def handle(self, *args, **options):
-        UserFactory.create(username='admin', password='123')
+        UserFactory.create(username="admin", password="123")
         for _ in range(5):
             province = ProvinceFactory.create()
             municipality = MunicipalityFactory.create(province=province)
