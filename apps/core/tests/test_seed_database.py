@@ -2,6 +2,7 @@ from io import StringIO
 
 from django.core.management import call_command
 
+from apps.accounts.models import User
 from apps.cancer_registry.models import Neoplasm
 from apps.chemotherapy.models import (
     Cycle,
@@ -41,6 +42,7 @@ class SeedDatabaseTest(TestCase):
 
     def test_province_instances_number(self):
         self.call_command()
+        user = User.objects.all().count()
         provinces = Province.objects.all().count()
         municipality = Municipality.objects.all().count()
         patient = Patient.objects.all().count()
@@ -87,6 +89,7 @@ class SeedDatabaseTest(TestCase):
         self.assertEqual(hormonalstudy, 5, "Estudio Hormonal")
         self.assertEqual(oncologicresult, 5, "Resultados Oncológicos")
         self.assertEqual(hormonalresult, 5, "Resultados Hormonales")
+        self.assertEqual(user, 1, "Usuario")
         self.assertEqual(iodinedetection, 5, "Detección de Yodo")
         self.assertEqual(serialiodinedetection, 5, "Detección de Yodo Seriada")
         self.assertEqual(gammagraphy, 5, "Gammagrafías")
