@@ -77,10 +77,13 @@ class NeoplasmDeleteView(BaseDeleteView):
 
 
 class MorphologyReportView(ReportDownloadView):
+    """View to handle morphology report."""
+
     report_name = "Cantidad de casos por morfología"
     report_text = "Ingrese el intervalo de tiempo."
 
     def post(self, request, *args, **kwargs):
+        """morphology report post function."""
         form = self.report_form(request.POST)
         if form.is_valid():
             initial_date = form.cleaned_data["initial_date"]
@@ -116,10 +119,13 @@ class MorphologyReportView(ReportDownloadView):
 
 
 class TopographyReportView(ReportDownloadView):
+    """View to handle topography report."""
+
     report_name = "Cantidad de casos por Topografía"
     report_text = "Ingrese el intervalo de tiempo."
 
     def post(self, request, *args, **kwargs):
+        """topography report post function."""
         form = self.report_form(request.POST)
         if form.is_valid():
             initial_date = form.cleaned_data["initial_date"]
@@ -155,10 +161,13 @@ class TopographyReportView(ReportDownloadView):
 
 
 class GroupReportView(ReportDownloadView):
+    """View to handle group report."""
+
     report_name = "Cantidad de casos por grupo de trabajo"
     report_text = "Ingrese el intervalo de tiempo."
 
     def post(self, request, *args, **kwargs):
+        """group report post function."""
         form = self.report_form(request.POST)
         if form.is_valid():
             initial_date = form.cleaned_data["initial_date"]
@@ -196,6 +205,7 @@ class GroupReportView(ReportDownloadView):
 def neoplasm_download_table(
     self, request: HttpRequest, *args, **kwargs
 ) -> FileResponse:
+    """neoplasm download table function."""
     filterset_class = self.get_filterset_class()
     filterset = self.get_filterset(filterset_class)
     object_list = filterset.qs

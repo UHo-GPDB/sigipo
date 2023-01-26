@@ -5,6 +5,8 @@ from apps.drugs.models import Drug, DrugTypeChoices, NuclearMedicineDrug
 
 
 class NuclearMedicineDrugFilter(FilterSet):
+    """Nuclear Medicine Drug Filter"""
+
     name = CharFilter(
         lookup_expr="icontains",
         widget=TextInput(
@@ -13,6 +15,8 @@ class NuclearMedicineDrugFilter(FilterSet):
     )
 
     class Meta:
+        """Nuclear Medicine Drug Filter Meta class"""
+
         model = NuclearMedicineDrug
         fields = [
             "name",
@@ -20,6 +24,8 @@ class NuclearMedicineDrugFilter(FilterSet):
 
 
 class DrugFilter(FilterSet):
+    """Drug Filter"""
+
     name = CharFilter(
         lookup_expr="icontains",
         widget=TextInput(
@@ -41,6 +47,8 @@ class DrugFilter(FilterSet):
     )
 
     class Meta:
+        """Drug Filter Meta class"""
+
         model = Drug
         fields = [
             "name",

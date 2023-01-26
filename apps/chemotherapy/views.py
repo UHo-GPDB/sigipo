@@ -191,6 +191,7 @@ class CycleCreateView(BaseCreateView):
     )
 
     def get_context_data(self, **kwargs):
+        """get context data function."""
         context = super().get_context_data(**kwargs)
         context["formset"] = self.Cycle_Cycle_Medication()
         for form in context["formset"]:
@@ -198,6 +199,7 @@ class CycleCreateView(BaseCreateView):
         return context
 
     def post(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
+        """post function"""
         self.object = None
         form_class = self.get_form_class()
         form = self.get_form(form_class)
@@ -210,6 +212,7 @@ class CycleCreateView(BaseCreateView):
             return self.form_invalid(form, formset)
 
     def form_valid(self, form, formset):
+        """form is valid function"""
         self.object = form.save(commit=False)
         self.object.save()
 
@@ -220,6 +223,7 @@ class CycleCreateView(BaseCreateView):
         return redirect(self.success_url)
 
     def form_invalid(self, form, formset):
+        """form is valid function"""
         return self.render_to_response(
             self.get_context_data(form=form, formset=formset)
         )
@@ -242,6 +246,7 @@ class CycleDetailView(BaseDetailView):
     )
 
     def get_context_data(self, **kwargs):
+        """get context data function"""
         context = super().get_context_data(**kwargs)
         cycle = self.get_object()
         context["formset"] = self.Cycle_Cycle_Medication(
@@ -276,6 +281,7 @@ class CycleUpdateView(BaseUpdateView):
     )
 
     def get_context_data(self, **kwargs):
+        """get context data function"""
         context = super().get_context_data(**kwargs)
         cycle = self.get_object()
         context["formset"] = self.Cycle_Cycle_Medication(
@@ -287,6 +293,7 @@ class CycleUpdateView(BaseUpdateView):
         return context
 
     def post(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
+        """post function"""
         cycle = self.get_object()
         self.object = self.get_object()
         form_class = self.get_form_class()
@@ -302,6 +309,7 @@ class CycleUpdateView(BaseUpdateView):
             return self.form_invalid(form, formset)
 
     def form_valid(self, form, formset):
+        """form is valid function"""
         self.object = form.save(commit=False)
         self.object.save()
 
@@ -312,6 +320,7 @@ class CycleUpdateView(BaseUpdateView):
         return redirect(self.success_url)
 
     def form_invalid(self, form, formset):
+        """form is valid function"""
         return self.render_to_response(
             self.get_context_data(form=form, formset=formset)
         )

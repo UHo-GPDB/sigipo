@@ -30,12 +30,17 @@ from apps.patient.models import Patient
 
 
 class Scheme(Model):
+    """Scheme"""
+
     name = CharField(verbose_name="Nombre", max_length=255)
 
     def __str__(self) -> str:
+        """Scheme str representation"""
         return self.name
 
     class Meta:
+        """Scheme Meta Class"""
+
         verbose_name = "Esquema"
         verbose_name_plural = "Esquemas"
         ordering = ["pk"]
@@ -43,12 +48,17 @@ class Scheme(Model):
 
 
 class RoomChoices(IntegerChoices):
+    """Room Choices"""
+
     CHEMOTHERAPY = 1, "Quimioterapia"
     ROOM_1 = 2, "Sala 1"
 
 
 class ProtocolQuerysetManager(Manager):
+    """Protocol Queryset Manager"""
+
     def get_queryset(self) -> QuerySet:
+        """get queryset function"""
         return (
             super()
             .get_queryset()
@@ -79,10 +89,13 @@ class ProtocolQuerysetManager(Manager):
         )
 
     def not_suspended(self) -> QuerySet:
+        """not suspended function"""
         return self.get_queryset().filter(suspended=False)
 
 
 class Protocol(TimeStampedModel):
+    """Protocol"""
+
     patient = ForeignKey(Patient, verbose_name="Paciente", on_delete=CASCADE)
     scheme = ForeignKey(Scheme, verbose_name="Esquema", on_delete=CASCADE)
     room = IntegerField(
@@ -99,9 +112,12 @@ class Protocol(TimeStampedModel):
     objects = ProtocolQuerysetManager()
 
     def __str__(self):
+        """Protocol str representation"""
         return f"Protocolo de {self.patient} con esquema {self.scheme}"
 
     class Meta:
+        """Protocol Meta class"""
+
         verbose_name = "Protocolo"
         verbose_name_plural = "Protocolos"
         ordering = ["pk"]
@@ -109,6 +125,8 @@ class Protocol(TimeStampedModel):
 
 
 class RouteChoices(IntegerChoices):
+    """Route Choices"""
+
     INTRAMUSCULAR = 0, "Intramuscular"
     INTRAVENOUS = 1, "Intravenosa"
     SUBCUTANEOUS = 2, "Subcutaneo"
@@ -117,7 +135,10 @@ class RouteChoices(IntegerChoices):
 
 
 class MedicationQuerysetManager(Manager):
+    """Medication Queryset Manager"""
+
     def get_queryset(self) -> QuerySet:
+        """get queryset function"""
         return (
             super()
             .get_queryset()
@@ -126,6 +147,8 @@ class MedicationQuerysetManager(Manager):
 
 
 class Medication(Model):
+    """Medication"""
+
     protocol = ForeignKey(Protocol, verbose_name="Protocolo", on_delete=CASCADE)
     drug = ForeignKey(Drug, verbose_name="Medicamento", on_delete=CASCADE)
     days = IntegerField(verbose_name="Días")
@@ -141,9 +164,12 @@ class Medication(Model):
     objects = MedicationQuerysetManager()
 
     def __str__(self) -> str:
+        """Medication str representation"""
         return f"{self.drug} en {self.protocol}"
 
     class Meta:
+        """Medication Meta class"""
+
         verbose_name = "Medicación"
         verbose_name_plural = "Medicaciones"
         ordering = ["pk"]
@@ -151,19 +177,27 @@ class Medication(Model):
 
 
 class CycleQuerysetManager(Manager):
+    """Cycle Queryset Manager"""
+
     def get_queryset(self) -> QuerySet:
+        """get queryset function"""
         return super().get_queryset().select_related("protocol")
 
 
 class Cycle(TimeStampedModel):
+    """Cycle"""
+
     protocol = ForeignKey(Protocol, verbose_name="Protocolo", on_delete=CASCADE)
     next_date = DateField(verbose_name="Fecha de próximo ciclo")
     objects = CycleQuerysetManager()
 
     def __str__(self) -> str:
+        """Cycle str representation"""
         return f"Ciclo de {self.protocol}"
 
     class Meta:
+        """Cycle Meta class"""
+
         verbose_name = "Ciclo"
         verbose_name_plural = "Ciclos"
         ordering = ["pk"]
@@ -171,11 +205,16 @@ class Cycle(TimeStampedModel):
 
 
 class CycleMedicationQuerysetManager(Manager):
+    """Cycle Medication Queryset Manager"""
+
     def get_queryset(self) -> QuerySet:
+        """get queryset function"""
         return super().get_queryset().select_related("cycle", "drug")
 
 
 class CycleMedication(Model):
+    """Cycle Medication"""
+
     cycle = ForeignKey(Cycle, verbose_name="Ciclo", on_delete=CASCADE)
     drug = ForeignKey(Drug, verbose_name="Fármaco", on_delete=CASCADE)
     dose = FloatField(verbose_name="Dosis")
@@ -185,9 +224,12 @@ class CycleMedication(Model):
     objects = CycleMedicationQuerysetManager()
 
     def __str__(self) -> str:
+        """Cycle Medication str representation"""
         return f"{self.drug} en {self.cycle}"
 
     class Meta:
+        """Cycle Medication Meta class"""
+
         verbose_name = "Medicación del ciclo"
         verbose_name_plural = "Medicaciones del ciclo"
         ordering = ["pk"]

@@ -4,6 +4,10 @@ from apps.cancer_registry.models import Neoplasm
 
 
 class NeoplasmResource(ModelResource):
+    """
+    Neoplasm Resource
+    """
+
     patient = Field(attribute="patient", column_name="Paciente")
     primary_site = Field(attribute="primary_site", column_name="Sitio primario")
     histologic_type = Field(attribute="histologic_type", column_name="Tipo histológico")
@@ -73,24 +77,45 @@ class NeoplasmResource(ModelResource):
     )
 
     def dehydrate_patient(self, neoplasm):
+        """
+        dehydrate patient
+        """
         return str(neoplasm.patient)
 
     def dehydrate_laterality(self, neoplasm):
+        """
+        dehydrate laterality
+        """
         return str(neoplasm.get_laterality_display() or "")
 
     def dehydrate_diagnostic_confirmation(self, neoplasm):
+        """
+        dehydrate diagnostic confirmation
+        """
         return str(neoplasm.get_diagnostic_confirmation_display() or "")
 
     def dehydrate_differentiation_grade(self, neoplasm):
+        """
+        dehydrate differentiation grade
+        """
         return str(neoplasm.get_differentiation_grade_display() or "")
 
     def dehydrate_clinical_extension(self, neoplasm):
+        """
+        dehydrate clinical extension
+        """
         return str(neoplasm.get_clinical_extension_display() or "")
 
     def dehydrate_clinical_stage(self, neoplasm):
+        """
+        dehydrate clinical stage
+        """
         return str(neoplasm.get_clinical_stage_display() or "")
 
     def dehydrate_is_pregnant(self, neoplasm):
+        """
+        dehydrate is pregnant
+        """
         return str(
             "Sí"
             if neoplasm.is_pregnant is True
@@ -100,9 +125,15 @@ class NeoplasmResource(ModelResource):
         )
 
     def dehydrate_trimester(self, neoplasm):
+        """
+        dehydrate trimester
+        """
         return str(neoplasm.trimester or "")
 
     def dehydrate_is_vih(self, neoplasm):
+        """
+        dehydrate is vih
+        """
         return str(
             "Sí"
             if neoplasm.is_vih is True
@@ -112,33 +143,63 @@ class NeoplasmResource(ModelResource):
         )
 
     def dehydrate_source_of_info(self, neoplasm):
+        """
+        dehydrate source of info
+        """
         return str(neoplasm.get_source_of_info_display() or "")
 
     def dehydrate_medic_that_report(self, neoplasm):
+        """
+        dehydrate medic that report
+        """
         return str(neoplasm.medic_that_report or "")
 
     def dehydrate_tumor(self, neoplasm):
+        """
+        dehydrate tumor
+        """
         return str(neoplasm.get_tumor_display() or "")
 
     def dehydrate_nodule(self, neoplasm):
+        """
+        dehydrate nodule
+        """
         return str(neoplasm.get_nodule_display() or "")
 
     def dehydrate_metastasis(self, neoplasm):
+        """
+        dehydrate metastasis
+        """
         return str(neoplasm.get_metastasis_display() or "")
 
     def dehydrate_neoplasm_classification(self, neoplasm):
+        """
+        dehydrate neoplasm classification
+        """
         return str(neoplasm.get_neoplasm_classification_display() or "")
 
     def dehydrate_tumor_classification(self, neoplasm):
+        """
+        dehydrate tumor classification
+        """
         return str(neoplasm.get_tumor_classification_display() or "")
 
     def dehydrate_treatment_performed(self, neoplasm):
+        """
+        dehydrate treatment performed
+        """
         return str(neoplasm.get_treatment_performed_display() or "")
 
     def dehydrate_group(self, neoplasm):
+        """
+        dehydrate group
+        """
         return str(neoplasm.group or "")
 
     def dehydrate_hematological_transformation(self, neoplasm):
+        """
+        dehydrate hematological transformation
+        """
         return str(
             "Sí"
             if neoplasm.hematological_transformation is True
@@ -148,21 +209,40 @@ class NeoplasmResource(ModelResource):
         )
 
     def dehydrate_acute_lymphoid_leukemia(self, neoplasm):
+        """
+        dehydrate acute lymphoid leukemia
+        """
         return str(neoplasm.get_acute_lymphoid_leukemia_display() or "")
 
     def dehydrate_chronic_lymphoid_leukemia(self, neoplasm):
+        """
+        dehydrate chronic lymphoid leukemia
+        """
         return str(neoplasm.get_chronic_lymphoid_leukemia_display() or "")
 
     def dehydrate_multiple_myeloma(self, neoplasm):
+        """
+        dehydrate multiple myeloma
+        """
         return str(neoplasm.get_multiple_myeloma_display() or "")
 
     def dehydrate_chronic_myeloid_leukemia(self, neoplasm):
+        """
+        dehydrate chronic myeloid leukemia
+        """
         return str(neoplasm.get_chronic_myeloid_leukemia_display() or "")
 
     def dehydrate_acute_myeloid_leukemia(self, neoplasm):
+        """
+        dehydrate acute myeloid leukemia
+        """
         return str(neoplasm.get_acute_myeloid_leukemia_display() or "")
 
     class Meta:
+        """
+        Meta class
+        """
+
         model = Neoplasm
         fields = (
             "patient",

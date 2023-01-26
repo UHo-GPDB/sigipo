@@ -6,6 +6,8 @@ from apps.employee.models import Doctor, Group
 
 
 class DoctorFilter(FilterSet):
+    """Doctor Filter"""
+
     personal_record_number = CharFilter(
         lookup_expr="icontains",
         widget=TextInput(
@@ -48,6 +50,8 @@ class DoctorFilter(FilterSet):
     )
 
     class Meta:
+        """Doctor Filter Meta class"""
+
         model = Doctor
         fields = [
             "personal_record_number",
@@ -58,6 +62,8 @@ class DoctorFilter(FilterSet):
 
 
 class GroupFilter(FilterSet):
+    """Group Filter"""
+
     name = CharFilter(
         lookup_expr="icontains",
         widget=TextInput(
@@ -67,6 +73,8 @@ class GroupFilter(FilterSet):
     )
 
     class Meta:
+        """Group Filter Meta class"""
+
         model = Group
         fields = [
             "name",

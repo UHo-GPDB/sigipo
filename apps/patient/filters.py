@@ -18,6 +18,7 @@ class CustomRangeWidget(RangeWidget):
     """Widget to set different placeholder to each field."""
 
     def __init__(self, attrs=None):
+        """constructor"""
         super().__init__(attrs)
         self.widgets[0].attrs.update(
             {"class": "form-control", "placeholder": "Edad de diagnóstico mínima"}
@@ -139,6 +140,8 @@ class PatientFilter(FilterSet):
     )
 
     class Meta:
+        """Patient Meta class"""
+
         model = Patient
         fields = [
             "identity_card",
@@ -153,6 +156,8 @@ class PatientFilter(FilterSet):
 
 
 class NuclearMedicinePatientFilter(PatientFilter):
+    """Nuclear Medicine Patient Filter"""
+
     is_oncologic = BooleanFilter(
         widget=NullBooleanSelect(
             attrs={
@@ -164,6 +169,8 @@ class NuclearMedicinePatientFilter(PatientFilter):
     )
 
     class Meta:
+        """Nuclear Medicine Patient Filter Meta class"""
+
         model = Patient
         fields = [
             "identity_card",

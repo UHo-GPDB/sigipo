@@ -15,6 +15,8 @@ from apps.employee.models import Doctor
 
 
 class SchemeFilter(FilterSet):
+    """Scheme Filter"""
+
     name = CharFilter(
         lookup_expr="icontains",
         widget=TextInput(
@@ -23,6 +25,8 @@ class SchemeFilter(FilterSet):
     )
 
     class Meta:
+        """Scheme Filter Meta class"""
+
         model = Scheme
         fields = [
             "name",
@@ -30,6 +34,8 @@ class SchemeFilter(FilterSet):
 
 
 class ProtocolFilter(FilterSet):
+    """Protocol Filter"""
+
     patient__identity_card = CharFilter(
         lookup_expr="icontains",
         widget=TextInput(
@@ -114,6 +120,8 @@ class ProtocolFilter(FilterSet):
     )
 
     class Meta:
+        """Protocol Filter Meta class"""
+
         model = Protocol
         fields = [
             "patient__identity_card",
@@ -129,6 +137,8 @@ class ProtocolFilter(FilterSet):
 
 
 class MedicationFilter(FilterSet):
+    """Medication Filter"""
+
     protocol__patient__identity_card = CharFilter(
         lookup_expr="icontains",
         widget=TextInput(
@@ -190,6 +200,8 @@ class MedicationFilter(FilterSet):
     )
 
     class Meta:
+        """Medication Filter Meta class"""
+
         model = Medication
         fields = [
             "protocol__patient__identity_card",
@@ -203,6 +215,8 @@ class MedicationFilter(FilterSet):
 
 
 class CycleFilter(FilterSet):
+    """Cycle Filter"""
+
     protocol__patient__identity_card = CharFilter(
         lookup_expr="icontains",
         widget=TextInput(
@@ -252,6 +266,8 @@ class CycleFilter(FilterSet):
     )
 
     class Meta:
+        """Cycle Filter Meta class"""
+
         model = Medication
         fields = [
             "protocol__patient__identity_card",

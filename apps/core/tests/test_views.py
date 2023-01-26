@@ -18,7 +18,11 @@ from apps.geographic_location.views import ProvinceDeleteView
 
 
 class Helper(CancelUrlMixin, ContextMixin):
+    """Helper class"""
+
     class RequestHelper:
+        """Request Helper class"""
+
         GET = {}
 
     cancel_url = "admin:login"
@@ -195,25 +199,34 @@ class BaseDeleteViewTestCase(TestCase):
 
 
 class CoreHandlerTestCase(TestCase):
+    """Core Handler Test Case"""
+
     @classmethod
     def setUpTestData(cls):
         """Common test data."""
         cls.user = UserFactory.create(is_staff=False, is_superuser=False)
 
     def test_403(self) -> None:
+        """test 403 function"""
         self.client.force_login(self.user)
         response = self.client.get(reverse("patient:oncologic_create"))
         self.assertTemplateUsed(response, "400/403.html")
 
 
 class FileDownloadViewTestCase(SimpleTestCase):
+    """File Download View Test Case"""
+
     def test_post(self) -> None:
+        """test post function"""
         with self.assertRaises(NotImplementedError):
             FileDownloadView.post(None, None)
 
 
 class ReportDownloadViewTestCase(SimpleTestCase):
+    """Report Download View Test Case"""
+
     def test_get(self) -> None:
+        """test get function"""
         response = ReportDownloadView().get_context_data()
         self.assertIn("report_name", response)
         self.assertIn("report_text", response)
@@ -221,6 +234,9 @@ class ReportDownloadViewTestCase(SimpleTestCase):
 
 
 class PaginationFilterViewTestCase(SimpleTestCase):
+    """Pagination Filter View Test Case"""
+
     def test_get(self) -> None:
+        """test get function"""
         with self.assertRaises(NotImplementedError):
             PaginationFilterView().post(None, None)

@@ -15,6 +15,7 @@ from apps.core.forms import BaseReportForm
 
 
 def http_403(request: HttpRequest, exception) -> HttpResponse:
+    """http 403 function"""
     return render(request, "400/403.html")
 
 
@@ -23,6 +24,8 @@ class FileDownloadView(
     PermissionRequiredMixin,
     TemplateView,
 ):
+    """File Download View"""
+
     def post(self, request, *args, **kwargs):
         """
         Download a file.
@@ -31,6 +34,8 @@ class FileDownloadView(
 
 
 class ReportDownloadView(FileDownloadView):
+    """Report Download View"""
+
     report_name = None
     report_text = None
     report_form = BaseReportForm
@@ -184,6 +189,7 @@ class BaseCreateView(
     permission_required = ()
 
     def __init__(self, **kwargs):
+        """constructor"""
         self.title = f"Añadir {self.model._meta.verbose_name.lower()}"
         super().__init__(**kwargs)
 
@@ -203,6 +209,7 @@ class BaseUpdateView(
     permission_required = ()
 
     def __init__(self, **kwargs):
+        """constructor"""
         self.title = f"Editar {self.model._meta.verbose_name.lower()}"
         super().__init__(**kwargs)
 
@@ -222,6 +229,7 @@ class BaseDetailView(
     permission_required = ()
 
     def __init__(self, **kwargs):
+        """constructor"""
         self.title = f"Detalles de {self.model._meta.verbose_name.lower()}"
         super().__init__(**kwargs)
 
@@ -265,6 +273,7 @@ class BaseDeleteView(
     permission_required = ()
 
     def __init__(self, **kwargs):
+        """constructor"""
         self.title = f"Eliminar {self.model._meta.verbose_name.lower()}"
         super().__init__(**kwargs)
 
@@ -290,6 +299,7 @@ class BaseDeleteView(
 
 
 def getUrl(crud_class):
+    """get Url function"""
     if issubclass(crud_class, BaseCreateView):
         model_name = crud_class.model.__name__.lower()
         return path(

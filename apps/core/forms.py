@@ -2,6 +2,8 @@ from django.forms import DateField, DateInput, Form, ModelForm, TypedChoiceField
 
 
 class ChoiceField(TypedChoiceField):
+    """Choice Field"""
+
     def __init__(
         self,
         choices=(),
@@ -56,6 +58,8 @@ class ModelForm(ModelForm):
 
 
 class BaseReportForm(Form):
+    """Base Report Form."""
+
     initial_date = DateField(
         widget=DateInput(
             attrs={

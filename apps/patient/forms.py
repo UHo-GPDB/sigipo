@@ -148,23 +148,31 @@ class BasePatientForm(ModelForm):
     ]
 
     class Meta:
+        """patient Meta class."""
+
         model = Patient
         fields = "__all__"
 
 
 class OncologicPatientForm(BasePatientForm):
+    """Oncologic Patient Form"""
+
     is_oncologic = BooleanField(
         widget=HiddenInput(attrs={"value": "true"}), required=False
     )
 
 
 class NuclearMedicinePatientForm(BasePatientForm):
+    """Nuclear Medicine Patient Form"""
+
     is_oncologic = BooleanField(
         widget=HiddenInput(attrs={"value": "false"}), required=False
     )
 
 
 class PatientChangeStatusForm(Form):
+    """Patient Change Status Form"""
+
     identity_card = CharField(
         widget=TextInput(
             attrs={"class": "form-control", "placeholder": "Carnet de identidad"}
@@ -185,6 +193,7 @@ class PatientOncologicReadOnlyForm(OncologicPatientForm):
     )
 
     def __init__(self, *args, **kwargs):
+        """constructor"""
         super().__init__(*args, **kwargs)
         for _, field in self.fields.items():
             field.widget.attrs["readonly"] = True

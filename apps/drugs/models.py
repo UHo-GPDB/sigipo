@@ -9,6 +9,8 @@ from django.db.models import (
 
 
 class DrugTypeChoices(IntegerChoices):
+    """Drug Type Choices"""
+
     CYTOSTATIC = 0, "Citostático"
     IMMUNO_MODULATOR = 1, "Inmuno Modulador"
     MONOCLONAL_ANTIBODY = 2, "Anticuerpo Monoclonal"
@@ -18,6 +20,8 @@ class DrugTypeChoices(IntegerChoices):
 
 
 class PresentationChoicesChoices(IntegerChoices):
+    """Presentation Choices Choices"""
+
     BULB = 0, "Bulbo"
     AMPOULE = 1, "Ámpula"
     FRASCO = 2, "Frasco"
@@ -27,18 +31,25 @@ class PresentationChoicesChoices(IntegerChoices):
 
 
 class UnitChoicesChoices(IntegerChoices):
+    """Unit Choices Choices"""
+
     M = 0, "g"
     MG = 1, "mg"
     ML = 2, "ml"
 
 
 class NuclearMedicineDrug(Model):
+    """Nuclear Medicine Drug"""
+
     name = CharField(max_length=100, verbose_name="Nombre")
 
     def __str__(self):
+        """Nuclear Medicine Drug str representation"""
         return self.name
 
     class Meta:
+        """Nuclear Medicine Drug Meta class"""
+
         verbose_name = "Fármaco de medicina nuclear"
         verbose_name_plural = "Fármacos de medicina nuclear"
         ordering = ["pk"]
@@ -46,6 +57,8 @@ class NuclearMedicineDrug(Model):
 
 
 class Drug(Model):
+    """Drug"""
+
     name = CharField(max_length=100, verbose_name="Nombre")
     drug_type = IntegerField(choices=DrugTypeChoices.choices, verbose_name="Tipo")
     presentation = IntegerField(
@@ -61,9 +74,12 @@ class Drug(Model):
     out_of_stock = BooleanField(verbose_name="¿En falta?")
 
     def __str__(self):
+        """Drug str representation"""
         return f"{self.name} {self.get_presentation_display()} {self.amount} {self.get_unit_display()}"
 
     class Meta:
+        """Drug Meta class"""
+
         verbose_name = "Fármaco de quimioterapia"
         verbose_name_plural = "Fármacos de quimioterapia"
         ordering = ["pk"]

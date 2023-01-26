@@ -98,6 +98,7 @@ class GammagraphyFactory(DjangoModelFactory):
 
     @post_generation
     def requested_study(self, create, extracted, **kwargs):
+        """requested study function"""
         if extracted:
             # A list of groups were passed in, use them
             for study in extracted:

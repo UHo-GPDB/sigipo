@@ -40,6 +40,8 @@ class SchemeForm(ModelForm):
     )
 
     class Meta:
+        """Scheme Meta class."""
+
         model = Scheme
         fields = "__all__"
 
@@ -146,6 +148,8 @@ class ProtocolForm(ModelForm):
     )
 
     class Meta:
+        """Protocol Meta class."""
+
         model = Protocol
         fields = "__all__"
 
@@ -232,11 +236,15 @@ class MedicationForm(ModelForm):
     )
 
     class Meta:
+        """Medication Meta class."""
+
         model = Medication
         fields = "__all__"
 
 
 class CycleForm(ModelForm):
+    """Model to handle Cycle creation and edition."""
+
     protocol = ModelChoiceField(
         queryset=Protocol.objects.all(),
         widget=ModelSelect2Widget(
@@ -270,11 +278,15 @@ class CycleForm(ModelForm):
     )
 
     class Meta:
+        """Cycle Meta class."""
+
         model = Cycle
         fields = "__all__"
 
 
 class CycleMedicationForm(ModelForm):
+    """Model to handle CycleMedication creation and edition."""
+
     drug = ModelChoiceField(
         queryset=Drug.objects.all(),
         widget=ModelSelect2Widget(
@@ -311,5 +323,7 @@ class CycleMedicationForm(ModelForm):
     )
 
     class Meta:
+        """CycleMedication Meta class."""
+
         model = CycleMedication
         fields = ("drug", "dose", "unit")

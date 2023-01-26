@@ -4,12 +4,17 @@ from django.db.models.manager import Manager
 
 # Create your models here.
 class Group(Model):
+    """Group"""
+
     name = CharField(max_length=100, verbose_name="Nombre")
 
     def __str__(self):
+        """Group str representation"""
         return self.name
 
     class Meta:
+        """Group Meta class"""
+
         verbose_name = "Grupo"
         verbose_name_plural = "Grupo"
         ordering = ["pk"]
@@ -25,6 +30,8 @@ class DoctorQuerysetManager(Manager):
 
 
 class Doctor(Model):
+    """Doctor"""
+
     first_name = CharField(verbose_name="Nombre", max_length=255)
     last_name = CharField(
         verbose_name="Apellidos", max_length=255, blank=True, null=True
@@ -36,6 +43,8 @@ class Doctor(Model):
     objects = DoctorQuerysetManager()
 
     class Meta:
+        """Doctor Meta class"""
+
         verbose_name = "Doctor"
         verbose_name_plural = "Doctor"
         ordering = ["personal_record_number"]
