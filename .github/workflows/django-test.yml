@@ -64,7 +64,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements/develop.txt
     - name: Generate badges
-        run: |
+      run: |
         pip install interrogate
         interrogate --generate-badge interrogate_badge.svg
     - name: Commit Badge
