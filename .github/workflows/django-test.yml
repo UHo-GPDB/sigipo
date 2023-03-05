@@ -30,8 +30,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-      ref: ${{ github.head_ref }}
-      fetch-depth: 0
+      with:
+        ref: ${{ github.head_ref }}
+        fetch-depth: 0
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
@@ -65,4 +66,5 @@ jobs:
       if: success()
       uses: ad-m/github-push-action@master
       with:
+        branch: ${{ github.head_ref }}
         github_token: ${{ secrets.GITHUB_TOKEN }}
