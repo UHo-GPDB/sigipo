@@ -59,7 +59,7 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add badges/interrogate.svg
+        git add .
         git diff --exit-code || git commit -m "Update interrogate.svg" -a
 
     - name: Push changes
