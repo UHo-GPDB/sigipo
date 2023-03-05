@@ -65,10 +65,10 @@ jobs:
         pip install -r requirements/develop.txt
         pip install interrogate
     - name: Generate badges
-        run: | 
+        run: |
         interrogate --generate-badge interrogate_badge.svg
     - name: Commit Badge
-      run: | 
+      run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add interrogate_badge.svg
