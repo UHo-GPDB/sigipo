@@ -37,6 +37,7 @@ class Command(BaseCommand):
     It Generates 5 instances of all models and creates
     a user with administrative credentials.
     """
+
     help = "Generates 5 instances of all models"
 
     def handle(self, *args, **options):
