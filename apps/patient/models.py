@@ -4,6 +4,7 @@ from django.db.models import (
     CharField,
     DateField,
     ForeignKey,
+    Index,
     IntegerChoices,
     IntegerField,
     UniqueConstraint,
@@ -125,6 +126,13 @@ class Patient(TimeStampedModel):
             )
         ]
         default_permissions = ()
+        indexes = [
+            Index(fields=["last_name", "first_name"]),
+            Index(fields=["first_name"]),
+            Index(fields=["last_name"]),
+            Index(fields=["identity_card"]),
+            Index(fields=["medical_record"]),
+        ]
 
     def __str__(self):
         """Returns the name of the patient."""

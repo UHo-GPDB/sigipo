@@ -111,7 +111,7 @@ class BasePatientForm(ModelForm):
                 "data-theme": "bootstrap-5",
                 "data-width": "style",
             },
-            search_fields=["name__icontains", "province__name__icontains"],
+            search_fields=["name__trigram_similar", "province__name__trigram_similar"],
         ),
     )
     born_municipality = ModelChoiceField(
@@ -125,7 +125,7 @@ class BasePatientForm(ModelForm):
                 "data-theme": "bootstrap-5",
                 "data-width": "style",
             },
-            search_fields=["name__icontains", "province__name__icontains"],
+            search_fields=["name__trigram_similar", "province__name__trigram_similar"],
         ),
     )
 
