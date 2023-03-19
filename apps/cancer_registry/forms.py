@@ -31,6 +31,7 @@ from apps.cancer_registry.models import (
     TumorClassificationChoices,
 )
 from apps.classifiers.models import Morphology, Topography
+from apps.core.fields import RelatedModelWrapper
 from apps.core.forms import ChoiceField as EmptyChoiceField
 from apps.core.forms import ModelForm
 from apps.employee.models import Doctor, Group
@@ -42,7 +43,7 @@ class NeoplasmForm(ModelForm):
 
     patient = ModelChoiceField(
         queryset=Patient.objects.only_oncologic(),
-        widget=ModelSelect2Widget(
+        widget=RelatedModelWrapper(
             attrs={
                 "class": "form-control",
                 "data-placeholder": "Paciente",
@@ -56,6 +57,10 @@ class NeoplasmForm(ModelForm):
                 "identity_card__trigram_similar",
                 "medical_record__trigram_similar",
             ],
+            add_url="patient:oncologic_create",
+            view_url="patient:oncologic_detail",
+            add_permission="accounts.cancer_registry_manage",
+            view_permission="accounts.cancer_registry_view",
         ),
         label="Paciente",
     )
@@ -365,4 +370,5 @@ class NeoplasmForm(ModelForm):
     class Meta:
         model = Neoplasm
         fields = "__all__"
+        default_permissions = ()
         default_permissions = ()

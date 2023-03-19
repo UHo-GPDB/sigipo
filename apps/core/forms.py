@@ -1,4 +1,13 @@
-from django.forms import DateField, DateInput, Form, ModelForm, TypedChoiceField
+from django.forms import (
+    DateField,
+    DateInput,
+    Form,
+    ModelChoiceField,
+    ModelForm,
+    TypedChoiceField,
+)
+
+from apps.core.fields import RelatedModelWrapper
 
 
 class ChoiceField(TypedChoiceField):
@@ -34,6 +43,15 @@ class ChoiceField(TypedChoiceField):
 
 class ModelForm(ModelForm):
     """Class to handle form validation."""
+
+    def __init__(self, *args, **kwargs) -> None:
+        request = kwargs.pop("request", None)
+        super().__init__(*args, **kwargs)
+        for _, field in self.fields.items():
+            if isinstance(field, ModelChoiceField) and isinstance(
+                field.widget, RelatedModelWrapper
+            ):
+                field.widget.request = request
 
     def is_valid(self) -> bool:
         """
