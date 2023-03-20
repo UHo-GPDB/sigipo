@@ -209,6 +209,12 @@ class BaseUpdateView(
     template_name = "base_crud/base_update.html"
     permission_required = ()
 
+    def get_form_kwargs(self):
+        """Return the keyword arguments for instantiating the form."""
+        kwargs = super().get_form_kwargs()
+        kwargs["request"] = self.request
+        return kwargs
+
     def __init__(self, **kwargs):
         self.title = f"Editar {self.model._meta.verbose_name.lower()}"
         super().__init__(**kwargs)

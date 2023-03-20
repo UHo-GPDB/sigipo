@@ -15,10 +15,16 @@ class RelatedModelWrapper(ModelSelect2Widget):
         self.view_url = kwargs.pop("view_url", None)
         self.add_permission = kwargs.pop("add_permission", None)
         self.view_permission = kwargs.pop("view_permission", None)
+        attrs = kwargs.get("attrs", {})
+        attrs["class"] = attrs.get("class", "") + " related-model-field"
+        kwargs["attrs"] = attrs
         super().__init__(*args, **kwargs)
 
     def get_context(self, name: str, value: str, attrs: dict):
         context = super().get_context(name, value, attrs)
+        request = getattr(self, "request", None)
+        if request is None:
+            return context
         model = (
             self.model or None if self.queryset is None else self.queryset.model
         ) or self.choices.queryset.model
@@ -28,7 +34,6 @@ class RelatedModelWrapper(ModelSelect2Widget):
         elif model is not None:
             self.add_url = getUrl(model)
             self.view_url = getUrl(model, "detail", REPLACE_URL_VALUE)
-        request = getattr(self, "request", None)
         context["add_perm"] = request.user.has_perm(self.add_permission)
         context["view_perm"] = request.user.has_perm(self.view_permission)
         context["add_url"] = self.add_url

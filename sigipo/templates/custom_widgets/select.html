@@ -10,7 +10,7 @@
         <a href="{{ add_url }}" class="related-model-add" role="button" title="A&ntilde;adir" data-toggle="tooltip"><i class="fa-solid fa-plus"></i></a>
       {% endif %}
       {% if view_perm %}
-        <a href="{{ view_url }}" class="related-model-view" role="button" title="Detalles" data-toggle="tooltip"><i class="fa-solid fa-eye"></i></a>
+        <a href="#" data-href="{{ view_url }}" class="related-model-view hidden" role="button" title="Detalles" data-toggle="tooltip"><i class="fa-solid fa-eye"></i></a>
       {% endif %}
     </div>
   {% endif %}
