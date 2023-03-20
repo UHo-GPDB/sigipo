@@ -8,7 +8,7 @@ REPLACE_URL_VALUE: Final[str] = "URL_VALUE_FOR_REPLACE"
 
 
 class RelatedModelWrapper(ModelSelect2Widget):
-    template_name = "custom_widgets/select.html"
+    template_name = "components/widgets/select.html"
 
     def __init__(self, *args, **kwargs):
         self.add_url = kwargs.pop("add_url", None)
@@ -33,7 +33,7 @@ class RelatedModelWrapper(ModelSelect2Widget):
             self.view_url = getUrl(full_url=self.view_url, value=REPLACE_URL_VALUE)
         elif model is not None:
             self.add_url = getUrl(model)
-            self.view_url = getUrl(model, "detail", REPLACE_URL_VALUE)
+            self.view_url = getUrl(model, REPLACE_URL_VALUE, "detail")
         context["add_perm"] = request.user.has_perm(self.add_permission)
         context["view_perm"] = request.user.has_perm(self.view_permission)
         context["add_url"] = self.add_url

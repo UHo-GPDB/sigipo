@@ -6,7 +6,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.forms import CheckboxInput, Form
 from django.http import Http404, HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
-from django.urls import path, reverse_lazy
+from django.urls import path, reverse, reverse_lazy
 from django.views import View
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 from django.views.generic.base import TemplateView
@@ -17,6 +17,28 @@ from apps.core.forms import BaseReportForm
 
 def http_403(request: HttpRequest, exception) -> HttpResponse:
     return render(request, "400/403.html")
+
+
+def close_popup_view(request: HttpRequest) -> HttpResponse:
+    return render(request, "components/close_popup.html")
+
+
+class PopupMixin:
+    """Add the popup behavior to the views."""
+
+    def is_popup(self):
+        """Returns True if the view is in popup mode."""
+        return self.request.GET.get("is_popup", False)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["is_popup"] = self.is_popup()
+        return context
+
+    def get_success_url(self):
+        if self.is_popup():
+            return reverse("close_popup")
+        return super().get_success_url()
 
 
 class FileDownloadView(
@@ -172,6 +194,7 @@ class GetObjectErrorMixin:
 
 
 class BaseCreateView(
+    PopupMixin,
     LoginRequiredMixin,
     PermissionRequiredMixin,
     SuccessMessageMixin,
