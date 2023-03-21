@@ -62,7 +62,11 @@
                 <div class="action-buttons">
                     {% block action-buttons %}
                         <button type="submit" class="btn btn-success"><i class="fa-solid fa-floppy-disk"></i> Guardar</button>
-                        <a href="{% url cancel_url %}" role="button" class="btn btn-secondary"><i class="fa-solid fa-ban"></i> Cancelar</a>
+                        {% if not is_popup %}
+                            <a href="{% url cancel_url %}" role="button" class="btn btn-secondary"><i class="fa-solid fa-ban"></i> Cancelar</a>
+                        {% else %}
+                            <a href="#" role="button" class="btn btn-secondary close-popup-btn"><i class="fa-solid fa-ban"></i> Cancelar</a>
+                        {% endif %}
                     {% endblock action-buttons %}
                 </div>
             </div>

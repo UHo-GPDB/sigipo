@@ -28,7 +28,7 @@ class PopupMixin:
 
     def is_popup(self):
         """Returns True if the view is in popup mode."""
-        return self.request.GET.get("is_popup", False)
+        return self.request.GET.get("is_popup", False) == "true"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -263,9 +263,7 @@ class BaseDetailView(
 
     def get_form_kwargs(self):
         """Return the keyword arguments for instantiating the form."""
-        kwargs = super().get_form_kwargs()
-        kwargs["request"] = self.request
-        return kwargs
+        return {"request": self.request}
 
     def get_form_for_detail(self):
         """Returns the form_class with all the fields in readonly."""
@@ -274,6 +272,7 @@ class BaseDetailView(
             """Helper class"""
 
             def __init__(self, *args, **kwargs):
+                self.read_only_form = True
                 super().__init__(*args, **kwargs)
                 for _, field in self.fields.items():
                     field.widget.attrs["readonly"] = True
@@ -285,8 +284,9 @@ class BaseDetailView(
     def get_context_data(self, *args, **kwargs) -> dict:
         """Adds given form to the context."""
         context = super().get_context_data(*args, **kwargs)
-        form = self.get_form_for_detail()(instance=self.object)
-
+        form = self.get_form_for_detail()(
+            instance=self.object, **self.get_form_kwargs()
+        )
         context["form"] = form
         return context
 

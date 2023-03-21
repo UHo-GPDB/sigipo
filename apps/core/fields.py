@@ -34,8 +34,12 @@ class RelatedModelWrapper(ModelSelect2Widget):
         elif model is not None:
             self.add_url = getUrl(model)
             self.view_url = getUrl(model, REPLACE_URL_VALUE, "detail")
-        context["add_perm"] = request.user.has_perm(self.add_permission)
+        context["add_perm"] = (
+            None
+            if self.is_read_only_mode
+            else request.user.has_perm(self.add_permission)
+        )
         context["view_perm"] = request.user.has_perm(self.view_permission)
-        context["add_url"] = self.add_url
+        context["add_url"] = None if self.is_read_only_mode else self.add_url
         context["view_url"] = self.view_url
         return context
