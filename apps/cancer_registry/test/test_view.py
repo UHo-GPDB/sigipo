@@ -35,6 +35,7 @@ class NeoplasmCreateViewTestCase(TestCase):
         )
         self.assertIn(reverse(NeoplasmCreateView.cancel_url), response.content.decode())
         self.assertIn("related-model-add", response.content.decode())
+        self.assertIn(reverse("classifiers:topography_create"),response.content.decode())
 
     def test_related_model_in_detail_view(self):
         """Test that related model view button is not shown in detail view"""

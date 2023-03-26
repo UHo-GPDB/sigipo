@@ -8,7 +8,6 @@ from django.forms import (
     ModelChoiceField,
 )
 from django.forms.widgets import DateInput, NumberInput, Select
-from django_select2.forms import ModelSelect2Widget
 
 from apps.cancer_registry.models import (
     AcuteLymphoidLeukemiaChoices,
@@ -98,7 +97,7 @@ class NeoplasmForm(ModelForm):
     )
     primary_site = ModelChoiceField(
         queryset=Topography.objects.all(),
-        widget=ModelSelect2Widget(
+        widget=RelatedModelWrapper(
             attrs={
                 "class": "form-control",
                 "data-placeholder": "Sitio primario",
@@ -109,6 +108,8 @@ class NeoplasmForm(ModelForm):
             search_fields=[
                 "name__trigram_similar",
             ],
+            add_permission="accounts.cancer_registry_manage",
+            view_permission="accounts.cancer_registry_view",
         ),
         label="Sitio primario",
     )
@@ -128,7 +129,7 @@ class NeoplasmForm(ModelForm):
     )
     histologic_type = ModelChoiceField(
         queryset=Morphology.objects.all(),
-        widget=ModelSelect2Widget(
+        widget=RelatedModelWrapper(
             attrs={
                 "class": "form-control",
                 "data-placeholder": "Tipo histológico",
@@ -139,6 +140,8 @@ class NeoplasmForm(ModelForm):
             search_fields=[
                 "name__trigram_similar",
             ],
+            add_permission="accounts.cancer_registry_manage",
+            view_permission="accounts.cancer_registry_view",
         ),
         label="Tipo histológico",
     )
@@ -239,7 +242,7 @@ class NeoplasmForm(ModelForm):
     )
     medic_that_report = ModelChoiceField(
         queryset=Doctor.objects.all(),
-        widget=ModelSelect2Widget(
+        widget=RelatedModelWrapper(
             attrs={
                 "class": "form-control",
                 "data-placeholder": "Médico que reporta",
@@ -252,13 +255,15 @@ class NeoplasmForm(ModelForm):
                 "last_name__trigram_similar",
                 "personal_record_number__trigram_similar",
             ],
+            add_permission="accounts.employee_manage",
+            view_permission="accounts.employee_view",
         ),
         required=False,
         label="Médico que reporta",
     )
     group = ModelChoiceField(
         queryset=Group.objects.all(),
-        widget=ModelSelect2Widget(
+        widget=RelatedModelWrapper(
             attrs={
                 "class": "form-control",
                 "data-placeholder": "Grupo que reporta",
@@ -269,6 +274,8 @@ class NeoplasmForm(ModelForm):
             search_fields=[
                 "name__trigram_similar",
             ],
+            add_permission="accounts.employee_manage",
+            view_permission="accounts.employee_view",
         ),
         required=False,
         label="Grupo que reporta",

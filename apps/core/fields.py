@@ -23,7 +23,7 @@ class RelatedModelWrapper(ModelSelect2Widget):
     def get_context(self, name: str, value: str, attrs: dict):
         context = super().get_context(name, value, attrs)
         request = getattr(self, "request", None)
-        if request is None:
+        if request is None: # pragma: no cover
             return context
         model = (
             self.model or None if self.queryset is None else self.queryset.model
@@ -31,7 +31,7 @@ class RelatedModelWrapper(ModelSelect2Widget):
         if self.add_url is not None and self.view_url is not None:
             self.add_url = getUrl(full_url=self.add_url)
             self.view_url = getUrl(full_url=self.view_url, value=REPLACE_URL_VALUE)
-        elif model is not None:
+        else:
             self.add_url = getUrl(model)
             self.view_url = getUrl(model, REPLACE_URL_VALUE, "detail")
         context["add_perm"] = (

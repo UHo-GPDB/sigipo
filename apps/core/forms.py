@@ -53,7 +53,7 @@ class ModelForm(ModelForm):
             ):
                 field.widget.request = request
                 field.widget.is_read_only_mode = (
-                    getattr(self, "read_only_form", False) == True
+                    getattr(self, "read_only_form", False) is True
                 )
 
     def is_valid(self) -> bool:

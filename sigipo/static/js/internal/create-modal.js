@@ -5,7 +5,7 @@ document.querySelectorAll("a.related-model-add").forEach((button) => {
       button.href + "?is_popup=true",
       window.location.href,
     );
-    window.showAddPopup(create_url, "Añadir");
+    window.showAddPopup(create_url);
   });
 });
 document.querySelectorAll("a.related-model-view").forEach((button) => {
@@ -15,6 +15,6 @@ document.querySelectorAll("a.related-model-view").forEach((button) => {
       button.href + "?is_popup=true",
       window.location.href,
     );
-    window.showAddPopup(create_url, "Detalles");
+    window.showAddPopup(create_url);
   });
 });

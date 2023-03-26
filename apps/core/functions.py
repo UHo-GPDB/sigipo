@@ -15,10 +15,9 @@ def getUrl(
         return reverse(full_url) if value is None else reverse(full_url, args=(value,))
     model_name = model.__name__.lower()
     app_label = model._meta.app_label.lower()
-    if model is not None:
-        crud_action = crud_action or "create"
-        return (
-            reverse(f"{app_label}:{model_name}_{crud_action}")
-            if value is None
-            else reverse(f"{app_label}:{model_name}_{crud_action}", args=(value,))
-        )
+    crud_action = crud_action or "create"
+    return (
+        reverse(f"{app_label}:{model_name}_{crud_action}")
+        if value is None
+        else reverse(f"{app_label}:{model_name}_{crud_action}", args=(value,))
+    )

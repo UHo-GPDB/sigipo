@@ -1,7 +1,7 @@
-function showAddPopup(href, title) {
+function showAddPopup(href) {
   var win = window.open(
     href,
-    title,
+    "_blank",
     "height=500,width=800,resizable=yes,scrollbars=yes",
   );
   win.focus();
