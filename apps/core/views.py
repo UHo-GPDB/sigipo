@@ -244,6 +244,7 @@ class BaseUpdateView(
 
 
 class BaseDetailView(
+    PopupMixin,
     LoginRequiredMixin,
     PermissionRequiredMixin,
     GetObjectErrorMixin,
