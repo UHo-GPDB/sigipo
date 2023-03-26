@@ -23,7 +23,7 @@ class RelatedModelWrapper(ModelSelect2Widget):
     def get_context(self, name: str, value: str, attrs: dict):
         context = super().get_context(name, value, attrs)
         request = getattr(self, "request", None)
-        if request is None: # pragma: no cover
+        if request is None:  # pragma: no cover
             return context
         model = (
             self.model or None if self.queryset is None else self.queryset.model
