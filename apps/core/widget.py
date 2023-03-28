@@ -1,14 +1,12 @@
 import datetime as dt  # pragma: no cover
 import json  # pragma: no cover
 
-from django.forms import (  # pragma: no cover
-    CharField,  # pragma: no cover
-    DateField,  # pragma: no cover
-    DateInput,  # pragma: no cover
-    MultiValueField,  # pragma: no cover
-    MultiWidget,  # pragma: no cover
-    TextInput,  # pragma: no cover
-)
+from django.forms import CharField  # pragma: no cover
+from django.forms import DateField  # pragma: no cover
+from django.forms import DateInput  # pragma: no cover
+from django.forms import MultiValueField  # pragma: no cover
+from django.forms import MultiWidget  # pragma: no cover
+from django.forms import TextInput  # pragma: no cover; pragma: no cover
 from django.utils.dateparse import parse_datetime  # pragma: no cover
 
 
