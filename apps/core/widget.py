@@ -58,7 +58,7 @@ class CauseOfDeathWidget(MultiWidget):
 class CauseOfDeathField(MultiValueField):
     widget = CauseOfDeathWidget
 
-    def __init__(self, *arg,**kwargs):
+    def __init__(self, *arg, **kwargs):
         fields = (
             CharField(),
             DateField(),
