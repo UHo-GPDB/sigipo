@@ -9,6 +9,37 @@ from apps.death_certificate.models import DeathCertificate, ConfirmationCausesCh
 class DeathCertificateFilter(FilterSet):
     """Filters to search for death certificates."""
 
+    patient__identity_card = CharFilter(
+        lookup_expr="icontains",
+        widget=TextInput(
+            attrs={"class": "form-control", "placeholder": "Carnet contiene"}
+        ),
+        label="Carnet contiene",
+    )
+    patient__first_name = CharFilter(
+        lookup_expr="icontains",
+        widget=TextInput(
+            attrs={"class": "form-control", "placeholder": "Nombre contiene"}
+        ),
+        label="Nombre contiene",
+    )
+    patient__last_name = CharFilter(
+        lookup_expr="icontains",
+        widget=TextInput(
+            attrs={"class": "form-control", "placeholder": "Apellidos contiene"}
+        ),
+        label="Apellidos contiene",
+    )
+    patient__medical_record = CharFilter(
+        lookup_expr="icontains",
+        widget=TextInput(
+            attrs={
+                "class": "form-control",
+                "placeholder": "No. historia clínica contiene",
+            }
+        ),
+        label="No. historia clínica contiene",
+    )
     time_of_death = DateFilter(
         lookup_expr="icontains",
         widget=TextInput(
@@ -48,49 +79,37 @@ class DeathCertificateFilter(FilterSet):
         ),
     )
 
-    residence_municipality = ModelChoiceFilter(
-        queryset=Municipality.objects.all(),
+    death_location = ModelChoiceFilter(
+        queryset=Location.objects.all(),
         widget=ModelSelect2Widget(
             attrs={
                 "class": "form-control",
-                "data-placeholder": "Municipio de residencia",
+                "data-placeholder": "Localidad de defunción",
                 "data-language": "es",
                 "data-theme": "bootstrap-5",
                 "data-width": "style",
             },
             search_fields=[
                 "name__icontains",
-                "province__name__icontains",
+                "locality__name__icontains",
             ],
         ),
-        label="Municipio de residencia",
+        label="Localidad de defunción",
     )
-    born_municipality = ModelChoiceFilter(
-        queryset=Municipality.objects.all(),
-        widget=ModelSelect2Widget(
-            attrs={
-                "class": "form-control",
-                "data-placeholder": "Municipio natal",
-                "data-language": "es",
-                "data-theme": "bootstrap-5",
-                "data-width": "style",
-            },
-            search_fields=[
-                "name__icontains",
-                "province__name__icontains",
-            ],
-        ),
-        label="Municipio natal",
-    )
+    
     class Meta:
         model = DeathCertificate
         fields = [
+            "patient__identity_card",
+            "patient__first_name",
+            "patient__last_name",
+            "patient__medical_record",
             "deathCertificate_number",
             "time_of_death",
             "first_name",
             "last_name",
             "ConfirmationCauses",
             "residence_municipality",
-            "born_municipality",
+            "death_location",
 
         ]

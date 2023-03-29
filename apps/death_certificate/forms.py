@@ -8,8 +8,29 @@ from apps.death_certificate.models import DeathCertificate, ScholarshipLevelChoi
 from apps.patient.forms import BasePatientForm
 
 
-class DeathCertificateForm(BasePatientForm):
+class DeathCertificateForm(ModelForm):
     """Model to handle DeathCertificate creation and edition."""
+
+
+    patient = ModelChoiceField(
+        queryset=Patient.objects.all(),
+        widget=ModelSelect2Widget(
+            attrs={
+                "class": "form-control",
+                "data-placeholder": "Paciente",
+                "data-language": "es",
+                "data-theme": "bootstrap-5",
+                "data-width": "style",
+            },
+            search_fields=[
+                "first_name__icontains",
+                "last_name__icontains",
+                "identity_card__icontains",
+                "medical_record__icontains",
+            ],
+        ),
+        label="Paciente",
+    )
 
     deathCertificate_number = CharField(
         widget=TextInput(
@@ -183,6 +204,21 @@ class DeathCertificateForm(BasePatientForm):
     Surgery_reasons = CharField(
         widget=Textarea(attrs={"class": "form-control", "placeholder": "Causa de la Cirugía"}),
         label="Causa de la Cirugía",
+    )
+
+    death_location = ModelChoiceField(
+        queryset=Location.objects.all(),
+        label="Localidad de defunción",
+        widget=ModelSelect2Widget(
+            attrs={
+                "class": "form-control",
+                "data-placeholder": "Localidad de defunción",
+                "data-language": "es",
+                "data-theme": "bootstrap-5",
+                "data-width": "style",
+            },
+            search_fields=["name__icontains", "province__name__icontains","municipality__name__icontains"],
+        ),
     )
 
     class Meta:

@@ -12,7 +12,7 @@ from django.db.models import (
     JSONField,
     Model)
 
-from apps.geographic_location.models import Municipality
+from apps.geographic_location.models import Location
 from apps.patient.models import Patient
 
 class ScholarshipLevelChoices(IntegerChoices):
@@ -123,7 +123,6 @@ class DeathCertificate(Model):
 
     other_contibuting_diseases = JSONField(verbose_name="Otras enfermedades contribuyentes")
 
-    #authopsy_number = OneToOneField(Pathology, to_field="authopsy_number", null=True, blank=False, on_delete=SET_NULL)
 
     time_of_death = DateTimeField(
         verbose_name="Fecha de defunción",
@@ -216,17 +215,10 @@ class DeathCertificate(Model):
     Requesting_authority = TextField(verbose_name="Autoridad que solicita") 
     Act_number = TextField(verbose_name="Número de Acta") 
 
-    residence_municipality = ForeignKey(
-        Municipality,
-        verbose_name="Municipio de residencia",
-        related_name="residence_municipality_death",
-        null=True,
-        on_delete=SET_NULL,
-    )
-    born_municipality = ForeignKey(
-        Municipality,
-        verbose_name="Municipio natal",
-        related_name="born_municipality_death",
+    death_location = ForeignKey(
+        Location,
+        verbose_name="Localidad de defunción",
+        related_name="residence_location_death",
         null=True,
         on_delete=SET_NULL,
     )
