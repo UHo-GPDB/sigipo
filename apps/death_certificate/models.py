@@ -1,19 +1,20 @@
 from django.db.models import (
     SET_NULL,
-    CASCADE,
     CharField,
     DateField,
-    ForeignKey,
-    IntegerField,
     DateTimeField,
+    ForeignKey,
+    IntegerChoices,
+    IntegerField,
+    JSONField,
+    Model,
     OneToOneField,
     TextField,
-    IntegerChoices,
-    JSONField,
-    Model)
+)
 
 from apps.geographic_location.models import Municipality
 from apps.patient.models import Patient
+
 
 class ScholarshipLevelChoices(IntegerChoices):
     """Defines the Death Scholarship Level."""
@@ -27,6 +28,7 @@ class ScholarshipLevelChoices(IntegerChoices):
     UNIVERSITY = 6, "Universitario"
     UNDEFINED = 7, "Ignorado(a)"
 
+
 class CivilStateChoices(IntegerChoices):
     """Defines the Death Civil State."""
 
@@ -38,12 +40,14 @@ class CivilStateChoices(IntegerChoices):
     SINGLE = 6, "Soltero"
     UNDEFINED = 7, "Ignorado(a)"
 
+
 class ResidenceTypeChoices(IntegerChoices):
     """Defines the Death Residence Type."""
 
     PERMANENT = 1, "Permanente"
     TEMPORAL = 2, "Temporal"
     UNDEFINED = 3, "Ignorado(a)"
+
 
 class DeathPlaceChoices(IntegerChoices):
     """Defines the Death Death Place."""
@@ -56,12 +60,14 @@ class DeathPlaceChoices(IntegerChoices):
     OTHERPLACE = 6, "Otro Lugar"
     UNDEFINED = 7, "Ignorado(a)"
 
+
 class PregnancyChoices(IntegerChoices):
     """Defines the Death Pregnancy in the last 12 month."""
 
     YES = 1, "Sí"
     NO = 2, "No"
     UNDEFINED = 3, "Ignorado(a)"
+
 
 class PregnancyResultChoices(IntegerChoices):
     """Defines the Death Pregnancy Result."""
@@ -71,6 +77,7 @@ class PregnancyResultChoices(IntegerChoices):
     PELVICHILDBIRTH = 3, "Parto Pelviano"
     DIEDPREGNANT = 4, "Murio estando embarazada"
     UNDEFINED = 5, "Ignorado(a)"
+
 
 class ConfirmationCausesChoices(IntegerChoices):
     """Defines the Death Confirmation Causes."""
@@ -82,6 +89,7 @@ class ConfirmationCausesChoices(IntegerChoices):
     NECROPSY = 5, "Necropsia"
     RECOGNITION = 6, "Reconocimiento"
 
+
 class CertficationMadeByChoices(IntegerChoices):
     """Defines the Death Certfication made by Doctor."""
 
@@ -91,12 +99,14 @@ class CertficationMadeByChoices(IntegerChoices):
     LEGIST = 4, "Legista"
     OTHER = 5, "Otro"
 
+
 class LastSurgeriesChoices(IntegerChoices):
     """Defines the Death Last Surgeries in the last 4 months."""
 
     YES = 1, "Sí"
     NO = 2, "No"
     UNDEFINED = 3, "Ignorado(a)"
+
 
 class ViolentDeathCausesChoices(IntegerChoices):
     """Defines the Death Violent Death Causes."""
@@ -113,7 +123,12 @@ class DeathCertificate(Model):
 
     patient = OneToOneField(Patient, null=True, blank=False, on_delete=SET_NULL)
 
-    deathCertificate_number = CharField(verbose_name ='Número de Certificación de Defunción', max_length = 50 ,primary_key=True, default=None)
+    deathCertificate_number = CharField(
+        verbose_name="Número de Certificación de Defunción",
+        max_length=50,
+        primary_key=True,
+        default=None,
+    )
 
     direct_death_cause = TextField(verbose_name="Causa de Muerte")
 
@@ -121,16 +136,18 @@ class DeathCertificate(Model):
     indirect_death_cause = JSONField(verbose_name="Causa que ocasionó")
     indirect_death_cause = JSONField(verbose_name="Causa que ocasionó")
 
-    other_contibuting_diseases = JSONField(verbose_name="Otras enfermedades contribuyentes")
+    other_contibuting_diseases = JSONField(
+        verbose_name="Otras enfermedades contribuyentes"
+    )
 
-    #authopsy_number = OneToOneField(Pathology, to_field="authopsy_number", null=True, blank=False, on_delete=SET_NULL)
+    # authopsy_number = OneToOneField(Pathology, to_field="authopsy_number", null=True, blank=False, on_delete=SET_NULL)
 
     time_of_death = DateTimeField(
         verbose_name="Fecha de defunción",
         blank=True,
         null=True,
         auto_now_add=True,
-    ) 
+    )
     first_name = CharField(verbose_name="Nombre", max_length=128)
     last_name = CharField(verbose_name="Apellidos", max_length=255)
     ocupation = CharField(verbose_name="Ocupación", max_length=128)
@@ -196,7 +213,7 @@ class DeathCertificate(Model):
         default=LastSurgeriesChoices.UNDEFINED,
     )
 
-    Surgery_reasons = TextField(verbose_name="Causa de la Cirugía")    
+    Surgery_reasons = TextField(verbose_name="Causa de la Cirugía")
 
     ViolentDeathCauses = IntegerField(
         verbose_name="Causa aparente de muerte violenta",
@@ -211,10 +228,12 @@ class DeathCertificate(Model):
         null=True,
     )
 
-    place_where_injury_occurred = TextField(verbose_name="Lugar donde ocurrio la lesión") 
-    event_description = TextField(verbose_name="Descripcion de como ocurrio") 
-    Requesting_authority = TextField(verbose_name="Autoridad que solicita") 
-    Act_number = TextField(verbose_name="Número de Acta") 
+    place_where_injury_occurred = TextField(
+        verbose_name="Lugar donde ocurrio la lesión"
+    )
+    event_description = TextField(verbose_name="Descripcion de como ocurrio")
+    Requesting_authority = TextField(verbose_name="Autoridad que solicita")
+    Act_number = TextField(verbose_name="Número de Acta")
 
     residence_municipality = ForeignKey(
         Municipality,

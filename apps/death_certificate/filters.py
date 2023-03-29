@@ -1,9 +1,15 @@
-from django.forms import TextInput, Select
-from django_filters import FilterSet, CharFilter, DateFilter, ModelChoiceFilter, ChoiceFilter
+from django.forms import Select, TextInput
+from django_filters import (
+    CharFilter,
+    ChoiceFilter,
+    DateFilter,
+    FilterSet,
+    ModelChoiceFilter,
+)
 from django_select2.forms import ModelSelect2Widget
 
+from apps.death_certificate.models import ConfirmationCausesChoices, DeathCertificate
 from apps.geographic_location.models import Municipality
-from apps.death_certificate.models import DeathCertificate, ConfirmationCausesChoices
 
 
 class DeathCertificateFilter(FilterSet):
@@ -20,31 +26,33 @@ class DeathCertificateFilter(FilterSet):
     deathCertificate_number = CharFilter(
         lookup_expr="icontains",
         widget=TextInput(
-            attrs={"class": "form-control", "placeholder": "Número de Certificación de Defunción"}
+            attrs={
+                "class": "form-control",
+                "placeholder": "Número de Certificación de Defunción",
+            }
         ),
         label="Número de Certificación de Defunción",
     )
 
     first_name = CharFilter(
         lookup_expr="icontains",
-        widget=TextInput(
-            attrs={"class": "form-control", "placeholder": "Nombre"}
-        ),
+        widget=TextInput(attrs={"class": "form-control", "placeholder": "Nombre"}),
         label="Nombre",
     )
 
     last_name = CharFilter(
         lookup_expr="icontains",
-        widget=TextInput(
-            attrs={"class": "form-control", "placeholder": "Apellidos"}
-        ),
+        widget=TextInput(attrs={"class": "form-control", "placeholder": "Apellidos"}),
         label="Apellidos",
     )
 
     ConfirmationCauses = ChoiceFilter(
         choices=ConfirmationCausesChoices.choices,
         widget=Select(
-            attrs={"class": "form-control form-select", "placeholder": "Confirmación de las causas"}
+            attrs={
+                "class": "form-control form-select",
+                "placeholder": "Confirmación de las causas",
+            }
         ),
     )
 
@@ -82,6 +90,7 @@ class DeathCertificateFilter(FilterSet):
         ),
         label="Municipio natal",
     )
+
     class Meta:
         model = DeathCertificate
         fields = [
@@ -92,5 +101,4 @@ class DeathCertificateFilter(FilterSet):
             "ConfirmationCauses",
             "residence_municipality",
             "born_municipality",
-
         ]
