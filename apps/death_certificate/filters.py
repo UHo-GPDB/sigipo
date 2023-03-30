@@ -8,8 +8,8 @@ from django_filters import (
 )
 from django_select2.forms import ModelSelect2Widget
 
+from apps.death_certificate.models import ConfirmationCausesChoices, DeathCertificate
 from apps.geographic_location.models import Location
-from apps.death_certificate.models import DeathCertificate, ConfirmationCausesChoices
 
 
 class DeathCertificateFilter(FilterSet):
@@ -118,5 +118,4 @@ class DeathCertificateFilter(FilterSet):
             "last_name",
             "ConfirmationCauses",
             "death_location",
-
         ]

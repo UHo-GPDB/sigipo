@@ -136,8 +136,9 @@ class DeathCertificate(Model):
     indirect_death_cause = JSONField(verbose_name="Causa que ocasionó")
     indirect_death_cause = JSONField(verbose_name="Causa que ocasionó")
 
-    other_contibuting_diseases = JSONField(verbose_name="Otras enfermedades contribuyentes")
-
+    other_contibuting_diseases = JSONField(
+        verbose_name="Otras enfermedades contribuyentes"
+    )
 
     time_of_death = DateTimeField(
         verbose_name="Fecha de defunción",

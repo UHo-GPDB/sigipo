@@ -22,12 +22,10 @@ from apps.death_certificate.models import (
     ScholarshipLevelChoices,
     ViolentDeathCausesChoices,
 )
-from apps.patient.forms import BasePatientForm
 
 
 class DeathCertificateForm(ModelForm):
     """Model to handle DeathCertificate creation and edition."""
-
 
     patient = ModelChoiceField(
         queryset=Patient.objects.all(),
@@ -262,7 +260,11 @@ class DeathCertificateForm(ModelForm):
                 "data-theme": "bootstrap-5",
                 "data-width": "style",
             },
-            search_fields=["name__icontains", "province__name__icontains","municipality__name__icontains"],
+            search_fields=[
+                "name__icontains",
+                "province__name__icontains",
+                "municipality__name__icontains",
+            ],
         ),
     )
 
