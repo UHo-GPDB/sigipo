@@ -7,3 +7,11 @@ class ProvinceWidget(ModelSelect2Widget):
     search_fields = [
         "name__icontains",
     ]
+
+class MunicipalityWidget(ModelSelect2Widget):
+    """Widget to search and select related Municipality."""
+
+    search_fields = [
+        "name__icontains",
+    ]
+

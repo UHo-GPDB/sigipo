@@ -6,8 +6,8 @@ from apps.core.views import (
     BaseDetailView,
     BaseUpdateView,
 )
-from apps.geographic_location.forms import MunicipalityForm, ProvinceForm
-from apps.geographic_location.models import Municipality, Province
+from apps.geographic_location.forms import MunicipalityForm, ProvinceForm, LocationForm
+from apps.geographic_location.models import Municipality, Province, Location
 
 
 # * Province Views
@@ -97,4 +97,48 @@ class MunicipalityDeleteView(BaseDeleteView):
     success_message = "%(name)s eliminada satisfactoriamente."
     cancel_url = "geographic_location:municipality_list"
     object_not_found_error_message = "Municipio no encontrada"
+    permission_required = "accounts.cancer_registry_view"
+
+# * Location View
+class LocationCreateView(BaseCreateView):
+    """View to handle Location creation."""
+
+    model = Location
+    form_class = LocationForm
+    success_url = reverse_lazy("geographic_location:location_list")
+    success_message = "%(name)s guardado correctamente."
+    cancel_url = "geographic_location:location_list"
+    permission_required = "accounts.cancer_registry_view"
+
+
+class LocationDetailView(BaseDetailView):
+    """View to handle Location details."""
+
+    model = Location
+    form_class = LocationForm
+    cancel_url = "geographic_location:location_list"
+    object_not_found_error_message = "Localidad no encontrada"
+    permission_required = "accounts.cancer_registry_view"
+
+
+class LocationUpdateView(BaseUpdateView):
+    """View to handle Location edition."""
+
+    model = Location
+    form_class = LocationForm
+    success_url = reverse_lazy("geographic_location:location_list")
+    success_message = "%(name)s guardado correctamente."
+    cancel_url = "geographic_location:location_list"
+    object_not_found_error_message = "Localidad no encontrada no encontrada"
+    permission_required = "accounts.cancer_registry_view"
+
+
+class LocationDeleteView(BaseDeleteView):
+    """View to handle Location delete."""
+
+    model = Location
+    success_url = reverse_lazy("geographic_location:location_list")
+    success_message = "%(name)s eliminada satisfactoriamente."
+    cancel_url = "geographic_location:location_list"
+    object_not_found_error_message = "Localidad no encontrada no encontrada"
     permission_required = "accounts.cancer_registry_view"
