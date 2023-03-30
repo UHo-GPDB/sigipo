@@ -9,7 +9,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
+BASE_DIR = Path(__file__).parent.parent.parent
 
 load_dotenv(dotenv_path=BASE_DIR / ".env")
 
@@ -22,7 +22,9 @@ DJANGO_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
+    "django.forms",
 ]
 
 THIRD_PARTY_APPS = [
@@ -50,6 +52,7 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -178,3 +181,5 @@ EMAIL_HOST_USER = os.environ.get("EMAIL_USER", None)
 EMAIL_PORT = os.environ.get("EMAIL_PORT", None)
 
 DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", None)
+
+FORM_RENDERER = "django.forms.renderers.TemplatesSetting"
