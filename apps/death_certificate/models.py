@@ -16,6 +16,7 @@ from apps.geographic_location.models import Location
 from apps.patient.models import Patient
 
 
+
 class ScholarshipLevelChoices(IntegerChoices):
     """Defines the Death Scholarship Level."""
 
@@ -132,9 +133,9 @@ class DeathCertificate(Model):
 
     direct_death_cause = TextField(verbose_name="Causa de Muerte")
 
-    indirect_death_cause = JSONField(verbose_name="Causa que ocasionó")
-    indirect_death_cause = JSONField(verbose_name="Causa que ocasionó")
-    indirect_death_cause = JSONField(verbose_name="Causa que ocasionó")
+    indirect_death_cause_1 = JSONField(verbose_name="Causa que ocasionó I")
+    indirect_death_cause_2 = JSONField(verbose_name="Causa que ocasionó II")
+    indirect_death_cause_3 = JSONField(verbose_name="Causa que ocasionó III")
 
     other_contibuting_diseases = JSONField(verbose_name="Otras enfermedades contribuyentes")
 
@@ -145,42 +146,39 @@ class DeathCertificate(Model):
         null=True,
         auto_now_add=True,
     )
-    first_name = CharField(verbose_name="Nombre", max_length=128)
-    last_name = CharField(verbose_name="Apellidos", max_length=255)
-    ocupation = CharField(verbose_name="Ocupación", max_length=128)
 
-    ScholarshipLevel = IntegerField(
+    scholarship_level = IntegerField(
         verbose_name="Nivel de Escolaridad",
         choices=ScholarshipLevelChoices.choices,
         default=ScholarshipLevelChoices.UNDEFINED,
     )
 
-    CivilState = IntegerField(
+    civil_state = IntegerField(
         verbose_name="Estado Cívil",
         choices=CivilStateChoices.choices,
         default=CivilStateChoices.UNDEFINED,
     )
 
-    ResidenceType = IntegerField(
+    residence_type = IntegerField(
         verbose_name="Tipo de Residencia",
         choices=ResidenceTypeChoices.choices,
         blank=True,
         null=True,
     )
 
-    DeathPlace = IntegerField(
+    death_place = IntegerField(
         verbose_name="Sitio de Defunción",
         choices=DeathPlaceChoices.choices,
         default=DeathPlaceChoices.UNDEFINED,
     )
 
-    Pregnancy = IntegerField(
+    pregnancy = IntegerField(
         verbose_name="Embarazo en los últimos 12 meses",
         choices=PregnancyChoices.choices,
         default=PregnancyChoices.UNDEFINED,
     )
 
-    PregnancyResult = IntegerField(
+    pregnancy_result = IntegerField(
         verbose_name="Resultado del embarazo",
         choices=PregnancyResultChoices.choices,
         blank=True,
@@ -192,27 +190,27 @@ class DeathCertificate(Model):
         null=True,
     )
 
-    ConfirmationCauses = IntegerField(
+    confirmation_causes = IntegerField(
         verbose_name="Confirmación de las causas",
         choices=ConfirmationCausesChoices.choices,
         default=ConfirmationCausesChoices.CLINIC,
     )
 
-    CertficationMadeBy = IntegerField(
+    certfication_made_by = IntegerField(
         verbose_name="Certificación realizada por médico de",
         choices=CertficationMadeByChoices.choices,
         default=CertficationMadeByChoices.HGCORP,
     )
 
-    LastSurgeries = IntegerField(
+    last_surgeries = IntegerField(
         verbose_name="Cirugías en las últimas 4 semanas",
         choices=LastSurgeriesChoices.choices,
         default=LastSurgeriesChoices.UNDEFINED,
     )
 
-    Surgery_reasons = TextField(verbose_name="Causa de la Cirugía")
+    surgery_reasons = TextField(verbose_name="Causa de la Cirugía")
 
-    ViolentDeathCauses = IntegerField(
+    violent_death_causes = IntegerField(
         verbose_name="Causa aparente de muerte violenta",
         choices=ViolentDeathCausesChoices.choices,
         blank=True,
@@ -229,8 +227,8 @@ class DeathCertificate(Model):
         verbose_name="Lugar donde ocurrio la lesión"
     )
     event_description = TextField(verbose_name="Descripcion de como ocurrio")
-    Requesting_authority = TextField(verbose_name="Autoridad que solicita")
-    Act_number = TextField(verbose_name="Número de Acta")
+    requesting_authority = TextField(verbose_name="Autoridad que solicita")
+    act_number = TextField(verbose_name="Número de Acta")
 
     death_location = ForeignKey(
         Location,

@@ -114,8 +114,6 @@ class DeathCertificateFilter(FilterSet):
             "patient__medical_record",
             "deathCertificate_number",
             "time_of_death",
-            "first_name",
-            "last_name",
             "ConfirmationCauses",
             "death_location",
 

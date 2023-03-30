@@ -7,8 +7,14 @@ from django.forms import (
     Select,
     Textarea,
     TextInput,
+    ModelChoiceField,
 )
 
+from apps.core.widget import CauseOFDeathField
+from django_select2.forms import ModelSelect2Widget
+from apps.patient.models import Patient
+
+from apps.core.forms import ModelForm
 from apps.death_certificate.models import (
     CertficationMadeByChoices,
     CivilStateChoices,
@@ -22,7 +28,6 @@ from apps.death_certificate.models import (
     ScholarshipLevelChoices,
     ViolentDeathCausesChoices,
 )
-from apps.patient.forms import BasePatientForm
 
 
 class DeathCertificateForm(ModelForm):
@@ -67,23 +72,23 @@ class DeathCertificateForm(ModelForm):
         label="Causa de Muerte",
     )
 
-    indirect_death_cause = JSONField(
+    indirect_death_cause_1 = CauseOFDeathField(
         widget=Textarea(
-            attrs={"class": "form-control", "placeholder": "Causa que ocasionó"}
+            attrs={"class": "form-control", "placeholder": "Causa que ocasionó I"}
         ),
         label="Causa que ocasionó",
     )
 
-    indirect_death_cause = JSONField(
+    indirect_death_cause_2 = CauseOFDeathField(
         widget=Textarea(
-            attrs={"class": "form-control", "placeholder": "Causa que ocasionó"}
+            attrs={"class": "form-control", "placeholder": "Causa que ocasionó II"}
         ),
         label="Causa que ocasionó",
     )
 
-    indirect_death_cause = JSONField(
+    indirect_death_cause_3 = CauseOFDeathField(
         widget=Textarea(
-            attrs={"class": "form-control", "placeholder": "Causa que ocasionó"}
+            attrs={"class": "form-control", "placeholder": "Causa que ocasionó III"}
         ),
         label="Causa que ocasionó",
     )
@@ -96,10 +101,6 @@ class DeathCertificateForm(ModelForm):
             }
         ),
         label="Otras enfermedades contribuyentes",
-    )
-    ocupation = CharField(
-        widget=TextInput(attrs={"class": "form-control", "placeholder": "Ocupación"}),
-        label="Ocupación",
     )
 
     time_of_death = DateTimeField(
@@ -115,42 +116,42 @@ class DeathCertificateForm(ModelForm):
         label="Fecha de defunción",
     )
 
-    ScholarshipLevel = ChoiceField(
+    scholarship_level = ChoiceField(
         choices=ScholarshipLevelChoices.choices,
         initial=ScholarshipLevelChoices.UNDEFINED,
         widget=Select(attrs={"class": "form-control form-select"}),
         label="Nivel de Escolaridad",
     )
 
-    CivilState = ChoiceField(
+    civil_state = ChoiceField(
         choices=CivilStateChoices.choices,
         initial=CivilStateChoices.UNDEFINED,
         widget=Select(attrs={"class": "form-control form-select"}),
         label="Estado Cívil",
     )
 
-    ResidenceType = ChoiceField(
+    residence_type = ChoiceField(
         choices=ResidenceTypeChoices.choices,
         initial=ResidenceTypeChoices.UNDEFINED,
         widget=Select(attrs={"class": "form-control form-select"}),
         label="Tipo de Residencia",
     )
 
-    DeathPlace = ChoiceField(
+    death_place = ChoiceField(
         choices=DeathPlaceChoices.choices,
         initial=DeathPlaceChoices.UNDEFINED,
         widget=Select(attrs={"class": "form-control form-select"}),
         label="Sitio de Defunción",
     )
 
-    Pregnancy = ChoiceField(
+    pregnancy = ChoiceField(
         choices=PregnancyChoices.choices,
         initial=PregnancyChoices.UNDEFINED,
         widget=Select(attrs={"class": "form-control form-select"}),
         label="Embarazo en los últimos 12 meses",
     )
 
-    PregnancyResult = ChoiceField(
+    pregnancy_result = ChoiceField(
         choices=PregnancyResultChoices.choices,
         initial=PregnancyResultChoices.UNDEFINED,
         widget=Select(attrs={"class": "form-control form-select"}),
@@ -170,28 +171,28 @@ class DeathCertificateForm(ModelForm):
         label="Fecha del embarazo",
     )
 
-    ConfirmationCauses = ChoiceField(
+    confirmation_causes = ChoiceField(
         choices=ConfirmationCausesChoices.choices,
         initial=ConfirmationCausesChoices.CLINIC,
         widget=Select(attrs={"class": "form-control form-select"}),
         label="Certificación realizada por médico de",
     )
 
-    CertficationMadeBy = ChoiceField(
+    certfication_made_by = ChoiceField(
         choices=CertficationMadeByChoices.choices,
         initial=CertficationMadeByChoices.HGCORP,
         widget=Select(attrs={"class": "form-control form-select"}),
         label="Certificación realizada por médico de",
     )
 
-    LastSurgeries = ChoiceField(
+    last_surgeries = ChoiceField(
         choices=LastSurgeriesChoices.choices,
         initial=LastSurgeriesChoices.UNDEFINED,
         widget=Select(attrs={"class": "form-control form-select"}),
         label="CCirugías en las últimas 4 semanas",
     )
 
-    ViolentDeathCauses = ChoiceField(
+    violent_death_causes = ChoiceField(
         choices=ViolentDeathCausesChoices.choices,
         widget=Select(attrs={"class": "form-control form-select"}),
         label="Causa aparente de muerte violenta",
@@ -230,21 +231,21 @@ class DeathCertificateForm(ModelForm):
         label="Descripcion de como ocurrio",
     )
 
-    Requesting_authority = CharField(
+    requesting_authority = CharField(
         widget=Textarea(
             attrs={"class": "form-control", "placeholder": "Autoridad que solicita"}
         ),
         label="Autoridad que solicita",
     )
 
-    Act_number = CharField(
+    act_number = CharField(
         widget=Textarea(
             attrs={"class": "form-control", "placeholder": "Número de Acta"}
         ),
         label="Número de Acta",
     )
 
-    Surgery_reasons = CharField(
+    surgery_reasons = CharField(
         widget=Textarea(
             attrs={"class": "form-control", "placeholder": "Causa de la Cirugía"}
         ),
