@@ -54,17 +54,6 @@ class DeathCertificateForm(ModelForm):
         label="Paciente",
     )
 
-    deathCertificate_number = CharField(
-        widget=TextInput(
-            attrs={
-                "type": "text",
-                "class": "form-control",
-                "placeholder": "Número de Certificación de Defunción",
-            },
-        ),
-        label="Número de Certificación de Defunción",
-    )
-
     direct_death_cause = CharField(
         widget=Textarea(
             attrs={"class": "form-control", "placeholder": "Causa de Muerte"}
@@ -175,7 +164,7 @@ class DeathCertificateForm(ModelForm):
         choices=ConfirmationCausesChoices.choices,
         initial=ConfirmationCausesChoices.CLINIC,
         widget=Select(attrs={"class": "form-control form-select"}),
-        label="Certificación realizada por médico de",
+        label="Certificación de Causas",
     )
 
     certfication_made_by = ChoiceField(

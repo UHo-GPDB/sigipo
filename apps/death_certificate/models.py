@@ -1,5 +1,6 @@
 from django.db.models import (
     SET_NULL,
+    CASCADE,
     CharField,
     DateField,
     DateTimeField,
@@ -12,6 +13,7 @@ from django.db.models import (
     TextField,
 )
 
+from apps.core.widget import CauseOfDeathField
 from apps.geographic_location.models import Location
 from apps.patient.models import Patient
 
@@ -122,22 +124,16 @@ class ViolentDeathCausesChoices(IntegerChoices):
 class DeathCertificate(Model):
     """Model representation of a death_certificate."""
 
-    patient = OneToOneField(Patient, null=True, blank=False, on_delete=SET_NULL)
+    patient = OneToOneField(Patient, null=True, blank=False, on_delete=CASCADE)
 
-    deathCertificate_number = CharField(
-        verbose_name="Número de Certificación de Defunción",
-        max_length=50,
-        primary_key=True,
-        default=None,
-    )
 
     direct_death_cause = TextField(verbose_name="Causa de Muerte")
 
-    indirect_death_cause_1 = JSONField(verbose_name="Causa que ocasionó I")
-    indirect_death_cause_2 = JSONField(verbose_name="Causa que ocasionó II")
-    indirect_death_cause_3 = JSONField(verbose_name="Causa que ocasionó III")
+    indirect_death_cause_1 = CauseOfDeathField(verbose_name="Causa que ocasionó I")
+    indirect_death_cause_2 = CauseOfDeathField(verbose_name="Causa que ocasionó II")
+    indirect_death_cause_3 = CauseOfDeathField(verbose_name="Causa que ocasionó III")
 
-    other_contibuting_diseases = JSONField(verbose_name="Otras enfermedades contribuyentes")
+    other_contibuting_diseases = CauseOfDeathField(verbose_name="Otras enfermedades contribuyentes")
 
 
     time_of_death = DateTimeField(

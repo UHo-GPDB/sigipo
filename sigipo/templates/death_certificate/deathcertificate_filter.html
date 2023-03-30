@@ -1,28 +1,84 @@
 {% extends "base_crud/base_list.html" %}
-{% load column_sort %}
+{% load static column_sort %}
 
 {% block crud_columns %}
-    {% create_header_column 'patient' 'Paciente' %}
-    {% create_header_column 'created_at' 'Fecha' %}
-    {% create_header_column 'drug' 'Fármaco' %}
-    {% create_header_column 'radio_isotope' 'Radio isótopo' %}
-    {% create_header_column 'requested_study__name' 'Estudios' %}
-    {% create_header_column 'dose' 'Dosis' %}
+    {% create_header_column 'identity_card' 'Carnet de identidad' %}
+    {% create_header_column 'first_name' 'Nombre' %}
+    {% create_header_column 'last_name' 'Apellidos' %}
+    {% create_header_column 'medical_record' 'No. Historia Clínica' %}
+    {% create_header_column 'time_of_death' 'Fecha de defunción' %}
+    {% create_header_column 'ConfirmationCauses' 'Certificación de Causas' %}
+    {% create_header_column 'death_location' 'Localidad de defunción' %}
 {% endblock crud_columns %}
+
+{% block table_filters %}
+    <form method="get" class="row">
+        <div class="col">
+            {% block model_filters %}
+                <div class="row">
+                    {% for field in filter.form.visible_fields %}
+                        {% if forloop.counter <= 3 %}
+                        <div class="col">
+                            <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                            {{ field }}
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <hr/>
+                <div class="row">
+                    {% for field in filter.form.visible_fields %}
+                        {% if forloop.counter > 3 and forloop.counter <= 5 %}
+                        <div class="col">
+                            <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                            {{ field }}
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <hr/>
+                <div class="row">
+                    {% for field in filter.form.visible_fields %}
+                        {% if forloop.counter > 5 and forloop.counter <= 7 %}
+                        <div class="col">
+                            <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                            {{ field }}
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <hr/>
+                <div class="row">
+                    {% for field in filter.form.visible_fields %}
+                        {% if forloop.counter > 7 %}
+                        <div class="col">
+                            <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                            {{ field }}
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endblock model_filters %}
+        </div>
+        <div class="col-auto">
+            <button type="submit" id="id_submit_filters" class="btn btn-info mb-3"><i class="fa-solid fa-filter"></i> Filtrar</button>
+        </div>
+        <div class="col-auto">
+            <a href="?" class="btn btn-warning mb-3"><i class="fa-solid fa-ban"></i> Quitar filtros</a>
+        </div>
+    </form>
+{% endblock table_filters %}
 
 {% block table_body %}
     {% for obj in page_obj %}
         <tr>
-            <td><a href="{% url "patient:patient_detail" obj.patient.pk %}?return_to=nuclear_medicine:iodine_detection_list&{{ url_lookup }}" class="text-dark text-decoration-none" title="Detalles" data-toggle="tooltip">{{ obj.patient }}</a></td>
-            <td>{{ obj.created_at }}</td>
-            <td><a href="{% url "drugs:drug_detail" obj.drug.pk %}?return_to=nuclear_medicine:gammagraphy_list&{{ url_lookup }}" class="text-dark text-decoration-none" title="Detalles" data-toggle="tooltip">{{ obj.drug }}</a></td>
-            <td><a href="{% url "classifiers:radioisotope_detail" obj.radio_isotope.pk %}?return_to=nuclear_medicine:gammagraphy_list&{{ url_lookup }}" class="text-dark text-decoration-none" title="Detalles" data-toggle="tooltip">{{ obj.radio_isotope }}</a></td>
-            <td>
-                {% for study in obj.requested_study.all %}
-                    <a href="{% url "classifiers:study_detail" study.pk %}?return_to=nuclear_medicine:gammagraphy_list&{{ url_lookup }}" class="text-dark text-decoration-none" title="Detalles" data-toggle="tooltip">{{ study }}</a>{% if not forloop.last %},&nbsp;{% endif %}
-                {% endfor %}
-            </td>
-            <td>{{ obj.dose }}</td>
+            <td>{{ obj.identity_card }}</td>
+            <td>{{ obj.first_name }}</td>
+            <td>{{ obj.last_name }}</td>
+            <td>{{ obj.medical_record }}</td>
+            <td>{{ obj.time_of_death }}</td>
+            <td>{{ obj.ConfirmationCauses }}</td>
+            <td>{{ obj.death_location }}</td>
             <td>
                 <a href="{% url detail_url obj.pk %}" class="view" title="Detalles" data-toggle="tooltip"><i class="fa-solid fa-eye"></i></a>
                 <a href="{% url edit_url obj.pk %}" class="edit" title="Editar" data-toggle="tooltip"><i class="fa-solid fa-pen-to-square"></i></a>
