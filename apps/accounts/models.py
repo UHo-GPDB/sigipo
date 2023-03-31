@@ -8,6 +8,12 @@ class User(AbstractUser):
 
     class Meta:
         ordering = ["username"]
+        permissions = (
+            (
+                "download_cancer_report",
+                "Puede descargar reportes del registro de cáncer",
+            ),
+        )
 
     def __str__(self) -> str:
         """Define the str representation for the user."""
