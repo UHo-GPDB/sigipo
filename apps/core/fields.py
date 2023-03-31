@@ -1,5 +1,6 @@
 from typing import Final
 
+from django.db.models import Model
 from django_select2.forms import ModelSelect2Widget
 
 from apps.core.functions import getUrl
@@ -25,9 +26,17 @@ class RelatedModelWrapper(ModelSelect2Widget):
         request = getattr(self, "request", None)
         if request is None:  # pragma: no cover
             return context
-        model = (
+        model: Model = (
             self.model or None if self.queryset is None else self.queryset.model
         ) or self.choices.queryset.model
+        add_permission = (
+            self.add_permission
+            or f"{model._meta.app_label}.add_{model._meta.model_name}"
+        )
+        view_permission = (
+            self.add_permission
+            or f"{model._meta.app_label}.view_{model._meta.model_name}"
+        )
         if self.add_url is not None and self.view_url is not None:
             self.add_url = getUrl(full_url=self.add_url)
             self.view_url = getUrl(full_url=self.view_url, value=REPLACE_URL_VALUE)
@@ -35,11 +44,9 @@ class RelatedModelWrapper(ModelSelect2Widget):
             self.add_url = getUrl(model)
             self.view_url = getUrl(model, REPLACE_URL_VALUE, "detail")
         context["add_perm"] = (
-            None
-            if self.is_read_only_mode
-            else request.user.has_perm(self.add_permission)
+            None if self.is_read_only_mode else request.user.has_perm(add_permission)
         )
-        context["view_perm"] = request.user.has_perm(self.view_permission)
+        context["view_perm"] = request.user.has_perm(view_permission)
         context["add_url"] = None if self.is_read_only_mode else self.add_url
         context["view_url"] = self.view_url
         return context

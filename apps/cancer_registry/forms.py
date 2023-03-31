@@ -58,8 +58,8 @@ class NeoplasmForm(ModelForm):
             ],
             add_url="patient:oncologic_create",
             view_url="patient:oncologic_detail",
-            add_permission="accounts.cancer_registry_manage",
-            view_permission="accounts.cancer_registry_view",
+            add_permission="patient.add_oncologic",
+            view_permission="patient.view_oncologic",
         ),
         label="Paciente",
     )
@@ -108,8 +108,6 @@ class NeoplasmForm(ModelForm):
             search_fields=[
                 "name__trigram_similar",
             ],
-            add_permission="accounts.cancer_registry_manage",
-            view_permission="accounts.cancer_registry_view",
         ),
         label="Sitio primario",
     )
@@ -140,8 +138,6 @@ class NeoplasmForm(ModelForm):
             search_fields=[
                 "name__trigram_similar",
             ],
-            add_permission="accounts.cancer_registry_manage",
-            view_permission="accounts.cancer_registry_view",
         ),
         label="Tipo histológico",
     )
@@ -255,8 +251,6 @@ class NeoplasmForm(ModelForm):
                 "last_name__trigram_similar",
                 "personal_record_number__trigram_similar",
             ],
-            add_permission="accounts.employee_manage",
-            view_permission="accounts.employee_view",
         ),
         required=False,
         label="Médico que reporta",
@@ -274,8 +268,6 @@ class NeoplasmForm(ModelForm):
             search_fields=[
                 "name__trigram_similar",
             ],
-            add_permission="accounts.employee_manage",
-            view_permission="accounts.employee_view",
         ),
         required=False,
         label="Grupo que reporta",
