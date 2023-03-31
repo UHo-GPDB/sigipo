@@ -58,7 +58,7 @@ urlpatterns = [
         PaginationFilterView.as_view(
             model=OncologicStudy,
             filterset_class=OncologicStudyFilter,
-            permission_required="accounts.cancer_registry_view",
+            
         ),
         name="oncologic_study_list",
     ),
@@ -72,7 +72,7 @@ urlpatterns = [
         PaginationFilterView.as_view(
             model=HormonalStudy,
             filterset_class=HormonalStudyFilter,
-            permission_required="accounts.cancer_registry_view",
+            
         ),
         name="hormonal_study_list",
     ),
@@ -88,7 +88,7 @@ urlpatterns = [
                 "oncologic_study__patient"
             ).all(),
             filterset_class=OncologicResultFilter,
-            permission_required="accounts.cancer_registry_view",
+            
         ),
         name="oncologic_result_list",
     ),
@@ -104,7 +104,7 @@ urlpatterns = [
                 "hormonal_study__patient"
             ).all(),
             filterset_class=HormonalResultFilter,
-            permission_required="accounts.cancer_registry_view",
+            
         ),
         name="hormonal_result_list",
     ),
@@ -118,7 +118,7 @@ urlpatterns = [
         PaginationFilterView.as_view(
             model=IodineDetection,
             filterset_class=IodineDetectionFilter,
-            permission_required="accounts.cancer_registry_view",
+            
         ),
         name="iodine_detection_list",
     ),
@@ -132,7 +132,7 @@ urlpatterns = [
         PaginationFilterView.as_view(
             model=SerialIodineDetection,
             filterset_class=SerialIodineDetectionFilter,
-            permission_required="accounts.cancer_registry_view",
+            
         ),
         name="serial_iodine_detection_list",
     ),
@@ -146,7 +146,7 @@ urlpatterns = [
         PaginationFilterView.as_view(
             model=Gammagraphy,
             filterset_class=GammagraphyFilter,
-            permission_required="accounts.cancer_registry_view",
+            
         ),
         name="gammagraphy_list",
     ),
