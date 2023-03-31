@@ -11,9 +11,8 @@ from django.forms import (
     Select,
     TextInput,
 )
-from django_select2.forms import ModelSelect2Widget
-from apps.core.fields import RelatedModelWrapper
 
+from apps.core.fields import RelatedModelWrapper
 from apps.core.forms import ModelForm
 from apps.geographic_location.models import Municipality
 from apps.patient.models import Patient, PatientRace, SexChoices

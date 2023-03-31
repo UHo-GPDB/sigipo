@@ -12,7 +12,6 @@ from django.forms import (
     Select,
     TextInput,
 )
-from django_select2.forms import ModelSelect2Widget
 
 from apps.cancer_registry.models import NeoplasmClinicalStageChoices
 from apps.chemotherapy.models import (
