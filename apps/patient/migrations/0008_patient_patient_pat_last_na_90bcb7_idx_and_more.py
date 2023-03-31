@@ -5,7 +5,7 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("patient", "0005_alter_patient_options"),
+        ("patient", "0007_alter_patient_options"),
     ]
 
     operations = [

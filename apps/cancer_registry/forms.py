@@ -377,5 +377,3 @@ class NeoplasmForm(ModelForm):
     class Meta:
         model = Neoplasm
         fields = "__all__"
-        default_permissions = ()
-        default_permissions = ()

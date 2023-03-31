@@ -76,8 +76,16 @@ class PaginationFilterView(LoginRequiredMixin, PermissionRequiredMixin, FilterVi
 
     paginate_by = 30
     extra_context: dict = None
-    permission_required = ()
+    permission_required = None
     post_function = None
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        model = self.model or self.queryset.model
+        self.permission_required = (
+            self.permission_required
+            or f"{model._meta.app_label}.view_{model._meta.model_name}"
+        )
 
     def get_ordering(self):
         """Return the field or fields to use for ordering the queryset."""
@@ -205,7 +213,7 @@ class BaseCreateView(
     """Base create view."""
 
     template_name = "base_crud/base_create.html"
-    permission_required = ()
+    permission_required = None
 
     def get_form_kwargs(self):
         """Return the keyword arguments for instantiating the form."""
@@ -214,6 +222,10 @@ class BaseCreateView(
         return kwargs
 
     def __init__(self, **kwargs):
+        self.permission_required = (
+            self.permission_required
+            or f"{self.model._meta.app_label}.add_{self.model._meta.model_name}"
+        )
         self.title = f"Añadir {self.model._meta.verbose_name.lower()}"
         super().__init__(**kwargs)
 
@@ -230,7 +242,7 @@ class BaseUpdateView(
     """Base update view."""
 
     template_name = "base_crud/base_update.html"
-    permission_required = ()
+    permission_required = None
 
     def get_form_kwargs(self):
         """Return the keyword arguments for instantiating the form."""
@@ -239,6 +251,10 @@ class BaseUpdateView(
         return kwargs
 
     def __init__(self, **kwargs):
+        self.permission_required = (
+            self.permission_required
+            or f"{self.model._meta.app_label}.change_{self.model._meta.model_name}"
+        )
         self.title = f"Editar {self.model._meta.verbose_name.lower()}"
         super().__init__(**kwargs)
 
@@ -256,9 +272,13 @@ class BaseDetailView(
 
     template_name = "base_crud/base_detail.html"
     form_class = None
-    permission_required = ()
+    permission_required = None
 
     def __init__(self, **kwargs):
+        self.permission_required = (
+            self.permission_required
+            or f"{self.model._meta.app_label}.view_{self.model._meta.model_name}"
+        )
         self.title = f"Detalles de {self.model._meta.verbose_name.lower()}"
         super().__init__(**kwargs)
 
@@ -305,9 +325,13 @@ class BaseDeleteView(
 
     template_name = "base_crud/base_delete.html"
     template_modal = "base_crud/base_modal_delete.html"
-    permission_required = ()
+    permission_required = None
 
     def __init__(self, **kwargs):
+        self.permission_required = (
+            self.permission_required
+            or f"{self.model._meta.app_label}.delete_{self.model._meta.model_name}"
+        )
         self.title = f"Eliminar {self.model._meta.verbose_name.lower()}"
         super().__init__(**kwargs)
 
