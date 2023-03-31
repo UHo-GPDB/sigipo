@@ -57,9 +57,11 @@ class PaginationFilterView(LoginRequiredMixin, PermissionRequiredMixin, FilterVi
     post_function = None
 
     def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        model = self.model or self.queryset.model
         self.permission_required = (
             self.permission_required
-            or f"{self.model._meta.app_label}.view_{self.model._meta.model_name}"
+            or f"{model._meta.app_label}.view_{model._meta.model_name}"
         )
 
     def get_ordering(self):
