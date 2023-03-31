@@ -10,10 +10,11 @@ from django.forms import (
     TextInput,
 )
 from django.utils.safestring import mark_safe
-from django_select2.forms import ModelSelect2MultipleWidget, ModelSelect2Widget
+from django_select2.forms import ModelSelect2MultipleWidget
 from multiselectfield.forms.fields import MultiSelectFormField
 
 from apps.classifiers.models import RadioIsotope, Study
+from apps.core.fields import RelatedModelWrapper
 from apps.core.forms import ModelForm
 from apps.drugs.models import NuclearMedicineDrug
 from apps.nuclear_medicine.models import (
@@ -76,7 +77,7 @@ class BaseStudyForm(ModelForm):
 
     patient = ModelChoiceField(
         queryset=Patient.objects.all(),
-        widget=ModelSelect2Widget(
+        widget=RelatedModelWrapper(
             attrs={
                 "class": "form-control",
                 "data-placeholder": "Paciente",
@@ -118,7 +119,7 @@ class BaseStudyDetailForm(ModelForm):
 
     patient = ModelChoiceField(
         queryset=Patient.objects.only_oncologic(),
-        widget=ModelSelect2Widget(
+        widget=RelatedModelWrapper(
             attrs={
                 "class": "form-control",
                 "data-placeholder": "Paciente",
@@ -229,7 +230,7 @@ class OncologicResultForm(ModelForm):
 
     oncologic_study = ModelChoiceField(
         queryset=OncologicStudy.objects.all(),
-        widget=ModelSelect2Widget(
+        widget=RelatedModelWrapper(
             attrs={
                 "class": "form-control",
                 "data-placeholder": "Estudio Oncológico",
@@ -330,7 +331,7 @@ class HormonalResultForm(ModelForm):
 
     hormonal_study = ModelChoiceField(
         queryset=HormonalStudy.objects.all(),
-        widget=ModelSelect2Widget(
+        widget=RelatedModelWrapper(
             attrs={
                 "class": "form-control",
                 "data-placeholder": "Estudio hormonal",
@@ -431,7 +432,7 @@ class IodineDetectionForm(ModelForm):
 
     patient = ModelChoiceField(
         queryset=Patient.objects.all(),
-        widget=ModelSelect2Widget(
+        widget=RelatedModelWrapper(
             attrs={
                 "class": "form-control",
                 "data-placeholder": "Paciente",
@@ -471,7 +472,7 @@ class SerialIodineDetectionForm(ModelForm):
 
     patient = ModelChoiceField(
         queryset=Patient.objects.all(),
-        widget=ModelSelect2Widget(
+        widget=RelatedModelWrapper(
             attrs={
                 "class": "form-control",
                 "data-placeholder": "Paciente",
@@ -536,7 +537,7 @@ class GammagraphyForm(ModelForm):
 
     patient = ModelChoiceField(
         queryset=Patient.objects.all(),
-        widget=ModelSelect2Widget(
+        widget=RelatedModelWrapper(
             attrs={
                 "class": "form-control",
                 "data-placeholder": "Paciente",
@@ -571,7 +572,7 @@ class GammagraphyForm(ModelForm):
     )
     drug = ModelChoiceField(
         queryset=NuclearMedicineDrug.objects.all(),
-        widget=ModelSelect2Widget(
+        widget=RelatedModelWrapper(
             attrs={
                 "class": "form-control",
                 "data-placeholder": "Fármaco",
@@ -587,7 +588,7 @@ class GammagraphyForm(ModelForm):
     )
     radio_isotope = ModelChoiceField(
         queryset=RadioIsotope.objects.all(),
-        widget=ModelSelect2Widget(
+        widget=RelatedModelWrapper(
             attrs={
                 "class": "form-control",
                 "data-placeholder": "Radio isótopo",

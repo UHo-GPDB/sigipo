@@ -24,6 +24,7 @@ from apps.chemotherapy.models import (
     RouteChoices,
     Scheme,
 )
+from apps.core.fields import RelatedModelWrapper
 from apps.core.forms import ChoiceField as EmptyChoiceField
 from apps.core.forms import ModelForm
 from apps.drugs.models import Drug, UnitChoicesChoices
@@ -49,7 +50,7 @@ class ProtocolForm(ModelForm):
 
     patient = ModelChoiceField(
         queryset=Patient.objects.all(),
-        widget=ModelSelect2Widget(
+        widget=RelatedModelWrapper(
             attrs={
                 "class": "form-control",
                 "data-placeholder": "Paciente",
@@ -63,12 +64,16 @@ class ProtocolForm(ModelForm):
                 "identity_card__trigram_similar",
                 "medical_record__trigram_similar",
             ],
+            add_url="patient:oncologic_create",
+            view_url="patient:oncologic_detail",
+            add_permission="patient.add_oncologic",
+            view_permission="patient.view_oncologic",
         ),
         label="Paciente",
     )
     scheme = ModelChoiceField(
         queryset=Scheme.objects.all(),
-        widget=ModelSelect2Widget(
+        widget=RelatedModelWrapper(
             attrs={
                 "class": "form-control",
                 "data-placeholder": "Esquema",
@@ -123,7 +128,7 @@ class ProtocolForm(ModelForm):
     )
     doctor = ModelChoiceField(
         queryset=Doctor.objects.all(),
-        widget=ModelSelect2Widget(
+        widget=RelatedModelWrapper(
             attrs={
                 "class": "form-control",
                 "data-placeholder": "Médico que reporta",
@@ -155,7 +160,7 @@ class MedicationForm(ModelForm):
 
     protocol = ModelChoiceField(
         queryset=Protocol.objects.not_suspended(),
-        widget=ModelSelect2Widget(
+        widget=RelatedModelWrapper(
             attrs={
                 "class": "form-control",
                 "data-placeholder": "Protocolo",
@@ -174,7 +179,7 @@ class MedicationForm(ModelForm):
     )
     drug = ModelChoiceField(
         queryset=Drug.objects.all(),
-        widget=ModelSelect2Widget(
+        widget=RelatedModelWrapper(
             attrs={
                 "class": "form-control",
                 "data-placeholder": "Fármaco",
@@ -239,7 +244,7 @@ class MedicationForm(ModelForm):
 class CycleForm(ModelForm):
     protocol = ModelChoiceField(
         queryset=Protocol.objects.all(),
-        widget=ModelSelect2Widget(
+        widget=RelatedModelWrapper(
             attrs={
                 "class": "form-control",
                 "data-placeholder": "Protocolo",
@@ -277,7 +282,7 @@ class CycleForm(ModelForm):
 class CycleMedicationForm(ModelForm):
     drug = ModelChoiceField(
         queryset=Drug.objects.all(),
-        widget=ModelSelect2Widget(
+        widget=RelatedModelWrapper(
             attrs={
                 "class": "form-control",
                 "data-placeholder": "Fármaco",

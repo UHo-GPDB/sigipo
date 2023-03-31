@@ -12,6 +12,7 @@ from django.forms import (
     TextInput,
 )
 from django_select2.forms import ModelSelect2Widget
+from apps.core.fields import RelatedModelWrapper
 
 from apps.core.forms import ModelForm
 from apps.geographic_location.models import Municipality
@@ -103,7 +104,7 @@ class BasePatientForm(ModelForm):
     residence_municipality = ModelChoiceField(
         queryset=Municipality.objects.all(),
         label="Municipio de residencia",
-        widget=ModelSelect2Widget(
+        widget=RelatedModelWrapper(
             attrs={
                 "class": "form-control",
                 "data-placeholder": "Municipio de residencia",
@@ -117,7 +118,7 @@ class BasePatientForm(ModelForm):
     born_municipality = ModelChoiceField(
         queryset=Municipality.objects.all(),
         label="Municipio natal",
-        widget=ModelSelect2Widget(
+        widget=RelatedModelWrapper(
             attrs={
                 "class": "form-control",
                 "data-placeholder": "Municipio natal",
