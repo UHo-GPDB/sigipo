@@ -22,7 +22,6 @@ urlpatterns = [
         PaginationFilterView.as_view(
             model=NuclearMedicineDrug,
             filterset_class=NuclearMedicineDrugFilter,
-            
         ),
         name="nuclearmedicinedrug_list",
     ),
@@ -36,7 +35,6 @@ urlpatterns = [
         PaginationFilterView.as_view(
             model=Drug,
             filterset_class=DrugFilter,
-            
         ),
         name="drug_list",
     ),

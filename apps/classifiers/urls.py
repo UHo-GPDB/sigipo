@@ -35,7 +35,6 @@ urlpatterns = [
         PaginationFilterView.as_view(
             model=Morphology,
             filterset_class=MorphologyFilter,
-            
         ),
         name="morphology_list",
     ),
@@ -49,7 +48,6 @@ urlpatterns = [
         PaginationFilterView.as_view(
             model=Topography,
             filterset_class=TopographyFilter,
-            
         ),
         name="topography_list",
     ),
@@ -63,7 +61,6 @@ urlpatterns = [
         PaginationFilterView.as_view(
             model=Study,
             filterset_class=StudyFilter,
-            
         ),
         name="study_list",
     ),
@@ -77,7 +74,6 @@ urlpatterns = [
         PaginationFilterView.as_view(
             model=RadioIsotope,
             filterset_class=RadioIsotopeFilter,
-            
         ),
         name="radioisotope_list",
     ),

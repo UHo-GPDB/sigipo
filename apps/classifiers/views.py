@@ -24,7 +24,6 @@ class MorphologyCreateView(BaseCreateView):
     success_url = reverse_lazy("classifiers:morphology_list")
     success_message = "%(name)s guardada correctamente."
     cancel_url = "classifiers:morphology_list"
-    
 
 
 class MorphologyDetailView(BaseDetailView):
@@ -34,7 +33,6 @@ class MorphologyDetailView(BaseDetailView):
     form_class = MorphologyForm
     cancel_url = "classifiers:morphology_list"
     object_not_found_error_message = "Morfología no encontrada"
-    
 
 
 class MorphologyUpdateView(BaseUpdateView):
@@ -46,7 +44,6 @@ class MorphologyUpdateView(BaseUpdateView):
     success_message = "%(name)s guardada correctamente."
     cancel_url = "classifiers:morphology_list"
     object_not_found_error_message = "Morfología no encontrado"
-    
 
 
 class MorphologyDeleteView(BaseDeleteView):
@@ -57,7 +54,6 @@ class MorphologyDeleteView(BaseDeleteView):
     success_message = "%(name)s guardada correctamente."
     cancel_url = "classifiers:morphology_list"
     object_not_found_error_message = "Morfología no encontrado"
-    
 
 
 # * Topography Views
@@ -69,7 +65,6 @@ class TopographyCreateView(BaseCreateView):
     success_url = reverse_lazy("classifiers:topography_list")
     success_message = "%(name)s guardada correctamente."
     cancel_url = "classifiers:topography_list"
-    
 
 
 class TopographyDetailView(BaseDetailView):
@@ -79,7 +74,6 @@ class TopographyDetailView(BaseDetailView):
     form_class = TopographyForm
     cancel_url = "classifiers:topography_list"
     object_not_found_error_message = "Topografía no encontrada"
-    
 
 
 class TopographyUpdateView(BaseUpdateView):
@@ -91,7 +85,6 @@ class TopographyUpdateView(BaseUpdateView):
     success_message = "%(name)s guardada correctamente."
     cancel_url = "classifiers:topography_list"
     object_not_found_error_message = "Topografía no encontrado"
-    
 
 
 class TopographyDeleteView(BaseDeleteView):
@@ -102,7 +95,6 @@ class TopographyDeleteView(BaseDeleteView):
     success_message = "%(name)s guardada correctamente."
     cancel_url = "classifiers:topography_list"
     object_not_found_error_message = "Topografía no encontrado"
-    
 
 
 # * Study Views
@@ -116,7 +108,6 @@ class StudyCreateView(BaseCreateView):
     cancel_url = "classifiers:study_list"
 
 
-
 class StudyDetailView(BaseDetailView):
     """View to handle study details."""
 
@@ -124,7 +115,6 @@ class StudyDetailView(BaseDetailView):
     form_class = StudyForm
     cancel_url = "classifiers:study_list"
     object_not_found_error_message = "Estudio no encontrada"
-
 
 
 class StudyUpdateView(BaseUpdateView):
@@ -138,7 +128,6 @@ class StudyUpdateView(BaseUpdateView):
     object_not_found_error_message = "Estudio no encontrado"
 
 
-
 class StudyDeleteView(BaseDeleteView):
     """View to handle study delete."""
 
@@ -147,7 +136,6 @@ class StudyDeleteView(BaseDeleteView):
     success_message = "%(name)s guardada correctamente."
     cancel_url = "classifiers:study_list"
     object_not_found_error_message = "Estudio no encontrado"
-
 
 
 # * RadioIsotope Views
@@ -161,7 +149,6 @@ class RadioIsotopeCreateView(BaseCreateView):
     cancel_url = "classifiers:radioisotope_list"
 
 
-
 class RadioIsotopeDetailView(BaseDetailView):
     """View to handle study details."""
 
@@ -169,7 +156,6 @@ class RadioIsotopeDetailView(BaseDetailView):
     form_class = RadioIsotopeForm
     cancel_url = "classifiers:radioisotope_list"
     object_not_found_error_message = "Radio isótopo no encontrada"
-
 
 
 class RadioIsotopeUpdateView(BaseUpdateView):
@@ -183,7 +169,6 @@ class RadioIsotopeUpdateView(BaseUpdateView):
     object_not_found_error_message = "Radio isótopo no encontrado"
 
 
-
 class RadioIsotopeDeleteView(BaseDeleteView):
     """View to handle study delete."""
 
@@ -192,4 +177,3 @@ class RadioIsotopeDeleteView(BaseDeleteView):
     success_message = "%(name)s guardada correctamente."
     cancel_url = "classifiers:radioisotope_list"
     object_not_found_error_message = "Radio isótopo no encontrado"
-

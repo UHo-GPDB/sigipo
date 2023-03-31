@@ -22,7 +22,6 @@ urlpatterns = [
         PaginationFilterView.as_view(
             model=Group,
             filterset_class=GroupFilter,
-            
         ),
         name="group_list",
     ),
@@ -36,7 +35,6 @@ urlpatterns = [
         PaginationFilterView.as_view(
             model=Doctor,
             filterset_class=DoctorFilter,
-            
         ),
         name="doctor_list",
     ),

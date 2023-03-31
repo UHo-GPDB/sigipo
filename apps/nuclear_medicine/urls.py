@@ -58,7 +58,6 @@ urlpatterns = [
         PaginationFilterView.as_view(
             model=OncologicStudy,
             filterset_class=OncologicStudyFilter,
-            
         ),
         name="oncologic_study_list",
     ),
@@ -72,7 +71,6 @@ urlpatterns = [
         PaginationFilterView.as_view(
             model=HormonalStudy,
             filterset_class=HormonalStudyFilter,
-            
         ),
         name="hormonal_study_list",
     ),
@@ -88,7 +86,6 @@ urlpatterns = [
                 "oncologic_study__patient"
             ).all(),
             filterset_class=OncologicResultFilter,
-            
         ),
         name="oncologic_result_list",
     ),
@@ -104,7 +101,6 @@ urlpatterns = [
                 "hormonal_study__patient"
             ).all(),
             filterset_class=HormonalResultFilter,
-            
         ),
         name="hormonal_result_list",
     ),
@@ -118,7 +114,6 @@ urlpatterns = [
         PaginationFilterView.as_view(
             model=IodineDetection,
             filterset_class=IodineDetectionFilter,
-            
         ),
         name="iodine_detection_list",
     ),
@@ -132,7 +127,6 @@ urlpatterns = [
         PaginationFilterView.as_view(
             model=SerialIodineDetection,
             filterset_class=SerialIodineDetectionFilter,
-            
         ),
         name="serial_iodine_detection_list",
     ),
@@ -146,7 +140,6 @@ urlpatterns = [
         PaginationFilterView.as_view(
             model=Gammagraphy,
             filterset_class=GammagraphyFilter,
-            
         ),
         name="gammagraphy_list",
     ),
