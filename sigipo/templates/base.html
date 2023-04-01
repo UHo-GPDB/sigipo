@@ -97,7 +97,7 @@
             <div class="collapse" id="nuclear-medicine">
               <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                 <li class="sub-menu nav-item mb-1">
-                  <a href="{% url 'patient:patient_list' %}" class="nav-link link-light rounded"><i class="fa-solid fa-hospital-user"></i> Paciente</a>
+                  <a href="{% url 'patient:patient_list' %}?module-name=nuclear_medicine" class="nav-link link-light rounded"><i class="fa-solid fa-hospital-user"></i> Paciente</a>
                 </li>
                 <li class="nav-item mb-1">
                   <button class="sub-menu btn btn-toggle align-items-center rounded collapsed text-white" data-bs-toggle="collapse" data-bs-target="#ria-irma" aria-expanded="false">
@@ -158,7 +158,7 @@
             <div class="collapse" id="chemotherapy">
               <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                 <li class="sub-menu nav-item mb-1">
-                  <a href="{% url 'patient:oncologic_list' %}" class="nav-link link-light rounded"><i class="fa-solid fa-hospital-user"></i> Paciente</a>
+                  <a href="{% url 'patient:oncologic_list' %}?module-name=chemotherapy" class="nav-link link-light rounded"><i class="fa-solid fa-hospital-user"></i> Paciente</a>
                 </li>
                 <li class="sub-menu nav-item mb-1">
                   <a href="{% url 'chemotherapy:scheme_list' %}" class="nav-link link-light rounded"><i class="fa-solid fa-folder"></i> Esquema</a>
