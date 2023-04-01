@@ -4,6 +4,9 @@
 .fa-sort-down:hover::before {
   content: "\f0dc";
 }
+.sort-options i{
+  color: var(--bs-table-color);
+}
 .show {
   display: block !important;
 }
@@ -13,9 +16,6 @@
 .sort-options {
   display: none;
   float: right;
-}
-.sort-options i {
-  color: #212529;
 }
 .column-sorted:hover .sort-options {
   display: block;
@@ -104,6 +104,6 @@ table.table td i {
   row-gap: 0.7em;
 }
 i.object-link {
-  color: midnightblue;
+  color: var(--bs-link-color);
   font-size: 16px !important;
 }
