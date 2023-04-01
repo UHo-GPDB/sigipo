@@ -142,3 +142,11 @@ main .content {
   overflow-y: auto;
   width: 100%;
 }
+
+.bd-mode-toggle{
+  z-index: 1500;
+}
+
+.top-7{
+  top: 1em;
+}
