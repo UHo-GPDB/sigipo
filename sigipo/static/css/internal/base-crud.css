@@ -4,7 +4,7 @@
 .fa-sort-down:hover::before {
   content: "\f0dc";
 }
-.sort-options i{
+.sort-options i {
   color: var(--bs-table-color);
 }
 .show {
