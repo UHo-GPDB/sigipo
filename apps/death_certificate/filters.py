@@ -54,29 +54,6 @@ class DeathCertificateFilter(FilterSet):
         label="Fecha de Fallecimiento",
     )
 
-    deathCertificate_number = CharFilter(
-        lookup_expr="icontains",
-        widget=TextInput(
-            attrs={
-                "class": "form-control",
-                "placeholder": "Número de Certificación de Defunción",
-            }
-        ),
-        label="Número de Certificación de Defunción",
-    )
-
-    first_name = CharFilter(
-        lookup_expr="icontains",
-        widget=TextInput(attrs={"class": "form-control", "placeholder": "Nombre"}),
-        label="Nombre",
-    )
-
-    last_name = CharFilter(
-        lookup_expr="icontains",
-        widget=TextInput(attrs={"class": "form-control", "placeholder": "Apellidos"}),
-        label="Apellidos",
-    )
-
     ConfirmationCauses = ChoiceFilter(
         choices=ConfirmationCausesChoices.choices,
         widget=Select(
@@ -85,6 +62,7 @@ class DeathCertificateFilter(FilterSet):
                 "placeholder": "Confirmación de las causas",
             }
         ),
+        label="Confirmación de las causas",
     )
 
     death_location = ModelChoiceFilter(
@@ -112,9 +90,7 @@ class DeathCertificateFilter(FilterSet):
             "patient__first_name",
             "patient__last_name",
             "patient__medical_record",
-            "deathCertificate_number",
             "time_of_death",
             "ConfirmationCauses",
             "death_location",
-
         ]

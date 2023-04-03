@@ -72,5 +72,6 @@ class LocationFilter(FilterSet):
         model = Location
         fields = [
             "name",
+            "municipality",
             "province",
         ]

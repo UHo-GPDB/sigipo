@@ -10,9 +10,10 @@ from django.forms import (
     ModelChoiceField,
 )
 
-from apps.core.widget import CauseOFDeathField
+from apps.core.widget import CauseOfDeathField
 from django_select2.forms import ModelSelect2Widget
 from apps.patient.models import Patient
+from apps.geographic_location.models import Location
 
 from apps.core.forms import ModelForm
 from apps.death_certificate.models import (
@@ -61,21 +62,21 @@ class DeathCertificateForm(ModelForm):
         label="Causa de Muerte",
     )
 
-    indirect_death_cause_1 = CauseOFDeathField(
+    indirect_death_cause_1 = CauseOfDeathField(
         widget=Textarea(
             attrs={"class": "form-control", "placeholder": "Causa que ocasionó I"}
         ),
         label="Causa que ocasionó",
     )
 
-    indirect_death_cause_2 = CauseOFDeathField(
+    indirect_death_cause_2 = CauseOfDeathField(
         widget=Textarea(
             attrs={"class": "form-control", "placeholder": "Causa que ocasionó II"}
         ),
         label="Causa que ocasionó",
     )
 
-    indirect_death_cause_3 = CauseOFDeathField(
+    indirect_death_cause_3 = CauseOfDeathField(
         widget=Textarea(
             attrs={"class": "form-control", "placeholder": "Causa que ocasionó III"}
         ),

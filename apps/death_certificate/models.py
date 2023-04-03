@@ -129,11 +129,11 @@ class DeathCertificate(Model):
 
     direct_death_cause = TextField(verbose_name="Causa de Muerte")
 
-    indirect_death_cause_1 = CauseOfDeathField(verbose_name="Causa que ocasionó I")
-    indirect_death_cause_2 = CauseOfDeathField(verbose_name="Causa que ocasionó II")
-    indirect_death_cause_3 = CauseOfDeathField(verbose_name="Causa que ocasionó III")
+    indirect_death_cause_1 = CauseOfDeathField()
+    indirect_death_cause_2 = CauseOfDeathField()
+    indirect_death_cause_3 = CauseOfDeathField()
 
-    other_contibuting_diseases = CauseOfDeathField(verbose_name="Otras enfermedades contribuyentes")
+    other_contibuting_diseases = CauseOfDeathField()
 
 
     time_of_death = DateTimeField(
