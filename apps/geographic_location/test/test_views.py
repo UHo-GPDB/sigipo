@@ -370,8 +370,9 @@ class LocationCreateViewTestCase(TestCase):
     def setUpTestData(cls):
         """Common test data."""
         cls.user = UserFactory.create()
-        cls.municpality = MunicipalityFactory.create()
-
+        cls.municipality = MunicipalityFactory.create()
+        cls.province = ProvinceFactory.create()
+        
     def setUp(self) -> None:
         """Extra initialization."""
         self.client.force_login(self.user)
@@ -388,7 +389,7 @@ class LocationCreateViewTestCase(TestCase):
         count_before_test = Location.objects.count()
         response = self.client.post(
             reverse("geographic_location:location_create"),
-            {"name": "TestLocation", "municpality": self.municpality.pk},
+            {"name": "TestLocation", "municipality": self.municipality.pk, "province": self.province.pk},
         )
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         messages = list(get_messages(response.wsgi_request))
@@ -407,6 +408,7 @@ class LocationUpdateViewTestCase(TestCase):
     def setUpTestData(cls):
         """Common test data."""
         cls.user = UserFactory.create()
+        cls.province = ProvinceFactory.create(name="TestProvince")
         cls.municipality = MunicipalityFactory.create(name="TestMunicipality")
         cls.location = LocationFactory.create()
 
@@ -433,7 +435,7 @@ class LocationUpdateViewTestCase(TestCase):
             reverse(
                 "geographic_location:location_update", args=(self.location.pk,)
             ),
-            {"name": "TestLocation", "municipality": self.municipality.pk},
+            {"name": "TestLocation", "municipality": self.municipality.pk, "province": self.province.pk},
         )
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         messages = list(get_messages(response.wsgi_request))
@@ -443,5 +445,6 @@ class LocationUpdateViewTestCase(TestCase):
             LocationUpdateView.success_message % {"name": "TestLocation"},
         )
         self.location.refresh_from_db()
-        self.assertEqual(str(self.location), "TestLocation - TestMunicipality")
+        self.assertEqual(str(self.location), "TestLocation - TestMunicipality - TestProvince")
         self.assertEqual(self.location.municipality.pk, self.municipality.pk)
+        self.assertEqual(self.location.province.pk, self.province.pk)
