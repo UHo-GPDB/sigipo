@@ -5,10 +5,18 @@ from django.urls import reverse
 
 from apps.accounts.factories import UserFactory
 from apps.core.test import TestCase
-from apps.geographic_location.factories import MunicipalityFactory, ProvinceFactory, LocationFactory
-from apps.geographic_location.forms import MunicipalityForm, ProvinceForm, LocationForm
-from apps.geographic_location.models import Municipality, Province, Location
+from apps.geographic_location.factories import (
+    LocationFactory,
+    MunicipalityFactory,
+    ProvinceFactory,
+)
+from apps.geographic_location.forms import LocationForm, MunicipalityForm, ProvinceForm
+from apps.geographic_location.models import Location, Municipality, Province
 from apps.geographic_location.views import (
+    LocationCreateView,
+    LocationDeleteView,
+    LocationDetailView,
+    LocationUpdateView,
     MunicipalityCreateView,
     MunicipalityDeleteView,
     MunicipalityDetailView,
@@ -17,10 +25,6 @@ from apps.geographic_location.views import (
     ProvinceDeleteView,
     ProvinceDetailView,
     ProvinceUpdateView,
-    LocationCreateView,
-    LocationDeleteView,
-    LocationDetailView,
-    LocationUpdateView
 )
 
 
@@ -298,7 +302,7 @@ class MunicipalityUpdateViewTestCase(TestCase):
         self.assertEqual(str(self.municipality), "TestMunicipality - TestProvince")
         self.assertEqual(self.municipality.province.pk, self.province.pk)
 
-        
+
 class LocationDetailViewTestCase(TestCase):
     """Test case for LocationDetailView."""
 
@@ -315,17 +319,15 @@ class LocationDetailViewTestCase(TestCase):
     def test_get(self):
         """Test the get method for LocationDetailView."""
         response = self.client.get(
-            reverse(
-                "geographic_location:location_detail", args=(self.location.pk,)
-            )
+            reverse("geographic_location:location_detail", args=(self.location.pk,))
         )
         self.assertIn(self.location.name, response.content.decode())
-        self.assertIn(self.location.municipality.province.name, response.content.decode())
+        self.assertIn(
+            self.location.municipality.province.name, response.content.decode()
+        )
         self.assertIn("form", response.context)
         self.assertIn("readonly", response.content.decode())
-        self.assertIn(
-            reverse(LocationDetailView.cancel_url), response.content.decode()
-        )
+        self.assertIn(reverse(LocationDetailView.cancel_url), response.content.decode())
 
 
 class LocationDeleteViewTestCase(TestCase):
@@ -344,23 +346,17 @@ class LocationDeleteViewTestCase(TestCase):
     def test_post(self):
         """Test the post method for LocationDeleteView."""
         self.client.post(
-            reverse(
-                "geographic_location:location_delete", args=(self.location.pk,)
-            )
+            reverse("geographic_location:location_delete", args=(self.location.pk,))
         )
         self.assertFalse(Location.objects.filter(pk=self.location.pk).exists())
 
     def test_get(self):
         """Test the get method for LocationDeleteView."""
         response = self.client.get(
-            reverse(
-                "geographic_location:location_delete", args=(self.location.pk,)
-            )
+            reverse("geographic_location:location_delete", args=(self.location.pk,))
         )
         self.assertIn(str(self.location), response.content.decode())
-        self.assertIn(
-            reverse(LocationDeleteView.cancel_url), response.content.decode()
-        )
+        self.assertIn(reverse(LocationDeleteView.cancel_url), response.content.decode())
 
 
 class LocationCreateViewTestCase(TestCase):
@@ -372,7 +368,7 @@ class LocationCreateViewTestCase(TestCase):
         cls.user = UserFactory.create()
         cls.municipality = MunicipalityFactory.create()
         cls.province = ProvinceFactory.create()
-        
+
     def setUp(self) -> None:
         """Extra initialization."""
         self.client.force_login(self.user)
@@ -382,14 +378,20 @@ class LocationCreateViewTestCase(TestCase):
         response = self.client.get(reverse("geographic_location:location_create"))
         self.assertIn("form", response.context)
         self.assertTrue(isinstance(response.context["form"], LocationForm))
-        self.assertIn(reverse(MunicipalityCreateView.cancel_url), response.content.decode())
+        self.assertIn(
+            reverse(MunicipalityCreateView.cancel_url), response.content.decode()
+        )
 
     def test_post(self):
         """Test the post method for LocationCreateView."""
         count_before_test = Location.objects.count()
         response = self.client.post(
             reverse("geographic_location:location_create"),
-            {"name": "TestLocation", "municipality": self.municipality.pk, "province": self.province.pk},
+            {
+                "name": "TestLocation",
+                "municipality": self.municipality.pk,
+                "province": self.province.pk,
+            },
         )
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         messages = list(get_messages(response.wsgi_request))
@@ -419,23 +421,21 @@ class LocationUpdateViewTestCase(TestCase):
     def test_get(self):
         """Test the get method for LocationUpdateView."""
         response = self.client.get(
-            reverse(
-                "geographic_location:location_update", args=(self.location.pk,)
-            )
+            reverse("geographic_location:location_update", args=(self.location.pk,))
         )
         self.assertIn("form", response.context)
         self.assertTrue(isinstance(response.context["form"], LocationForm))
-        self.assertIn(
-            reverse(LocationUpdateView.cancel_url), response.content.decode()
-        )
+        self.assertIn(reverse(LocationUpdateView.cancel_url), response.content.decode())
 
     def test_post(self):
         """Test the post method for LocationUpdateView."""
         response = self.client.post(
-            reverse(
-                "geographic_location:location_update", args=(self.location.pk,)
-            ),
-            {"name": "TestLocation", "municipality": self.municipality.pk, "province": self.province.pk},
+            reverse("geographic_location:location_update", args=(self.location.pk,)),
+            {
+                "name": "TestLocation",
+                "municipality": self.municipality.pk,
+                "province": self.province.pk,
+            },
         )
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         messages = list(get_messages(response.wsgi_request))
@@ -445,6 +445,8 @@ class LocationUpdateViewTestCase(TestCase):
             LocationUpdateView.success_message % {"name": "TestLocation"},
         )
         self.location.refresh_from_db()
-        self.assertEqual(str(self.location), "TestLocation - TestMunicipality - TestProvince")
+        self.assertEqual(
+            str(self.location), "TestLocation - TestMunicipality - TestProvince"
+        )
         self.assertEqual(self.location.municipality.pk, self.municipality.pk)
         self.assertEqual(self.location.province.pk, self.province.pk)

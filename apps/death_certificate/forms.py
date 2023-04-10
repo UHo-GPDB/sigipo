@@ -4,19 +4,15 @@ from django.forms import (
     DateTimeField,
     DateTimeInput,
     JSONField,
+    ModelChoiceField,
     Select,
     Textarea,
-    TextInput,
-    ModelChoiceField,
 )
-
-from apps.core.widget import CauseOfDeathField
-from apps.core.fields import RelatedModelWrapper
 from django_select2.forms import ModelSelect2Widget
-from apps.patient.models import Patient
-from apps.geographic_location.models import Location
 
+from apps.core.fields import RelatedModelWrapper
 from apps.core.forms import ModelForm
+from apps.core.widget import CauseOfDeathField
 from apps.death_certificate.models import (
     CertficationMadeByChoices,
     CivilStateChoices,
@@ -30,11 +26,12 @@ from apps.death_certificate.models import (
     ScholarshipLevelChoices,
     ViolentDeathCausesChoices,
 )
+from apps.geographic_location.models import Location
+from apps.patient.models import Patient
 
 
 class DeathCertificateForm(ModelForm):
     """Model to handle DeathCertificate creation and edition."""
-
 
     patient = ModelChoiceField(
         queryset=Patient.objects.all(),
@@ -254,7 +251,11 @@ class DeathCertificateForm(ModelForm):
                 "data-theme": "bootstrap-5",
                 "data-width": "style",
             },
-            search_fields=["name__icontains", "province__name__icontains","municipality__name__icontains"],
+            search_fields=[
+                "name__icontains",
+                "province__name__icontains",
+                "municipality__name__icontains",
+            ],
         ),
     )
 

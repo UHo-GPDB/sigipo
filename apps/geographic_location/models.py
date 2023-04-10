@@ -41,13 +41,15 @@ class Municipality(Model):
         """Returns the name of the municipality."""
         return f"{self.name} - {self.province.name}"
 
+
 class LocationQuerysetManager(Manager):
     """Manager to handle Location."""
 
     def get_queryset(self):
         """Fetch related Municipalities."""
         return super().get_queryset().select_related("municipality")
-    
+
+
 class Location(Model):
     """Model representation of a municipality."""
 
