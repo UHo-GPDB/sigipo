@@ -11,6 +11,7 @@ from django.forms import (
 )
 
 from apps.core.widget import CauseOfDeathField
+from apps.core.fields import RelatedModelWrapper
 from django_select2.forms import ModelSelect2Widget
 from apps.patient.models import Patient
 from apps.geographic_location.models import Location
@@ -37,7 +38,7 @@ class DeathCertificateForm(ModelForm):
 
     patient = ModelChoiceField(
         queryset=Patient.objects.all(),
-        widget=ModelSelect2Widget(
+        widget=RelatedModelWrapper(
             attrs={
                 "class": "form-control",
                 "data-placeholder": "Paciente",
