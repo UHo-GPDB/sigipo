@@ -19,7 +19,7 @@ from apps.death_certificate.models import (
 )
 
 from apps.patient.factories import PatientFactory
-from apps.geographic_location.models import Location
+from apps.geographic_location.factories import LocationFactory
 
 class DeathCertificateFactory(DjangoModelFactory):
     """Factory to handle death_certificate creation."""
