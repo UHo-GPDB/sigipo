@@ -4,6 +4,7 @@ from django.db.models import (
     CharField,
     DateField,
     ForeignKey,
+    Index,
     IntegerChoices,
     IntegerField,
     UniqueConstraint,
@@ -118,13 +119,37 @@ class Patient(TimeStampedModel):
         verbose_name = "Paciente"
         verbose_name_plural = "pacientes"
         ordering = ["updated_at"]
+        permissions = (
+            (
+                "add_oncologic",
+                "Puede añadir pacientes al registro de cáncer",
+            ),
+            (
+                "view_oncologic",
+                "Puede añadir pacientes al registro de cáncer",
+            ),
+            (
+                "change_oncologic",
+                "Puede añadir pacientes al registro de cáncer",
+            ),
+            (
+                "delete_oncologic",
+                "Puede añadir pacientes al registro de cáncer",
+            ),
+        )
         constraints = [
             UniqueConstraint(
                 fields=["identity_card"],
                 name="patient_identity_card_constraints",
             )
         ]
-        default_permissions = ()
+        indexes = [
+            Index(fields=["last_name", "first_name"]),
+            Index(fields=["first_name"]),
+            Index(fields=["last_name"]),
+            Index(fields=["identity_card"]),
+            Index(fields=["medical_record"]),
+        ]
 
     def __str__(self):
         """Returns the name of the patient."""

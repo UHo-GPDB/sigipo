@@ -5,7 +5,7 @@ class ProvinceWidget(ModelSelect2Widget):
     """Widget to search and select related province."""
 
     search_fields = [
-        "name__icontains",
+        "name__trigram_similar",
     ]
 
 class MunicipalityWidget(ModelSelect2Widget):
