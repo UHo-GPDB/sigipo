@@ -1,5 +1,9 @@
 from apps.core.test import TestCase
-from apps.geographic_location.factories import MunicipalityFactory, ProvinceFactory, LocationFactory
+from apps.geographic_location.factories import (
+    LocationFactory,
+    MunicipalityFactory,
+    ProvinceFactory,
+)
 
 
 class ProvinceTestCase(TestCase):
@@ -32,6 +36,7 @@ class MunicipalityTestCase(TestCase):
             str(self.municipality),
             f"{self.municipality.name} - {self.municipality.province.name}",
         )
+
 
 class LocationTestCase(TestCase):
     """Test case for Location model."""

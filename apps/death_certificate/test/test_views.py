@@ -37,7 +37,9 @@ class DeathCertificateDetailViewTestCase(TestCase):
         self.assertIn(str(self.death), response.content.decode())
         self.assertIn("form", response.context)
         self.assertIn("readonly", response.content.decode())
-        self.assertIn(reverse(DeathCertificateDetailView.cancel_url), response.content.decode())
+        self.assertIn(
+            reverse(DeathCertificateDetailView.cancel_url), response.content.decode()
+        )
 
 
 class DeathCertificateDeleteViewTestCase(TestCase):
@@ -66,7 +68,9 @@ class DeathCertificateDeleteViewTestCase(TestCase):
             reverse("death_certificate:death_certificate_delete", args=(self.death.pk,))
         )
         self.assertIn(str(self.death), response.content.decode())
-        self.assertIn(reverse(DeathCertificateDeleteView.cancel_url), response.content.decode())
+        self.assertIn(
+            reverse(DeathCertificateDeleteView.cancel_url), response.content.decode()
+        )
 
 
 class DeathCertificateCreateViewTestCase(TestCase):
@@ -83,23 +87,29 @@ class DeathCertificateCreateViewTestCase(TestCase):
 
     def test_get(self):
         """Test the get method for DeathCertificateCreateView."""
-        response = self.client.get(reverse("death_certificate:death_certificate_create"))
+        response = self.client.get(
+            reverse("death_certificate:death_certificate_create")
+        )
         self.assertIn("form", response.context)
         self.assertTrue(isinstance(response.context["form"], DeathCertificateForm))
-        self.assertIn(reverse(DeathCertificateCreateView.cancel_url), response.content.decode())
+        self.assertIn(
+            reverse(DeathCertificateCreateView.cancel_url), response.content.decode()
+        )
 
     def test_post(self):
         """Test the post method for DeathCertificateCreateView."""
         count_before_test = DeathCertificate.objects.count()
         response = self.client.post(
-            reverse("death_certificate:death_certificate_create"), {"name": "Test_Death_Certificate"}
+            reverse("death_certificate:death_certificate_create"),
+            {"name": "Test_Death_Certificate"},
         )
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
         self.assertEqual(
             str(messages[0]),
-            DeathCertificateCreateView.success_message % {"name": "Test_Death_Certificate"},
+            DeathCertificateCreateView.success_message
+            % {"name": "Test_Death_Certificate"},
         )
         self.assertEqual(DeathCertificate.objects.count(), count_before_test + 1)
 
@@ -124,12 +134,16 @@ class DeathCertificateUpdateViewTestCase(TestCase):
         )
         self.assertIn("form", response.context)
         self.assertTrue(isinstance(response.context["form"], DeathCertificateForm))
-        self.assertIn(reverse(DeathCertificateUpdateView.cancel_url), response.content.decode())
+        self.assertIn(
+            reverse(DeathCertificateUpdateView.cancel_url), response.content.decode()
+        )
 
     def test_post(self):
         """Test the post method for DeathCertificateUpdateView."""
         response = self.client.post(
-            reverse("death_certificate:death_certificate_update", args=(self.death.pk,)),
+            reverse(
+                "death_certificate:death_certificate_update", args=(self.death.pk,)
+            ),
             {"name": "TestDeathCertificate"},
         )
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
@@ -137,7 +151,8 @@ class DeathCertificateUpdateViewTestCase(TestCase):
         self.assertEqual(len(messages), 1)
         self.assertEqual(
             str(messages[0]),
-            DeathCertificateUpdateView.success_message % {"name": "TestDeathCertificate"},
+            DeathCertificateUpdateView.success_message
+            % {"name": "TestDeathCertificate"},
         )
         self.death.refresh_from_db()
         self.assertEqual(str(self.death), "TestDeathCertificate")

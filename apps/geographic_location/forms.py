@@ -1,8 +1,8 @@
 from django.forms import CharField, TextInput
 
 from apps.core.forms import ModelForm
-from apps.geographic_location.models import Municipality, Province, Location
-from apps.geographic_location.widgets import ProvinceWidget, MunicipalityWidget
+from apps.geographic_location.models import Location, Municipality, Province
+from apps.geographic_location.widgets import MunicipalityWidget, ProvinceWidget
 
 
 class ProvinceForm(ModelForm):
@@ -40,6 +40,7 @@ class MunicipalityForm(ModelForm):
                 },
             ),
         }
+
 
 class LocationForm(ModelForm):
     """Model to handle Location creation and edition."""

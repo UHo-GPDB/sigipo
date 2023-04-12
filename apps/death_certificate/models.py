@@ -1,13 +1,11 @@
 from django.db.models import (
-    SET_NULL,
     CASCADE,
-    CharField,
+    SET_NULL,
     DateField,
     DateTimeField,
     ForeignKey,
     IntegerChoices,
     IntegerField,
-    JSONField,
     Model,
     OneToOneField,
     TextField,
@@ -16,7 +14,6 @@ from django.db.models import (
 from apps.core.widget import CauseOfDeathField
 from apps.geographic_location.models import Location
 from apps.patient.models import Patient
-
 
 
 class ScholarshipLevelChoices(IntegerChoices):
@@ -126,7 +123,6 @@ class DeathCertificate(Model):
 
     patient = OneToOneField(Patient, null=True, blank=False, on_delete=CASCADE)
 
-
     direct_death_cause = TextField(verbose_name="Causa de Muerte")
 
     indirect_death_cause_1 = CauseOfDeathField()
@@ -134,7 +130,6 @@ class DeathCertificate(Model):
     indirect_death_cause_3 = CauseOfDeathField()
 
     other_contibuting_diseases = CauseOfDeathField()
-
 
     time_of_death = DateTimeField(
         verbose_name="Fecha de defunción",

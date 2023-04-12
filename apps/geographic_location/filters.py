@@ -1,7 +1,7 @@
 from django.forms import TextInput
 from django_filters import CharFilter, FilterSet
 
-from apps.geographic_location.models import Municipality, Province, Location
+from apps.geographic_location.models import Location, Municipality, Province
 
 
 class ProvinceFilter(FilterSet):
@@ -43,6 +43,7 @@ class MunicipalityFilter(FilterSet):
             "name",
             "province",
         ]
+
 
 class LocationFilter(FilterSet):
     """Filters to search for Localities."""
