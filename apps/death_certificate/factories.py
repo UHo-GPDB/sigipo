@@ -18,6 +18,7 @@ from apps.death_certificate.models import (
     ViolentDeathCausesChoices,
 )
 from apps.patient.factories import PatientFactory
+from apps.geographic_location.factories import LocationFactory
 
 
 class DeathCertificateFactory(DjangoModelFactory):
