@@ -3,7 +3,6 @@ from django.forms import (
     ChoiceField,
     DateTimeField,
     DateTimeInput,
-    JSONField,
     ModelChoiceField,
     Select,
     Textarea,
@@ -12,7 +11,7 @@ from django_select2.forms import ModelSelect2Widget
 
 from apps.core.fields import RelatedModelWrapper
 from apps.core.forms import ModelForm
-from apps.core.widget import CauseOfDeathField
+from apps.core.widget import CauseOfDeathField, CauseOfDeathWidget
 from apps.death_certificate.models import (
     CertficationMadeByChoices,
     CivilStateChoices,
@@ -61,28 +60,28 @@ class DeathCertificateForm(ModelForm):
     )
 
     indirect_death_cause_1 = CauseOfDeathField(
-        widget=Textarea(
+        widget=CauseOfDeathWidget(
             attrs={"class": "form-control", "placeholder": "Causa que ocasionó I"}
         ),
         label="Causa que ocasionó",
     )
 
     indirect_death_cause_2 = CauseOfDeathField(
-        widget=Textarea(
+        widget=CauseOfDeathWidget(
             attrs={"class": "form-control", "placeholder": "Causa que ocasionó II"}
         ),
         label="Causa que ocasionó",
     )
 
     indirect_death_cause_3 = CauseOfDeathField(
-        widget=Textarea(
+        widget=CauseOfDeathWidget(
             attrs={"class": "form-control", "placeholder": "Causa que ocasionó III"}
         ),
         label="Causa que ocasionó",
     )
 
-    other_contibuting_diseases = JSONField(
-        widget=Textarea(
+    other_contibuting_diseases = CauseOfDeathField(
+        widget=CauseOfDeathWidget(
             attrs={
                 "class": "form-control",
                 "placeholder": "Otras enfermedades contribuyentes",
