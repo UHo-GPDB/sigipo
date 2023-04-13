@@ -1,4 +1,4 @@
-DOCKER_COMPOSE := docker-compose -f docker-compose.yml
+DOCKER_COMPOSE := docker-compose -f docker-compose.base.yml
 DOCKER_COMPOSE_DEV := $(DOCKER_COMPOSE) -f docker-compose.dev.yml
 DOCKER_RUN_WEB := $(DOCKER_COMPOSE_DEV) run --rm web
 
