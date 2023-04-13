@@ -70,3 +70,4 @@ class Command(BaseCommand):
                 patient=patient,
                 requested_study=[study],
             )
+        self.stdout.write("Created a samples of data.")
