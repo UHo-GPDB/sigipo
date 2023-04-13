@@ -130,7 +130,7 @@ class DeathCertificate(Model):
     indirect_death_cause_1 = JSONField(default=dict)
     indirect_death_cause_3 = JSONField(default=dict)
 
-    other_contibuting_diseases = JSONField(default=dict)
+    other_contributing_diseases = JSONField(default=dict)
 
     time_of_death = DateTimeField(
         verbose_name="Fecha de defunción",
@@ -188,7 +188,7 @@ class DeathCertificate(Model):
         default=ConfirmationCausesChoices.CLINIC,
     )
 
-    certfication_made_by = IntegerField(
+    certification_made_by = IntegerField(
         verbose_name="Certificación realizada por médico de",
         choices=CertficationMadeByChoices.choices,
         default=CertficationMadeByChoices.HGCORP,
@@ -200,7 +200,7 @@ class DeathCertificate(Model):
         default=LastSurgeriesChoices.UNDEFINED,
     )
 
-    surgery_reasons = TextField(verbose_name="Causa de la Cirugía")
+    surgery_reasons = TextField(verbose_name="Razón de la Cirugía")
 
     violent_death_causes = IntegerField(
         verbose_name="Causa aparente de muerte violenta",
@@ -216,9 +216,9 @@ class DeathCertificate(Model):
     )
 
     place_where_injury_occurred = TextField(
-        verbose_name="Lugar donde ocurrio la lesión"
+        verbose_name="Lugar donde ocurrió la lesión"
     )
-    event_description = TextField(verbose_name="Descripcion de como ocurrio")
+    event_description = TextField(verbose_name="Descripción de como ocurrió")
     requesting_authority = TextField(verbose_name="Autoridad que solicita")
     act_number = TextField(verbose_name="Número de Acta")
 
@@ -238,4 +238,4 @@ class DeathCertificate(Model):
 
     def __str__(self):
         """String representation of death_certificate."""
-        return f"{self.name}"
+        return f"{self.patient}"

@@ -54,7 +54,7 @@ class DeathCertificateFilter(FilterSet):
         label="Fecha de Fallecimiento",
     )
 
-    ConfirmationCauses = ChoiceFilter(
+    confirmation_causes = ChoiceFilter(
         choices=ConfirmationCausesChoices.choices,
         widget=Select(
             attrs={
@@ -91,6 +91,6 @@ class DeathCertificateFilter(FilterSet):
             "patient__last_name",
             "patient__medical_record",
             "time_of_death",
-            "ConfirmationCauses",
+            "confirmation_causes",
             "death_location",
         ]

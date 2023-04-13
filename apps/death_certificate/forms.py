@@ -6,6 +6,7 @@ from django.forms import (
     ModelChoiceField,
     Select,
     Textarea,
+    TextInput
 )
 from django_select2.forms import ModelSelect2Widget
 
@@ -61,31 +62,40 @@ class DeathCertificateForm(ModelForm):
 
     indirect_death_cause_1 = CauseOfDeathField(
         widget=CauseOfDeathWidget(
-            attrs={"class": "form-control", "placeholder": "Causa que ocasionó I"}
+            attrs={"class": "form-control"}, 
+            cause_attrs={"class": "form-control"},
+            date_attrs={"class": "form-control"},
+            code_attrs={ "class": "form-control"}
         ),
-        label="Causa que ocasionó",
+        label="Causa que ocasionó I",
     )
 
     indirect_death_cause_2 = CauseOfDeathField(
         widget=CauseOfDeathWidget(
-            attrs={"class": "form-control", "placeholder": "Causa que ocasionó II"}
+            attrs={"class": "form-control"},
+            cause_attrs={"class": "form-control"},
+            date_attrs={"class": "form-control"},
+            code_attrs={ "class": "form-control"},
         ),
-        label="Causa que ocasionó",
+        label="Causa que ocasionó II",
     )
 
     indirect_death_cause_3 = CauseOfDeathField(
         widget=CauseOfDeathWidget(
-            attrs={"class": "form-control", "placeholder": "Causa que ocasionó III"}
+            attrs={"class": "form-control"},
+            cause_attrs={"class": "form-control"},
+            date_attrs={"class": "form-control"},
+            code_attrs={ "class": "form-control"}
         ),
-        label="Causa que ocasionó",
+        label="Causa que ocasionó III",
     )
 
-    other_contibuting_diseases = CauseOfDeathField(
+    other_contributing_diseases = CauseOfDeathField(
         widget=CauseOfDeathWidget(
-            attrs={
-                "class": "form-control",
-                "placeholder": "Otras enfermedades contribuyentes",
-            }
+            attrs={"class": "form-control"},
+            cause_attrs={"class": "form-control"},
+            date_attrs={"class": "form-control"},
+            code_attrs={ "class": "form-control"}
         ),
         label="Otras enfermedades contribuyentes",
     )
@@ -165,7 +175,7 @@ class DeathCertificateForm(ModelForm):
         label="Certificación de Causas",
     )
 
-    certfication_made_by = ChoiceField(
+    certification_made_by = ChoiceField(
         choices=CertficationMadeByChoices.choices,
         initial=CertficationMadeByChoices.HGCORP,
         widget=Select(attrs={"class": "form-control form-select"}),
@@ -202,31 +212,31 @@ class DeathCertificateForm(ModelForm):
         widget=Textarea(
             attrs={
                 "class": "form-control",
-                "placeholder": "Lugar donde ocurrio la lesión",
+                "placeholder": "Lugar donde ocurrió la lesión",
             }
         ),
-        label="Lugar donde ocurrio la lesión",
+        label="Lugar donde ocurrió la lesión",
     )
 
     event_description = CharField(
         widget=Textarea(
             attrs={
                 "class": "form-control",
-                "placeholder": "Descripcion de como ocurrio",
+                "placeholder": "Descripción de como ocurrió",
             }
         ),
-        label="Descripcion de como ocurrio",
+        label="Descripción de como ocurrió",
     )
 
     requesting_authority = CharField(
-        widget=Textarea(
+        widget=TextInput(
             attrs={"class": "form-control", "placeholder": "Autoridad que solicita"}
         ),
         label="Autoridad que solicita",
     )
 
     act_number = CharField(
-        widget=Textarea(
+        widget=TextInput(
             attrs={"class": "form-control", "placeholder": "Número de Acta"}
         ),
         label="Número de Acta",
@@ -236,13 +246,13 @@ class DeathCertificateForm(ModelForm):
         widget=Textarea(
             attrs={"class": "form-control", "placeholder": "Causa de la Cirugía"}
         ),
-        label="Causa de la Cirugía",
+        label="Razón de la Cirugía",
     )
 
     death_location = ModelChoiceField(
         queryset=Location.objects.all(),
         label="Localidad de defunción",
-        widget=ModelSelect2Widget(
+        widget=RelatedModelWrapper(
             attrs={
                 "class": "form-control",
                 "data-placeholder": "Localidad de defunción",
