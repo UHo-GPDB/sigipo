@@ -9,6 +9,7 @@ from django.db.models import (
     Model,
     OneToOneField,
     TextField,
+    JSONField
 )
 
 from apps.core.widget import CauseOfDeathField
@@ -125,11 +126,11 @@ class DeathCertificate(Model):
 
     direct_death_cause = TextField(verbose_name="Causa de Muerte")
 
-    indirect_death_cause_1 = CauseOfDeathField()
-    indirect_death_cause_2 = CauseOfDeathField()
-    indirect_death_cause_3 = CauseOfDeathField()
+    indirect_death_cause_2 = JSONField(default=dict)
+    indirect_death_cause_1 = JSONField(default=dict)
+    indirect_death_cause_3 = JSONField(default=dict)
 
-    other_contibuting_diseases = CauseOfDeathField()
+    other_contibuting_diseases = JSONField(default=dict)
 
     time_of_death = DateTimeField(
         verbose_name="Fecha de defunción",
