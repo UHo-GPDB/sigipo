@@ -6,13 +6,12 @@ from django.db.models import (
     ForeignKey,
     IntegerChoices,
     IntegerField,
+    JSONField,
     Model,
     OneToOneField,
     TextField,
-    JSONField
 )
 
-from apps.core.widget import CauseOfDeathField
 from apps.geographic_location.models import Location
 from apps.patient.models import Patient
 
