@@ -6,9 +6,8 @@ from django.forms import (
     ModelChoiceField,
     Select,
     Textarea,
-    TextInput
+    TextInput,
 )
-from django_select2.forms import ModelSelect2Widget
 
 from apps.core.fields import RelatedModelWrapper
 from apps.core.forms import ModelForm
@@ -62,10 +61,10 @@ class DeathCertificateForm(ModelForm):
 
     indirect_death_cause_1 = CauseOfDeathField(
         widget=CauseOfDeathWidget(
-            attrs={"class": "form-control"}, 
+            attrs={"class": "form-control"},
             cause_attrs={"class": "form-control"},
             date_attrs={"class": "form-control"},
-            code_attrs={ "class": "form-control"}
+            code_attrs={"class": "form-control"},
         ),
         label="Causa que ocasionó I",
     )
@@ -75,7 +74,7 @@ class DeathCertificateForm(ModelForm):
             attrs={"class": "form-control"},
             cause_attrs={"class": "form-control"},
             date_attrs={"class": "form-control"},
-            code_attrs={ "class": "form-control"},
+            code_attrs={"class": "form-control"},
         ),
         label="Causa que ocasionó II",
     )
@@ -85,7 +84,7 @@ class DeathCertificateForm(ModelForm):
             attrs={"class": "form-control"},
             cause_attrs={"class": "form-control"},
             date_attrs={"class": "form-control"},
-            code_attrs={ "class": "form-control"}
+            code_attrs={"class": "form-control"},
         ),
         label="Causa que ocasionó III",
     )
@@ -95,7 +94,7 @@ class DeathCertificateForm(ModelForm):
             attrs={"class": "form-control"},
             cause_attrs={"class": "form-control"},
             date_attrs={"class": "form-control"},
-            code_attrs={ "class": "form-control"}
+            code_attrs={"class": "form-control"},
         ),
         label="Otras enfermedades contribuyentes",
     )
