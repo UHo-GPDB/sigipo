@@ -17,7 +17,7 @@ class DeathCertificateCreateView(BaseCreateView):
     model = DeathCertificate
     form_class = DeathCertificateForm
     success_url = reverse_lazy("death_certificate:death_certificate_list")
-    success_message = "%(name)s guardado correctamente."
+    success_message = "%(name)s %(last_name)s guardado correctamente."
     cancel_url = "death_certificate:death_certificate_list"
     permission_required = "accounts.death_certificate_manage"
 
@@ -38,7 +38,7 @@ class DeathCertificateUpdateView(BaseUpdateView):
     model = DeathCertificate
     form_class = DeathCertificateForm
     success_url = reverse_lazy("death_certificate:death_certificate_list")
-    success_message = "%(name)s guardada correctamente."
+    success_message = "%(name)s %(last_name)s actualizado correctamente."
     cancel_url = "death_certificate:death_certificate_list"
     object_not_found_error_message = "Certificado de Defunción no encontrado"
     permission_required = "accounts.death_certificate_manage"
@@ -49,7 +49,7 @@ class DeathCertificateDeleteView(BaseDeleteView):
 
     model = DeathCertificate
     success_url = reverse_lazy("death_certificate:death_certificate_list")
-    success_message = "%(name)s guardado correctamente."
+    success_message = "%(name)s %(last_name)s eliminado correctamente."
     cancel_url = "death_certificate:death_certificate_list"
     object_not_found_error_message = "Certificado de Defunción no encontrado"
     permission_required = "accounts.death_certificate_manage"

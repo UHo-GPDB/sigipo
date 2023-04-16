@@ -8,4 +8,4 @@ class DeathCertificateTestCase(TestCase):
         cls.death = DeathCertificateFactory.create()
 
     def test_deathCertificate_str(self):
-        self.assertEqual(str(self.death), f"{self.death.direct_death_cause}")
+        self.assertEqual(str(self.death), f"{self.death.patient}")
