@@ -32,7 +32,7 @@ class DeathCertificateDetailViewTestCase(TestCase):
     def test_get(self):
         """Test the get method for DeathCertificateDetailView."""
         response = self.client.get(
-            reverse("death_certificate:death_certificate_detail", args=(self.death.pk,))
+            reverse("death_certificate:death_certificate_list", args=(self.death.pk,))
         )
         self.assertIn(str(self.death), response.content.decode())
         self.assertIn("form", response.context)
@@ -58,14 +58,14 @@ class DeathCertificateDeleteViewTestCase(TestCase):
     def test_post(self):
         """Test the post method for DeathCertificateDeleteView."""
         self.client.post(
-            reverse("death_certificate:death_certificate_delete", args=(self.death.pk,))
+            reverse("death_certificate:death_certificate_list", args=(self.death.pk,))
         )
         self.assertFalse(DeathCertificate.objects.filter(pk=self.death.pk).exists())
 
     def test_get(self):
         """Test the get method for DeathCertificateDeleteView."""
         response = self.client.get(
-            reverse("death_certificate:death_certificate_delete", args=(self.death.pk,))
+            reverse("death_certificate:death_certificate_list", args=(self.death.pk,))
         )
         self.assertIn(str(self.death), response.content.decode())
         self.assertIn(
@@ -88,7 +88,7 @@ class DeathCertificateCreateViewTestCase(TestCase):
     def test_get(self):
         """Test the get method for DeathCertificateCreateView."""
         response = self.client.get(
-            reverse("death_certificate:death_certificate_create")
+            reverse("death_certificate:death_certificate_list")
         )
         self.assertIn("form", response.context)
         self.assertTrue(isinstance(response.context["form"], DeathCertificateForm))
@@ -100,7 +100,7 @@ class DeathCertificateCreateViewTestCase(TestCase):
         """Test the post method for DeathCertificateCreateView."""
         count_before_test = DeathCertificate.objects.count()
         response = self.client.post(
-            reverse("death_certificate:death_certificate_create"),
+            reverse("death_certificate:death_certificate_list"),
             {"name": "Test_Death_Certificate"},
         )
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
@@ -130,7 +130,7 @@ class DeathCertificateUpdateViewTestCase(TestCase):
     def test_get(self):
         """Test the get method for DeathCertificateUpdateView."""
         response = self.client.get(
-            reverse("death_certificate:death_certificate_update", args=(self.death.pk,))
+            reverse("death_certificate:death_certificate_list", args=(self.death.pk,))
         )
         self.assertIn("form", response.context)
         self.assertTrue(isinstance(response.context["form"], DeathCertificateForm))
@@ -142,7 +142,7 @@ class DeathCertificateUpdateViewTestCase(TestCase):
         """Test the post method for DeathCertificateUpdateView."""
         response = self.client.post(
             reverse(
-                "death_certificate:death_certificate_update", args=(self.death.pk,)
+                "death_certificate:death_certificate_list", args=(self.death.pk,)
             ),
             {"name": "TestDeathCertificate"},
         )
