@@ -30,9 +30,21 @@ class DeathCertificateFactory(DjangoModelFactory):
 
     patient = SubFactory(PatientFactory)
     direct_death_cause = FuzzyText(length=16)
-    indirect_death_cause_1 = {"cause": "asdf", "date": str(dt.datetime.now()), "code": 123}
-    indirect_death_cause_2 = {"cause": "asdf", "date": str(dt.datetime.now()), "code": 123}
-    indirect_death_cause_3 = {"cause": "asdf", "date": str(dt.datetime.now()), "code": 123}
+    indirect_death_cause_1 = {
+        "cause": "asdf",
+        "date": str(dt.datetime.now()),
+        "code": 123,
+    }
+    indirect_death_cause_2 = {
+        "cause": "asdf",
+        "date": str(dt.datetime.now()),
+        "code": 123,
+    }
+    indirect_death_cause_3 = {
+        "cause": "asdf",
+        "date": str(dt.datetime.now()),
+        "code": 123,
+    }
     other_contributing_diseases = {
         "cause": "asdf",
         "date": str(dt.datetime.now()),
