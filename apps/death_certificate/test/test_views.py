@@ -8,12 +8,6 @@ from apps.core.test import TestCase
 from apps.death_certificate.factories import DeathCertificateFactory
 from apps.death_certificate.forms import DeathCertificateForm
 from apps.death_certificate.models import DeathCertificate
-from apps.death_certificate.views import (
-    DeathCertificateCreateView,
-    DeathCertificateDeleteView,
-    DeathCertificateDetailView,
-    DeathCertificateUpdateView,
-)
 
 
 class DeathCertificateDetailViewTestCase(TestCase):
