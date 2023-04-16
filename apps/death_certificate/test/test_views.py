@@ -87,9 +87,7 @@ class DeathCertificateCreateViewTestCase(TestCase):
 
     def test_get(self):
         """Test the get method for DeathCertificateCreateView."""
-        response = self.client.get(
-            reverse("death_certificate:death_certificate_list")
-        )
+        response = self.client.get(reverse("death_certificate:death_certificate_list"))
         self.assertIn("form", response.context)
         self.assertTrue(isinstance(response.context["form"], DeathCertificateForm))
         self.assertIn(
@@ -141,9 +139,7 @@ class DeathCertificateUpdateViewTestCase(TestCase):
     def test_post(self):
         """Test the post method for DeathCertificateUpdateView."""
         response = self.client.post(
-            reverse(
-                "death_certificate:death_certificate_list", args=(self.death.pk,)
-            ),
+            reverse("death_certificate:death_certificate_list", args=(self.death.pk,)),
             {"name": "TestDeathCertificate"},
         )
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
