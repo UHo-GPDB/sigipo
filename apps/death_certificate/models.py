@@ -35,7 +35,7 @@ class CivilStateChoices(IntegerChoices):
     MARRIED = 1, "Casado(a)"
     UNITED = 2, "Unido"
     DIVORCE = 3, "Divorciado"
-    SEPARATE = 4, "Seaprado"
+    SEPARATE = 4, "Separado"
     WIDOW = 5, "Viudo"
     SINGLE = 6, "Soltero"
     UNDEFINED = 7, "Ignorado(a)"
@@ -199,7 +199,11 @@ class DeathCertificate(Model):
         default=LastSurgeriesChoices.UNDEFINED,
     )
 
-    surgery_reasons = TextField(verbose_name="Razón de la Cirugía")
+    surgery_reasons = TextField(
+        verbose_name="Razón de la Cirugía",
+        blank=True,
+        null=True,
+    )
 
     violent_death_causes = IntegerField(
         verbose_name="Causa aparente de muerte violenta",
@@ -215,9 +219,15 @@ class DeathCertificate(Model):
     )
 
     place_where_injury_occurred = TextField(
-        verbose_name="Lugar donde ocurrió la lesión"
+        verbose_name="Lugar donde ocurrió la lesión",
+        blank=True,
+        null=True,
     )
-    event_description = TextField(verbose_name="Descripción de como ocurrió")
+    event_description = TextField(
+        verbose_name="Descripción de como ocurrió",
+        blank=True,
+        null=True,
+    )
     requesting_authority = TextField(verbose_name="Autoridad que solicita")
     act_number = TextField(verbose_name="Número de Acta")
 

@@ -81,7 +81,6 @@ class DeathCertificateCreateViewTestCase(TestCase):
 
     def test_post(self):
         """Test the post method for DeathCertificateCreateView."""
-        count_before_test = DeathCertificate.objects.count()
         response = self.client.post(
             reverse("death_certificate:deathcertificate_create"),
             {"name": "Test_Death_Certificate"},
@@ -119,6 +118,5 @@ class DeathCertificateUpdateViewTestCase(TestCase):
             {"name": "TestDeathCertificate"},
         )
         self.assertEqual(response.status_code, HTTPStatus.OK)
-        messages = list(get_messages(response.wsgi_request))
 
         self.death.refresh_from_db()
