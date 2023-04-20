@@ -17,9 +17,10 @@ class DeathCertificateCreateView(BaseCreateView):
     model = DeathCertificate
     form_class = DeathCertificateForm
     success_url = reverse_lazy("death_certificate:death_certificate_list")
-    success_message = "%(name)s %(last_name)s guardado correctamente."
+    success_message = "%(patient)s guardado correctamente."
     cancel_url = "death_certificate:death_certificate_list"
     permission_required = "accounts.death_certificate_manage"
+    template_name = "death_certificate/deathcertificate_create.html"
 
 
 class DeathCertificateDetailView(BaseDetailView):
@@ -30,6 +31,7 @@ class DeathCertificateDetailView(BaseDetailView):
     cancel_url = "death_certificate:death_certificate_list"
     object_not_found_error_message = "Certificado de Defunción no encontrado"
     permission_required = "accounts.death_certificate_manage"
+    template_name = "death_certificate/deathcertificate_detail.html"
 
 
 class DeathCertificateUpdateView(BaseUpdateView):
@@ -38,10 +40,11 @@ class DeathCertificateUpdateView(BaseUpdateView):
     model = DeathCertificate
     form_class = DeathCertificateForm
     success_url = reverse_lazy("death_certificate:death_certificate_list")
-    success_message = "%(name)s %(last_name)s actualizado correctamente."
+    success_message = "%(patient)s actualizado correctamente."
     cancel_url = "death_certificate:death_certificate_list"
     object_not_found_error_message = "Certificado de Defunción no encontrado"
     permission_required = "accounts.death_certificate_manage"
+    template_name = "death_certificate/deathcertificate_update.html"
 
 
 class DeathCertificateDeleteView(BaseDeleteView):
@@ -49,7 +52,7 @@ class DeathCertificateDeleteView(BaseDeleteView):
 
     model = DeathCertificate
     success_url = reverse_lazy("death_certificate:death_certificate_list")
-    success_message = "%(name)s %(last_name)s eliminado correctamente."
+    success_message = "%(patient)s eliminado correctamente."
     cancel_url = "death_certificate:death_certificate_list"
     object_not_found_error_message = "Certificado de Defunción no encontrado"
     permission_required = "accounts.death_certificate_manage"

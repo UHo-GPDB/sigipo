@@ -185,12 +185,13 @@ class DeathCertificateForm(ModelForm):
         choices=LastSurgeriesChoices.choices,
         initial=LastSurgeriesChoices.UNDEFINED,
         widget=Select(attrs={"class": "form-control form-select"}),
-        label="CCirugías en las últimas 4 semanas",
+        label="Cirugías en las últimas 4 semanas",
     )
 
     violent_death_causes = ChoiceField(
         choices=ViolentDeathCausesChoices.choices,
         widget=Select(attrs={"class": "form-control form-select"}),
+        required=False,
         label="Causa aparente de muerte violenta",
     )
 
@@ -214,6 +215,7 @@ class DeathCertificateForm(ModelForm):
                 "placeholder": "Lugar donde ocurrió la lesión",
             }
         ),
+        required=False,
         label="Lugar donde ocurrió la lesión",
     )
 
@@ -224,6 +226,7 @@ class DeathCertificateForm(ModelForm):
                 "placeholder": "Descripción de como ocurrió",
             }
         ),
+        required=False,
         label="Descripción de como ocurrió",
     )
 
@@ -243,9 +246,13 @@ class DeathCertificateForm(ModelForm):
 
     surgery_reasons = CharField(
         widget=Textarea(
-            attrs={"class": "form-control", "placeholder": "Causa de la Cirugía"}
+            attrs={
+                "class": "form-control",
+                "placeholder": "Causa de la Cirugía",
+            }
         ),
         label="Razón de la Cirugía",
+        required=False,
     )
 
     death_location = ModelChoiceField(
@@ -266,6 +273,34 @@ class DeathCertificateForm(ModelForm):
             ],
         ),
     )
+
+    field_order = [
+        "patient",
+        "scholarship_level",
+        "civil_state",
+        "residence_type",
+        "time_of_death",
+        "death_place",
+        "death_location",
+        "pregnancy",
+        "pregnancy_result",
+        "date_of_pregnancy",
+        "direct_death_cause",
+        "indirect_death_cause_1",
+        "indirect_death_cause_2",
+        "indirect_death_cause_3",
+        "other_contributing_diseases",
+        "confirmation_causes",
+        "certification_made_by",
+        "last_surgeries",
+        "surgery_reasons",
+        "violent_death_causes",
+        "date_of_injury",
+        "place_where_injury_occurred",
+        "event_description",
+        "requesting_authority",
+        "act_number",
+    ]
 
     class Meta:
         model = DeathCertificate

@@ -72,12 +72,12 @@
 {% block table_body %}
     {% for obj in page_obj %}
         <tr>
-            <td>{{ obj.identity_card }}</td>
-            <td>{{ obj.first_name }}</td>
-            <td>{{ obj.last_name }}</td>
-            <td>{{ obj.medical_record }}</td>
+            <td>{{ obj.patient.identity_card }}</td>
+            <td>{{ obj.patient.first_name }}</td>
+            <td>{{ obj.patient.last_name }}</td>
+            <td>{{ obj.patient.medical_record }}</td>
             <td>{{ obj.time_of_death }}</td>
-            <td>{{ obj.ConfirmationCauses }}</td>
+            <td>{{ obj.get_confirmation_causes_display }}</td>
             <td>{{ obj.death_location }}</td>
             <td>
                 <a href="{% url detail_url obj.pk %}" class="view" title="Detalles" data-toggle="tooltip"><i class="fa-solid fa-eye"></i></a>
