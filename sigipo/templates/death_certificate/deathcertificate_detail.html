@@ -20,7 +20,7 @@
     <h5 class="text-center"><strong>¿ SE REALIZ&Oacute ALGUNA CIRUG&IacuteA <br> EN LAS &UacuteLTIMAS CUATRO SEMANAS ?</strong></h5>
     <hr/>
   {% endif %}
-  
+
   {% if forloop.counter <= 7 and forloop.counter|divisibleby:2 or forloop.counter > 7 and forloop.counter|divisibleby:2|add:"-1" and forloop.counter < 10 or forloop.counter > 10 and forloop.counter|divisibleby:2|add:"-1" %}
     {% if forloop.counter == 11 or forloop.counter == 19 %}
       {% if forloop.counter == 19 %}
@@ -42,14 +42,14 @@
         {{ block.super }}
       </div>
       {% close_div %}
-    {% endif %}  
+    {% endif %}
   {% else %}
   {% create_div_row %}
         <div class="col">
           {{ block.super }}
         </div>
     {% if forloop.last %}{% close_div %}{% endif %}
-    
+
   {% endif %}
 {% endblock form_customization %}
 
