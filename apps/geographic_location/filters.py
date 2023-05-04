@@ -2,7 +2,6 @@ from django.forms import TextInput
 from django_filters import CharFilter, FilterSet
 
 from apps.geographic_location.models import Location, Municipality, Province
-from apps.geographic_location.models import Municipality, Province
 from config.settings.base import FIELD_SEARCH_LOOKUP
 
 
