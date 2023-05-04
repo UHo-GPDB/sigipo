@@ -411,7 +411,9 @@ class LocationUpdateViewTestCase(TestCase):
         """Common test data."""
         cls.user = UserFactory.create()
         cls.province = ProvinceFactory.create(name="TestProvince")
-        cls.municipality = MunicipalityFactory.create(name="TestMunicipality")
+        cls.municipality = MunicipalityFactory.create(
+            name="TestMunicipality", province=cls.province
+        )
         cls.location = LocationFactory.create()
 
     def setUp(self) -> None:
@@ -434,7 +436,6 @@ class LocationUpdateViewTestCase(TestCase):
             {
                 "name": "TestLocation",
                 "municipality": self.municipality.pk,
-                "province": self.province.pk,
             },
         )
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
@@ -449,4 +450,3 @@ class LocationUpdateViewTestCase(TestCase):
             str(self.location), "TestLocation - TestMunicipality - TestProvince"
         )
         self.assertEqual(self.location.municipality.pk, self.municipality.pk)
-        self.assertEqual(self.location.province.pk, self.province.pk)

@@ -48,6 +48,5 @@ class LocationFactory(DjangoModelFactory):
     class Meta:
         model = Location
 
-    province = SubFactory(ProvinceFactory)
     municipality = SubFactory(MunicipalityFactory)
     name = FuzzyText(prefix="Location-", length=20)

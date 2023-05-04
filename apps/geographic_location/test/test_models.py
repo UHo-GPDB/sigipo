@@ -50,5 +50,5 @@ class LocationTestCase(TestCase):
         """Test that location str method returns the location name."""
         self.assertEqual(
             str(self.location),
-            f"{self.location.name} - {self.location.municipality.name} - {self.location.province.name}",
+            f"{self.location.name} - {self.location.municipality.name} - {self.location.municipality.province.name}",
         )
