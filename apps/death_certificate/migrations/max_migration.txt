@@ -1,1 +1,1 @@
-0006_alter_deathcertificate_civil_state_and_more
+0001_initial

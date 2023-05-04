@@ -2,7 +2,7 @@ import datetime as dt
 
 from factory import SubFactory
 from factory.django import DjangoModelFactory
-from factory.fuzzy import FuzzyChoice, FuzzyDate, FuzzyText
+from factory.fuzzy import FuzzyChoice, FuzzyDate, FuzzyText,FuzzyDateTime
 
 from apps.death_certificate.models import (
     CertificationMadeByChoices,
@@ -50,7 +50,7 @@ class DeathCertificateFactory(DjangoModelFactory):
         "date": str(dt.datetime.now()),
         "code": 123,
     }
-    time_of_death = FuzzyDate(dt.date(1990, 1, 1), end_date=dt.date.today())
+    datetime_of_death = FuzzyDateTime(dt.datetime(1990, 1, 1), end_date=dt.datetime.now())
     scholarship_level = FuzzyChoice(ScholarshipLevelChoices.values)
     civil_state = FuzzyChoice(CivilStateChoices.values)
     residence_type = FuzzyChoice(ResidenceTypeChoices.values)

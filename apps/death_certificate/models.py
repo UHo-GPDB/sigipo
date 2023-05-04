@@ -24,7 +24,7 @@ class ScholarshipLevelChoices(IntegerChoices):
     HIGH_SCHOOL = 2, "Secundaria Básica"
     QUALIFIED_WORKER = 3, "Obrero Calificado"
     INSTITUTE = 4, "Pre-Universitario"
-    MEDIUM_TECHNICIAN= 5, "Técnico Medio"
+    MEDIUM_TECHNICIAN = 5, "Técnico Medio"
     UNIVERSITY = 6, "Universitario"
     UNDEFINED = 7, "Ignorado(a)"
 
@@ -121,7 +121,7 @@ class ViolentDeathCausesChoices(IntegerChoices):
 class DeathCertificate(Model):
     """Model representation of a death_certificate."""
 
-    patient = OneToOneField(Patient,on_delete=CASCADE)
+    patient = OneToOneField(Patient, on_delete=CASCADE)
     direct_death_cause = TextField(verbose_name="Causa de Muerte")
     indirect_death_cause_1 = JSONField(null=True, blank=True)
     indirect_death_cause_2 = JSONField(null=True, blank=True)
@@ -177,7 +177,7 @@ class DeathCertificate(Model):
     certification_made_by = IntegerField(
         verbose_name="Certificación realizada por médico de",
         choices=CertificationMadeByChoices.choices,
-        default=CertificationMadeByChoices.HOSPITAL_GUARD_CORPS,
+        default=CertificationMadeByChoices.WATCH,
     )
     last_surgeries = IntegerField(
         verbose_name="Cirugías en las últimas 4 semanas",
@@ -224,7 +224,6 @@ class DeathCertificate(Model):
         verbose_name = "Certificado de Defunción"
         verbose_name_plural = "Certificados de Defunción"
         ordering = ["pk"]
-        default_permissions = ()
 
     def __str__(self):
         """String representation of death_certificate."""
