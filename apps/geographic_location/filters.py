@@ -1,5 +1,6 @@
 from django.forms import TextInput
-from django_filters import CharFilter, FilterSet
+from django_filters import CharFilter, FilterSet, ModelChoiceFilter
+from django_select2.forms import ModelSelect2Widget
 
 from apps.geographic_location.models import Location, Municipality, Province
 from config.settings.base import FIELD_SEARCH_LOOKUP
@@ -50,24 +51,27 @@ class LocationFilter(FilterSet):
     """Filters to search for Localities."""
 
     name = CharFilter(
-        lookup_expr="icontains",
+        lookup_expr=f"{FIELD_SEARCH_LOOKUP}",
         widget=TextInput(
             attrs={"class": "form-control", "placeholder": "Nombre contiene"}
         ),
     )
-
-    municipality = CharFilter(
-        lookup_expr="name__icontains",
-        widget=TextInput(
-            attrs={"class": "form-control", "placeholder": "Municipio contiene"}
+    municipality = ModelChoiceFilter(
+        queryset=Municipality.objects.all(),
+        widget=ModelSelect2Widget(
+            attrs={
+                "class": "form-control",
+                "data-placeholder": "Municipio natal",
+                "data-language": "es",
+                "data-theme": "bootstrap-5",
+                "data-width": "style",
+            },
+            search_fields=[
+                f"name__{FIELD_SEARCH_LOOKUP}",
+                f"province__name__{FIELD_SEARCH_LOOKUP}",
+            ],
         ),
-    )
-
-    province = CharFilter(
-        lookup_expr="name__icontains",
-        widget=TextInput(
-            attrs={"class": "form-control", "placeholder": "Provincia contiene"}
-        ),
+        label="Municipio contiene",
     )
 
     class Meta:
@@ -75,5 +79,4 @@ class LocationFilter(FilterSet):
         fields = [
             "name",
             "municipality",
-            "province",
         ]

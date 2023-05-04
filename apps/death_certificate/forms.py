@@ -13,7 +13,7 @@ from apps.core.fields import RelatedModelWrapper
 from apps.core.forms import ModelForm
 from apps.core.widget import CauseOfDeathField, CauseOfDeathWidget
 from apps.death_certificate.models import (
-    CertficationMadeByChoices,
+    CertificationMadeByChoices,
     CivilStateChoices,
     ConfirmationCausesChoices,
     DeathCertificate,
@@ -175,8 +175,8 @@ class DeathCertificateForm(ModelForm):
     )
 
     certification_made_by = ChoiceField(
-        choices=CertficationMadeByChoices.choices,
-        initial=CertficationMadeByChoices.HGCORP,
+        choices=CertificationMadeByChoices.choices,
+        initial=CertificationMadeByChoices.HGCORP,
         widget=Select(attrs={"class": "form-control form-select"}),
         label="Certificación realizada por médico de",
     )

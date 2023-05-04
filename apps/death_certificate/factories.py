@@ -5,7 +5,7 @@ from factory.django import DjangoModelFactory
 from factory.fuzzy import FuzzyChoice, FuzzyDate, FuzzyText
 
 from apps.death_certificate.models import (
-    CertficationMadeByChoices,
+    CertificationMadeByChoices,
     CivilStateChoices,
     ConfirmationCausesChoices,
     DeathCertificate,
@@ -59,7 +59,7 @@ class DeathCertificateFactory(DjangoModelFactory):
     pregnancy_result = FuzzyChoice(PregnancyResultChoices.values)
     date_of_pregnancy = FuzzyDate(dt.date(1990, 1, 1), end_date=dt.date.today())
     confirmation_causes = FuzzyChoice(ConfirmationCausesChoices.values)
-    certification_made_by = FuzzyChoice(CertficationMadeByChoices.values)
+    certification_made_by = FuzzyChoice(CertificationMadeByChoices.values)
     last_surgeries = FuzzyChoice(LastSurgeriesChoices.values)
     surgery_reasons = FuzzyText(length=16)
     violent_death_causes = FuzzyChoice(ViolentDeathCausesChoices.values)
