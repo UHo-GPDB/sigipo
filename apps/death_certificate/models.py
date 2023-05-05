@@ -1,6 +1,5 @@
 from django.db.models import (
     CASCADE,
-    SET_NULL,
     DateField,
     DateTimeField,
     ForeignKey,

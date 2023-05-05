@@ -72,7 +72,5 @@ class Command(BaseCommand):
                 requested_study=[study],
             )
             location = LocationFactory.create(municipality=municipality)
-            DeathCertificateFactory.create(
-                patient=patient, death_location=location
-            )
+            DeathCertificateFactory.create(patient=patient, death_location=location)
         self.stdout.write("Created a samples of data.")
