@@ -174,6 +174,7 @@ class DeathCertificateForm(ModelForm):
     )
     violent_death_causes = ChoiceField(
         choices=ViolentDeathCausesChoices.choices,
+        initial=ViolentDeathCausesChoices.UNKNOWN,
         widget=Select(attrs={"class": "form-control form-select"}),
         required=False,
         label="Causa aparente de muerte violenta",
