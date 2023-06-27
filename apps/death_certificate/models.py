@@ -6,6 +6,7 @@ from django.db.models import (
     IntegerChoices,
     IntegerField,
     JSONField,
+    Manager,
     Model,
     OneToOneField,
     TextField,
@@ -117,6 +118,14 @@ class ViolentDeathCausesChoices(IntegerChoices):
     UNKNOWN = 5, "Por Investigar"
 
 
+class DeathCertificateQuerySetManager(Manager):
+    """Manager to handle Prescription."""
+
+    def get_queryset(self):
+        """Fetch the related Prescription."""
+        return super().get_queryset().select_related("death_location")
+
+
 class DeathCertificate(Model):
     """Model representation of a death_certificate."""
 
@@ -218,6 +227,8 @@ class DeathCertificate(Model):
         null=True,
         on_delete=CASCADE,
     )
+
+    objects = DeathCertificateQuerySetManager()
 
     class Meta:
         verbose_name = "Certificado de Defunción"
