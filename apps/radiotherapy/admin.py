@@ -2,6 +2,7 @@ from django.contrib.admin import ModelAdmin, register
 
 from apps.radiotherapy.models import (
     Physicist,
+    Dosimetrist,
     TACRequest,
 )
 
@@ -11,6 +12,14 @@ from apps.radiotherapy.models import (
 class PhysicistAdmin(ModelAdmin):
     """
     Physicist Django Admin view.
+    """
+
+    pass
+
+@register(Dosimetrist)
+class DosimetristAdmin(ModelAdmin):
+    """
+    Dosimetrist Django Admin view.
     """
 
     pass

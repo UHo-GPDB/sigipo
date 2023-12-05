@@ -82,7 +82,7 @@ class TACRequest(Model):
         max_length=255, 
         blank=True, 
         null=True, 
-        verbose_name="Pocición del BB",
+        verbose_name="Posición del BB",
     )
 
     location = CharField(
@@ -114,7 +114,7 @@ class TACRequest(Model):
 
     medic_that_requests = ForeignKey(
         Doctor,
-        verbose_name="Médico",
+        verbose_name="Doctor",
         on_delete=CASCADE,
         null=True,
         blank=True,
