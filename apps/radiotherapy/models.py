@@ -5,6 +5,8 @@ from django.db.models import (
     DateField,
     CharField,
     PositiveIntegerField,
+    TextField,
+    ManyToManyField,
 )
 from apps.employee.models import Doctor
 
@@ -139,3 +141,82 @@ class TACRequest(Model):
         verbose_name = "Solicitud de TAC"
         verbose_name_plural = "Solicitudes de TAC"
         ordering = ["pk"]
+
+class Disease(Model):
+    """
+    Model representation of a Disease
+    """
+
+    name = CharField(
+        max_length=255,
+        verbose_name="Nombre"
+    )
+
+    description = TextField(
+        blank=True,
+        null=True,
+        verbose_name="Descripción"
+    )
+
+class GeneralDatasheet(Model):
+    """
+    Model representation of a Radiotherapy General Datasheet
+    """
+
+    id_code = CharField(
+        max_length=255, 
+        blank=True, 
+        null=True, 
+        verbose_name="ID",
+    )
+
+    patient = ForeignKey(
+        Patient,
+        on_delete=CASCADE,
+        verbose_name="Paciente",
+    )
+
+    serv_proc = CharField(
+        max_length=255, 
+        blank=True, 
+        null=True, 
+        verbose_name="Serv. Proc.",
+    )
+
+    amb = CharField(
+        max_length=255,
+        blank=True,
+        null=True,
+        verbose_name="Amb."
+    )
+
+    hosp = CharField(
+        max_length=255,
+        blank=True,
+        null=True,
+        verbose_name="Hosp."
+    )
+
+    no_locaclizacion = CharField(
+        max_length=255,
+        blank=True,
+        null=True,
+        verbose_name="No. Localización"
+    )
+
+    description = TextField(
+        blank=True,
+        null=True,
+        verbose_name="Localización y Descripción"
+    )
+
+    anatopathologic_diagnose = TextField(
+        blank=True,
+        null=True,
+        verbose_name="Diagnóstico Anatomopatológico"
+    )
+
+    related_diseases = ManyToManyField(
+        Disease,
+        verbose_name="Enfermedades Asociadas"
+    )

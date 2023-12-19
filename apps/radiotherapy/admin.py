@@ -4,6 +4,7 @@ from apps.radiotherapy.models import (
     Physicist,
     Dosimetrist,
     TACRequest,
+    GeneralDatasheet,
 )
 
 # Register your models here.
@@ -28,6 +29,14 @@ class DosimetristAdmin(ModelAdmin):
 class TACRequestAdmin(ModelAdmin):
     """
     TACRequest Django Admin view.
+    """
+
+    pass
+
+@register(GeneralDatasheet)
+class GeneralDatasheetAdmin(ModelAdmin):
+    """
+    General Datasheet Django Admin view.
     """
 
     pass
