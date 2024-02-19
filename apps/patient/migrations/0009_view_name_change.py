@@ -9,7 +9,8 @@ class Migration(migrations.Migration):
     operations = [
         migrations.RunSQL(
             sql=[
-                """
+                (
+                    """
                 CREATE OR REPLACE VIEW GENDER_COUNT AS
                     SELECT
                         row_number() OVER () as id, (
@@ -38,8 +39,8 @@ class Migration(migrations.Migration):
                         ) AS
                 TOTAL_COUNT;
                 """
-                if not settings.MY_SQL_DB
-                else """
+                    if not settings.MY_SQL_DB
+                    else """
                 CREATE OR REPLACE VIEW GENDER_COUNT AS
                     SELECT
                         row_number() OVER () as id, (
@@ -67,7 +68,8 @@ class Migration(migrations.Migration):
                                 patient_patient.is_oncologic
                         ) AS
                 TOTAL_COUNT;
-                """,
+                """
+                ),
             ],
             reverse_sql=[
                 "DROP VIEW GENDER_COUNT;",

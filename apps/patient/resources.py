@@ -50,9 +50,7 @@ class PatientResource(ModelResource):
         return str(
             "Sí"
             if neoplasm.is_oncologic is True
-            else "No"
-            if neoplasm.is_oncologic is False
-            else ""
+            else "No" if neoplasm.is_oncologic is False else ""
         )
 
     class Meta:
