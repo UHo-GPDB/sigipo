@@ -164,9 +164,7 @@ class NeoplasmResource(ModelResource):
         return str(
             "Sí"
             if neoplasm.is_pregnant is True
-            else "No"
-            if neoplasm.is_pregnant is False
-            else ""
+            else "No" if neoplasm.is_pregnant is False else ""
         )
 
     def dehydrate_trimester(self, neoplasm):
@@ -195,9 +193,7 @@ class NeoplasmResource(ModelResource):
         return str(
             "Sí"
             if neoplasm.is_vih is True
-            else "No"
-            if neoplasm.is_vih is False
-            else ""
+            else "No" if neoplasm.is_vih is False else ""
         )
 
     def dehydrate_source_of_info(self, neoplasm):
@@ -322,9 +318,7 @@ class NeoplasmResource(ModelResource):
         return str(
             "Sí"
             if neoplasm.hematological_transformation is True
-            else "No"
-            if neoplasm.hematological_transformation is False
-            else ""
+            else "No" if neoplasm.hematological_transformation is False else ""
         )
 
     def dehydrate_acute_lymphoid_leukemia(self, neoplasm):
