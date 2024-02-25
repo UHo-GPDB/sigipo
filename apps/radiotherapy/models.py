@@ -1,20 +1,21 @@
 from django.db.models import (
-    Model,
-    ForeignKey,
     CASCADE,
-    DateField,
     CharField,
+    DateField,
+    ForeignKey,
+    ManyToManyField,
+    Model,
     PositiveIntegerField,
     TextField,
-    ManyToManyField,
 )
-from apps.employee.models import Doctor
 
+from apps.employee.models import Doctor
 from apps.patient.models import Patient
 
 # Create your models here.
 
 # Evaluate the posibility of moving Physicist to employee.models
+
 
 class Physicist(Model):
     """
@@ -22,9 +23,9 @@ class Physicist(Model):
     """
 
     name = CharField(
-        max_length=255, 
-        blank=True, 
-        null=True, 
+        max_length=255,
+        blank=True,
+        null=True,
         verbose_name="Nombre",
     )
 
@@ -36,15 +37,16 @@ class Physicist(Model):
         verbose_name_plural = "Físicos"
         ordering = ["pk"]
 
+
 class Dosimetrist(Model):
     """
     Model representation of a Dosimetrist (Only Name field for now)
     """
 
     name = CharField(
-        max_length=255, 
-        blank=True, 
-        null=True, 
+        max_length=255,
+        blank=True,
+        null=True,
         verbose_name="Nombre",
     )
 
@@ -56,15 +58,16 @@ class Dosimetrist(Model):
         verbose_name_plural = "Dosimetristas"
         ordering = ["pk"]
 
+
 class Technic(Model):
     """
     Model representation of a Technic (Only Name field for now)
     """
 
     name = CharField(
-        max_length=255, 
-        blank=True, 
-        null=True, 
+        max_length=255,
+        blank=True,
+        null=True,
         verbose_name="Nombre",
     )
 
@@ -76,15 +79,16 @@ class Technic(Model):
         verbose_name_plural = "Técnicos"
         ordering = ["pk"]
 
+
 class TACRequest(Model):
     """
     Model representation of a TAC request for planning
     """
 
     id_code = CharField(
-        max_length=255, 
-        blank=True, 
-        null=True, 
+        max_length=255,
+        blank=True,
+        null=True,
         verbose_name="ID",
     )
 
@@ -101,36 +105,36 @@ class TACRequest(Model):
     )
 
     bb_position = CharField(
-        max_length=255, 
-        blank=True, 
-        null=True, 
+        max_length=255,
+        blank=True,
+        null=True,
         verbose_name="Posición del BB",
     )
 
     location = CharField(
-        max_length=255, 
-        blank=True, 
-        null=True, 
+        max_length=255,
+        blank=True,
+        null=True,
         verbose_name="Localización",
     )
 
     upper_limit = CharField(
-        max_length=255, 
-        blank=True, 
-        null=True, 
+        max_length=255,
+        blank=True,
+        null=True,
         verbose_name="Límite Superior",
     )
 
     lower_limit = CharField(
-        max_length=255, 
-        blank=True, 
-        null=True, 
+        max_length=255,
+        blank=True,
+        null=True,
         verbose_name="Límite Inferior",
     )
 
     distance_betwen_cuts = PositiveIntegerField(
-        blank=True, 
-        null=True, 
+        blank=True,
+        null=True,
         verbose_name="Distancia entre Cortes (mm)",
     )
 
@@ -155,28 +159,22 @@ class TACRequest(Model):
     )
 
     def __str__(self) -> str:
-        return f'{self.id_code} - {self.patient}'
+        return f"{self.id_code} - {self.patient}"
 
     class Meta:
         verbose_name = "Solicitud de TAC"
         verbose_name_plural = "Solicitudes de TAC"
         ordering = ["pk"]
 
+
 class Disease(Model):
     """
     Model representation of a Disease
     """
 
-    name = CharField(
-        max_length=255,
-        verbose_name="Nombre"
-    )
+    name = CharField(max_length=255, verbose_name="Nombre")
 
-    description = TextField(
-        blank=True,
-        null=True,
-        verbose_name="Descripción"
-    )
+    description = TextField(blank=True, null=True, verbose_name="Descripción")
 
     def __str__(self) -> str:
         return self.name
@@ -186,21 +184,15 @@ class Disease(Model):
         verbose_name_plural = "Enfermedades"
         ordering = ["pk"]
 
+
 class Treatment(Model):
     """
     Model representation of a Treatment
     """
 
-    name = CharField(
-        max_length=255,
-        verbose_name="Nombre"
-    )
+    name = CharField(max_length=255, verbose_name="Nombre")
 
-    description = TextField(
-        blank=True,
-        null=True,
-        verbose_name="Descripción"
-    )
+    description = TextField(blank=True, null=True, verbose_name="Descripción")
 
     def __str__(self) -> str:
         return self.name
@@ -210,15 +202,16 @@ class Treatment(Model):
         verbose_name_plural = "Tratamientos"
         ordering = ["pk"]
 
+
 class GeneralDatasheet(Model):
     """
     Model representation of a Radiotherapy General Datasheet
     """
 
     id_code = CharField(
-        max_length=255, 
-        blank=True, 
-        null=True, 
+        max_length=255,
+        blank=True,
+        null=True,
         verbose_name="ID",
     )
 
@@ -229,82 +222,39 @@ class GeneralDatasheet(Model):
     )
 
     serv_proc = CharField(
-        max_length=255, 
-        blank=True, 
-        null=True, 
+        max_length=255,
+        blank=True,
+        null=True,
         verbose_name="Serv. Proc.",
     )
 
-    amb = CharField(
-        max_length=255,
-        blank=True,
-        null=True,
-        verbose_name="Amb."
-    )
+    amb = CharField(max_length=255, blank=True, null=True, verbose_name="Amb.")
 
-    hosp = CharField(
-        max_length=255,
-        blank=True,
-        null=True,
-        verbose_name="Hosp."
-    )
+    hosp = CharField(max_length=255, blank=True, null=True, verbose_name="Hosp.")
 
     no_locaclizacion = CharField(
-        max_length=255,
-        blank=True,
-        null=True,
-        verbose_name="No. Localización"
+        max_length=255, blank=True, null=True, verbose_name="No. Localización"
     )
 
     description = TextField(
-        blank=True,
-        null=True,
-        verbose_name="Localización y Descripción"
+        blank=True, null=True, verbose_name="Localización y Descripción"
     )
 
     anatopathologic_diagnose = TextField(
-        blank=True,
-        null=True,
-        verbose_name="Diagnóstico Anatomopatológico"
+        blank=True, null=True, verbose_name="Diagnóstico Anatomopatológico"
     )
 
-    related_diseases = ManyToManyField(
-        Disease,
-        verbose_name="Enfermedades Asociadas"
-    )
+    related_diseases = ManyToManyField(Disease, verbose_name="Enfermedades Asociadas")
 
-    prev_treatments = ManyToManyField(
-        Treatment,
-        verbose_name="Tratamientos Previos"
-    )
+    prev_treatments = ManyToManyField(Treatment, verbose_name="Tratamientos Previos")
 
-    t = CharField(
-        max_length=255,
-        blank=True,
-        null=True,
-        verbose_name="T"
-    )
+    t = CharField(max_length=255, blank=True, null=True, verbose_name="T")
 
-    n = CharField(
-        max_length=255,
-        blank=True,
-        null=True,
-        verbose_name="N"
-    )
+    n = CharField(max_length=255, blank=True, null=True, verbose_name="N")
 
-    m = CharField(
-        max_length=255,
-        blank=True,
-        null=True,
-        verbose_name="M"
-    )
+    m = CharField(max_length=255, blank=True, null=True, verbose_name="M")
 
-    stage = CharField(
-        max_length=255,
-        blank=True,
-        null=True,
-        verbose_name="Etapa"
-    )
+    stage = CharField(max_length=255, blank=True, null=True, verbose_name="Etapa")
 
     date = DateField(
         verbose_name="Fecha",
@@ -349,7 +299,7 @@ class GeneralDatasheet(Model):
         blank=True,
         null=True,
     )
-    
+
     first_stage_simulation_date = DateField(
         verbose_name="Fecha de Simulación 1ra Fase",
         blank=True,
@@ -393,14 +343,11 @@ class GeneralDatasheet(Model):
     )
 
     registered_by = CharField(
-        max_length=255,
-        blank=True,
-        null=True,
-        verbose_name="Registrado por"
+        max_length=255, blank=True, null=True, verbose_name="Registrado por"
     )
 
     def __str__(self) -> str:
-        return f'{self.id_code} - {self.patient}'
+        return f"{self.id_code} - {self.patient}"
 
     class Meta:
         verbose_name = "Hoja de Datos Generales"

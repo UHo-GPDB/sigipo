@@ -1,25 +1,3 @@
-from django.shortcuts import render
-
-from apps.radiotherapy.models import (
-    Dosimetrist,
-    Physicist,
-    TACRequest,
-    Technic,
-    Disease,
-    Treatment,
-    GeneralDatasheet,
-)
-
-from apps.radiotherapy.forms import (
-    DosimetristForm,
-    PhysicistForm,
-    TACRequestForm,
-    TechnicForm,
-    DiseaseForm,
-    TreatmentForm,
-    GeneralDatasheetForm,
-)
-
 from django.urls import reverse_lazy
 
 from apps.core.views import (
@@ -28,6 +6,25 @@ from apps.core.views import (
     BaseDetailView,
     BaseUpdateView,
 )
+from apps.radiotherapy.forms import (
+    DiseaseForm,
+    DosimetristForm,
+    GeneralDatasheetForm,
+    PhysicistForm,
+    TACRequestForm,
+    TechnicForm,
+    TreatmentForm,
+)
+from apps.radiotherapy.models import (
+    Disease,
+    Dosimetrist,
+    GeneralDatasheet,
+    Physicist,
+    TACRequest,
+    Technic,
+    Treatment,
+)
+
 
 # * Physicist Views
 class PhysicistCreateView(BaseCreateView):
@@ -39,6 +36,7 @@ class PhysicistCreateView(BaseCreateView):
     success_message = "%(name)s guardado correctamente."
     cancel_url = "radiotherapy:physicist_list"
 
+
 class PhysicistDetailView(BaseDetailView):
     """View to handle Physicist details."""
 
@@ -46,6 +44,7 @@ class PhysicistDetailView(BaseDetailView):
     form_class = PhysicistForm
     cancel_url = "radiotherapy:physicist_list"
     object_not_found_error_message = "Físico no encontrado"
+
 
 class PhysicistUpdateView(BaseUpdateView):
     """View to handle Physicist edition."""
@@ -57,6 +56,7 @@ class PhysicistUpdateView(BaseUpdateView):
     cancel_url = "radiotherapy:physicist_list"
     object_not_found_error_message = "Físico no encontrado"
 
+
 class PhysicistDeleteView(BaseDeleteView):
     """View to handle Physicist delete."""
 
@@ -65,6 +65,7 @@ class PhysicistDeleteView(BaseDeleteView):
     success_message = "%(name)s eliminado correctamente."
     cancel_url = "radiotherapy:physicist_list"
     object_not_found_error_message = "Físico no encontrado"
+
 
 # * Dosimetrist Views
 class DosimetristCreateView(BaseCreateView):
@@ -76,6 +77,7 @@ class DosimetristCreateView(BaseCreateView):
     success_message = "%(name)s guardado correctamente."
     cancel_url = "radiotherapy:dosimetrist_list"
 
+
 class DosimetristDetailView(BaseDetailView):
     """View to handle Dosimetrist details."""
 
@@ -83,6 +85,7 @@ class DosimetristDetailView(BaseDetailView):
     form_class = DosimetristForm
     cancel_url = "radiotherapy:dosimetrist_list"
     object_not_found_error_message = "Dosimetrista no encontrado"
+
 
 class DosimetristUpdateView(BaseUpdateView):
     """View to handle Dosimetrist edition."""
@@ -94,6 +97,7 @@ class DosimetristUpdateView(BaseUpdateView):
     cancel_url = "radiotherapy:dosimetrist_list"
     object_not_found_error_message = "Dosimetrista no encontrado"
 
+
 class DosimetristDeleteView(BaseDeleteView):
     """View to handle Dosimetrist delete."""
 
@@ -102,6 +106,7 @@ class DosimetristDeleteView(BaseDeleteView):
     success_message = "%(name)s eliminado correctamente."
     cancel_url = "radiotherapy:dosimetrist_list"
     object_not_found_error_message = "Dosimetrista no encontrado"
+
 
 # * TACRequest Views
 class TACRequestCreateView(BaseCreateView):
@@ -113,6 +118,7 @@ class TACRequestCreateView(BaseCreateView):
     success_message = "%(id_code)s guardado correctamente."
     cancel_url = "radiotherapy:tac_list"
 
+
 class TACRequestDetailView(BaseDetailView):
     """View to handle TACRequest details."""
 
@@ -120,6 +126,7 @@ class TACRequestDetailView(BaseDetailView):
     form_class = TACRequestForm
     cancel_url = "radiotherapy:tac_list"
     object_not_found_error_message = "Solicitud de TAC no encontrada"
+
 
 class TACRequestUpdateView(BaseUpdateView):
     """View to handle TACRequest edition."""
@@ -131,6 +138,7 @@ class TACRequestUpdateView(BaseUpdateView):
     cancel_url = "radiotherapy:tac_list"
     object_not_found_error_message = "Solicitud de TAC no encontrada"
 
+
 class TACRequestDeleteView(BaseDeleteView):
     """View to handle TACRequest delete."""
 
@@ -139,6 +147,7 @@ class TACRequestDeleteView(BaseDeleteView):
     success_message = "%(id_code)s eliminado correctamente."
     cancel_url = "radiotherapy:tac"
     object_not_found_error_message = "Solicitud de TAC no encontrada"
+
 
 # * Technic Views
 class TechnicCreateView(BaseCreateView):
@@ -150,6 +159,7 @@ class TechnicCreateView(BaseCreateView):
     success_message = "%(name)s guardado correctamente."
     cancel_url = "radiotherapy:technic_list"
 
+
 class TechnicDetailView(BaseDetailView):
     """View to handle Technic details."""
 
@@ -157,6 +167,7 @@ class TechnicDetailView(BaseDetailView):
     form_class = TechnicForm
     cancel_url = "radiotherapy:technic_list"
     object_not_found_error_message = "Técnico no encontrado"
+
 
 class TechnicUpdateView(BaseUpdateView):
     """View to handle Technic edition."""
@@ -168,6 +179,7 @@ class TechnicUpdateView(BaseUpdateView):
     cancel_url = "radiotherapy:technic_list"
     object_not_found_error_message = "Técnico no encontrado"
 
+
 class TechnicDeleteView(BaseDeleteView):
     """View to handle Technic delete."""
 
@@ -176,6 +188,7 @@ class TechnicDeleteView(BaseDeleteView):
     success_message = "%(name)s eliminado correctamente."
     cancel_url = "radiotherapy:technic_list"
     object_not_found_error_message = "Técnico no encontrado"
+
 
 # * Disease Views
 class DiseaseCreateView(BaseCreateView):
@@ -187,6 +200,7 @@ class DiseaseCreateView(BaseCreateView):
     success_message = "%(name)s guardado correctamente."
     cancel_url = "radiotherapy:disease_list"
 
+
 class DiseaseDetailView(BaseDetailView):
     """View to handle Disease details."""
 
@@ -194,6 +208,7 @@ class DiseaseDetailView(BaseDetailView):
     form_class = DiseaseForm
     cancel_url = "radiotherapy:disease_list"
     object_not_found_error_message = "Enfermedad no encontrada"
+
 
 class DiseaseUpdateView(BaseUpdateView):
     """View to handle Disease edition."""
@@ -205,6 +220,7 @@ class DiseaseUpdateView(BaseUpdateView):
     cancel_url = "radiotherapy:disease_list"
     object_not_found_error_message = "Enfermedad no encontrada"
 
+
 class DiseaseDeleteView(BaseDeleteView):
     """View to handle Disease delete."""
 
@@ -213,6 +229,7 @@ class DiseaseDeleteView(BaseDeleteView):
     success_message = "%(name)s eliminado correctamente."
     cancel_url = "radiotherapy:disease_list"
     object_not_found_error_message = "Enfermedad no encontrada"
+
 
 # * Treatment Views
 class TreatmentCreateView(BaseCreateView):
@@ -224,6 +241,7 @@ class TreatmentCreateView(BaseCreateView):
     success_message = "%(name)s guardado correctamente."
     cancel_url = "radiotherapy:treatment_list"
 
+
 class TreatmentDetailView(BaseDetailView):
     """View to handle Treatment details."""
 
@@ -231,6 +249,7 @@ class TreatmentDetailView(BaseDetailView):
     form_class = TreatmentForm
     cancel_url = "radiotherapy:treatment_list"
     object_not_found_error_message = "Tratamiento no encontrado"
+
 
 class TreatmentUpdateView(BaseUpdateView):
     """View to handle Treatment edition."""
@@ -242,6 +261,7 @@ class TreatmentUpdateView(BaseUpdateView):
     cancel_url = "radiotherapy:treatment_list"
     object_not_found_error_message = "Tratamiento no encontrado"
 
+
 class TreatmentDeleteView(BaseDeleteView):
     """View to handle Treatment delete."""
 
@@ -250,6 +270,7 @@ class TreatmentDeleteView(BaseDeleteView):
     success_message = "%(name)s eliminado correctamente."
     cancel_url = "radiotherapy:treatment_list"
     object_not_found_error_message = "Tratamiento no encontrado"
+
 
 # * GeneralDatasheet Views
 class GeneralDatasheetCreateView(BaseCreateView):
@@ -261,6 +282,7 @@ class GeneralDatasheetCreateView(BaseCreateView):
     success_message = "%(id_code)s guardado correctamente."
     cancel_url = "radiotherapy:gd_list"
 
+
 class GeneralDatasheetDetailView(BaseDetailView):
     """View to handle General Datasheet details."""
 
@@ -268,6 +290,7 @@ class GeneralDatasheetDetailView(BaseDetailView):
     form_class = GeneralDatasheetForm
     cancel_url = "radiotherapy:gd_list"
     object_not_found_error_message = "Hoja de Datos Generales no encontrada"
+
 
 class GeneralDatasheetUpdateView(BaseUpdateView):
     """View to handle General Datasheet edition."""
@@ -279,6 +302,7 @@ class GeneralDatasheetUpdateView(BaseUpdateView):
     cancel_url = "radiotherapy:gd_list"
     object_not_found_error_message = "Hoja de Datos Generales no encontrada"
 
+
 class GeneralDatasheetDeleteView(BaseDeleteView):
     """View to handle General Datasheet delete."""
 
@@ -287,4 +311,3 @@ class GeneralDatasheetDeleteView(BaseDeleteView):
     success_message = "%(id_code)s eliminado correctamente."
     cancel_url = "radiotherapy:gd_list"
     object_not_found_error_message = "Hoja de Datos Generales no encontrada"
-    

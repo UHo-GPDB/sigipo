@@ -1,28 +1,27 @@
 from django.forms import (
     CharField,
+    DateInput,
+    IntegerField,
     ModelMultipleChoiceField,
+    NumberInput,
     SelectMultiple,
     Textarea,
     TextInput,
-    DateInput,
-    NumberInput,
-    IntegerField,
 )
+
+from apps.core.fields import RelatedModelWrapper
+from apps.core.forms import DateField, ModelChoiceField, ModelForm
 from apps.employee.models import Doctor
 from apps.patient.models import Patient
-
 from apps.radiotherapy.models import (
-    Physicist,
-    Dosimetrist,
-    Technic,
-    TACRequest,
     Disease,
-    Treatment,
+    Dosimetrist,
     GeneralDatasheet,
+    Physicist,
+    TACRequest,
+    Technic,
+    Treatment,
 )
-from apps.core.fields import RelatedModelWrapper
-from apps.core.forms import ChoiceField as EmptyChoiceField
-from apps.core.forms import ModelForm, ModelChoiceField, DateField
 from config.settings.base import FIELD_SEARCH_LOOKUP
 
 
@@ -56,8 +55,8 @@ class TACRequestForm(ModelForm):
     """Model to handle TAC Request creation and edition."""
 
     id_code = CharField(
-        widget = TextInput(attrs={"class": "form-control", "placeholder": "ID"}),
-        label = "ID"
+        widget=TextInput(attrs={"class": "form-control", "placeholder": "ID"}),
+        label="ID",
     )
 
     patient = ModelChoiceField(
@@ -85,39 +84,53 @@ class TACRequestForm(ModelForm):
     )
 
     date_of_request = DateField(
-        widget=DateInput(attrs={"class": "form-control", "type": "date",}, format="%Y-%m-%d"),
+        widget=DateInput(
+            attrs={
+                "class": "form-control",
+                "type": "date",
+            },
+            format="%Y-%m-%d",
+        ),
         required=False,
         label="Fecha de Solicitud",
     )
 
     bb_position = CharField(
-        widget = TextInput(attrs={"class": "form-control", "placeholder": "Posición del BB"}),
-        label = "Posición del BB"
+        widget=TextInput(
+            attrs={"class": "form-control", "placeholder": "Posición del BB"}
+        ),
+        label="Posición del BB",
     )
 
     location = CharField(
-        widget = TextInput(attrs={"class": "form-control", "placeholder": "Localización"}),
-        label = "Localización"
+        widget=TextInput(
+            attrs={"class": "form-control", "placeholder": "Localización"}
+        ),
+        label="Localización",
     )
 
     upper_limit = CharField(
-        widget = TextInput(attrs={"class": "form-control", "placeholder": "Límite superior"}),
-        label = "Límite superior"
+        widget=TextInput(
+            attrs={"class": "form-control", "placeholder": "Límite superior"}
+        ),
+        label="Límite superior",
     )
-    
+
     lower_limit = CharField(
-        widget = TextInput(attrs={"class": "form-control", "placeholder": "Límite inferior"}),
-        label = "Límite inferior"
+        widget=TextInput(
+            attrs={"class": "form-control", "placeholder": "Límite inferior"}
+        ),
+        label="Límite inferior",
     )
 
     distance_betwen_cuts = IntegerField(
-        widget = NumberInput(attrs={"class": "form-control", "min":0}),
-        label = "Distancia entre los cortes"
+        widget=NumberInput(attrs={"class": "form-control", "min": 0}),
+        label="Distancia entre los cortes",
     )
 
     medic_that_requests = ModelChoiceField(
-        queryset = Doctor.objects.all(),
-        widget = RelatedModelWrapper(
+        queryset=Doctor.objects.all(),
+        widget=RelatedModelWrapper(
             attrs={
                 "class": "form-control",
                 "data-placeholder": "Doctor",
@@ -133,10 +146,10 @@ class TACRequestForm(ModelForm):
         ),
         label="Doctor",
     )
-    
+
     physicist = ModelChoiceField(
-        queryset = Physicist.objects.all(),
-        widget = RelatedModelWrapper(
+        queryset=Physicist.objects.all(),
+        widget=RelatedModelWrapper(
             attrs={
                 "class": "form-control",
                 "data-placeholder": "Físico",
@@ -150,10 +163,10 @@ class TACRequestForm(ModelForm):
         ),
         label="Físico",
     )
-    
+
     dosimetrist = ModelChoiceField(
-        queryset = Dosimetrist.objects.all(),
-        widget = RelatedModelWrapper(
+        queryset=Dosimetrist.objects.all(),
+        widget=RelatedModelWrapper(
             attrs={
                 "class": "form-control",
                 "data-placeholder": "Dosimetrista",
@@ -167,7 +180,7 @@ class TACRequestForm(ModelForm):
         ),
         label="Dosimetrista",
     )
-    
+
     class Meta:
         model = TACRequest
         fields = "__all__"
@@ -226,8 +239,8 @@ class GeneralDatasheetForm(ModelForm):
     """Model to handle General Datasheet creation and edition."""
 
     id_code = CharField(
-        widget = TextInput(attrs={"class": "form-control", "placeholder": "ID"}),
-        label = "ID"
+        widget=TextInput(attrs={"class": "form-control", "placeholder": "ID"}),
+        label="ID",
     )
 
     patient = ModelChoiceField(
@@ -255,32 +268,41 @@ class GeneralDatasheetForm(ModelForm):
     )
 
     serv_proc = CharField(
-        widget = TextInput(attrs={"class": "form-control", "placeholder": "Serv. Proc."}),
-        label = "Serv. Proc."
+        widget=TextInput(attrs={"class": "form-control", "placeholder": "Serv. Proc."}),
+        label="Serv. Proc.",
     )
 
     amb = CharField(
-        widget = TextInput(attrs={"class": "form-control", "placeholder": "Amb."}),
-        label = "Amb."
+        widget=TextInput(attrs={"class": "form-control", "placeholder": "Amb."}),
+        label="Amb.",
     )
 
     hosp = CharField(
-        widget = TextInput(attrs={"class": "form-control", "placeholder": "Hosp."}),
-        label = "Hosp."
+        widget=TextInput(attrs={"class": "form-control", "placeholder": "Hosp."}),
+        label="Hosp.",
     )
 
     no_locaclizacion = CharField(
-        widget = TextInput(attrs={"class": "form-control", "placeholder": "No. Localización"}),
-        label = "No. Localización"
+        widget=TextInput(
+            attrs={"class": "form-control", "placeholder": "No. Localización"}
+        ),
+        label="No. Localización",
     )
 
     description = CharField(
-        widget=Textarea(attrs={"class": "form-control", "placeholder": "Localización y Descripción"}),
+        widget=Textarea(
+            attrs={"class": "form-control", "placeholder": "Localización y Descripción"}
+        ),
         label="Localización y Descripción",
     )
 
     anatopathologic_diagnose = CharField(
-        widget=Textarea(attrs={"class": "form-control", "placeholder": "Diagnóstico Anatomopatológico"}),
+        widget=Textarea(
+            attrs={
+                "class": "form-control",
+                "placeholder": "Diagnóstico Anatomopatológico",
+            }
+        ),
         label="Diagnóstico Anatomopatológico",
     )
 
@@ -290,43 +312,44 @@ class GeneralDatasheetForm(ModelForm):
         label="Enfermedades Asociadas",
     )
 
-    
     prev_treatments = ModelMultipleChoiceField(
         queryset=Treatment.objects.all(),
         widget=SelectMultiple(attrs={"class": "form-control"}),
         label="Tratamientos Previos",
     )
 
-    
     t = CharField(
-        widget = TextInput(attrs={"class": "form-control", "placeholder": "T"}),
-        label = "T"
+        widget=TextInput(attrs={"class": "form-control", "placeholder": "T"}), label="T"
     )
 
     n = CharField(
-        widget = TextInput(attrs={"class": "form-control", "placeholder": "N"}),
-        label = "N"
+        widget=TextInput(attrs={"class": "form-control", "placeholder": "N"}), label="N"
     )
 
     m = CharField(
-        widget = TextInput(attrs={"class": "form-control", "placeholder": "M"}),
-        label = "M"
+        widget=TextInput(attrs={"class": "form-control", "placeholder": "M"}), label="M"
     )
 
     stage = CharField(
-        widget = TextInput(attrs={"class": "form-control", "placeholder": "Etapa"}),
-        label = "Etapa"
+        widget=TextInput(attrs={"class": "form-control", "placeholder": "Etapa"}),
+        label="Etapa",
     )
 
     date = DateField(
-        widget=DateInput(attrs={"class": "form-control", "type": "date",}, format="%Y-%m-%d"),
+        widget=DateInput(
+            attrs={
+                "class": "form-control",
+                "type": "date",
+            },
+            format="%Y-%m-%d",
+        ),
         required=False,
         label="Fecha",
     )
 
     radiotherapist = ModelChoiceField(
-        queryset = Doctor.objects.all(),
-        widget = RelatedModelWrapper(
+        queryset=Doctor.objects.all(),
+        widget=RelatedModelWrapper(
             attrs={
                 "class": "form-control",
                 "data-placeholder": "Radioterapeuta",
@@ -344,8 +367,8 @@ class GeneralDatasheetForm(ModelForm):
     )
 
     physicist = ModelChoiceField(
-        queryset = Physicist.objects.all(),
-        widget = RelatedModelWrapper(
+        queryset=Physicist.objects.all(),
+        widget=RelatedModelWrapper(
             attrs={
                 "class": "form-control",
                 "data-placeholder": "Físico",
@@ -361,8 +384,8 @@ class GeneralDatasheetForm(ModelForm):
     )
 
     dosimetrist = ModelChoiceField(
-        queryset = Dosimetrist.objects.all(),
-        widget = RelatedModelWrapper(
+        queryset=Dosimetrist.objects.all(),
+        widget=RelatedModelWrapper(
             attrs={
                 "class": "form-control",
                 "data-placeholder": "Dosimetrista",
@@ -378,8 +401,8 @@ class GeneralDatasheetForm(ModelForm):
     )
 
     Technic = ModelChoiceField(
-        queryset = Technic.objects.all(),
-        widget = RelatedModelWrapper(
+        queryset=Technic.objects.all(),
+        widget=RelatedModelWrapper(
             attrs={
                 "class": "form-control",
                 "data-placeholder": "Técnico",
@@ -395,62 +418,118 @@ class GeneralDatasheetForm(ModelForm):
     )
 
     central_cons_date = DateField(
-        widget=DateInput(attrs={"class": "form-control", "type": "date",}, format="%Y-%m-%d"),
+        widget=DateInput(
+            attrs={
+                "class": "form-control",
+                "type": "date",
+            },
+            format="%Y-%m-%d",
+        ),
         required=False,
         label="Fecha de consulta Central",
     )
 
     new_cases_cons_date = DateField(
-        widget=DateInput(attrs={"class": "form-control", "type": "date",}, format="%Y-%m-%d"),
+        widget=DateInput(
+            attrs={
+                "class": "form-control",
+                "type": "date",
+            },
+            format="%Y-%m-%d",
+        ),
         required=False,
         label="Fecha de consulta Casos Nuevos",
     )
 
     first_stage_simulation_date = DateField(
-        widget=DateInput(attrs={"class": "form-control", "type": "date",}, format="%Y-%m-%d"),
+        widget=DateInput(
+            attrs={
+                "class": "form-control",
+                "type": "date",
+            },
+            format="%Y-%m-%d",
+        ),
         required=False,
         label="Fecha de Simulación 1ra Fase",
     )
 
     second_stage_simulation_date = DateField(
-        widget=DateInput(attrs={"class": "form-control", "type": "date",}, format="%Y-%m-%d"),
+        widget=DateInput(
+            attrs={
+                "class": "form-control",
+                "type": "date",
+            },
+            format="%Y-%m-%d",
+        ),
         required=False,
         label="Fecha de Simulación 2da Fase",
     )
 
     tac_date = DateField(
-        widget=DateInput(attrs={"class": "form-control", "type": "date",}, format="%Y-%m-%d"),
+        widget=DateInput(
+            attrs={
+                "class": "form-control",
+                "type": "date",
+            },
+            format="%Y-%m-%d",
+        ),
         required=False,
         label="Fecha de TAC",
     )
 
     paint_date = DateField(
-        widget=DateInput(attrs={"class": "form-control", "type": "date",}, format="%Y-%m-%d"),
+        widget=DateInput(
+            attrs={
+                "class": "form-control",
+                "type": "date",
+            },
+            format="%Y-%m-%d",
+        ),
         required=False,
         label="Fecha de Pintado",
     )
 
     planing_date = DateField(
-        widget=DateInput(attrs={"class": "form-control", "type": "date",}, format="%Y-%m-%d"),
+        widget=DateInput(
+            attrs={
+                "class": "form-control",
+                "type": "date",
+            },
+            format="%Y-%m-%d",
+        ),
         required=False,
         label="Fecha de Planificado",
     )
 
     first_stage_treatment_start_date = DateField(
-        widget=DateInput(attrs={"class": "form-control", "type": "date",}, format="%Y-%m-%d"),
+        widget=DateInput(
+            attrs={
+                "class": "form-control",
+                "type": "date",
+            },
+            format="%Y-%m-%d",
+        ),
         required=False,
         label="Fecha inicio tratamiento 1ra Fase",
     )
 
     second_stage_treatment_start_date = DateField(
-        widget=DateInput(attrs={"class": "form-control", "type": "date",}, format="%Y-%m-%d"),
+        widget=DateInput(
+            attrs={
+                "class": "form-control",
+                "type": "date",
+            },
+            format="%Y-%m-%d",
+        ),
         required=False,
         label="Fecha inicio tratamiento 2da Fase",
     )
 
     registered_by = CharField(
-        widget = TextInput(attrs={"class": "form-control", "placeholder": "Registrado por"}),
-        label = "Registrado por"
+        widget=TextInput(
+            attrs={"class": "form-control", "placeholder": "Registrado por"}
+        ),
+        label="Registrado por",
     )
 
     class Meta:

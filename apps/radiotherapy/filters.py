@@ -1,24 +1,23 @@
-from django.forms import TextInput, NumberInput
-from django_filters import CharFilter, FilterSet, NumberFilter, ModelChoiceFilter
+from django.forms import NumberInput, TextInput
+from django_filters import CharFilter, FilterSet, ModelChoiceFilter, NumberFilter
 from django_select2.forms import ModelSelect2Widget
+
 from apps.employee.models import Doctor
-
 from apps.radiotherapy.models import (
-    Physicist,
-    Dosimetrist,
-    Technic,
-    TACRequest,
     Disease,
-    Treatment,
+    Dosimetrist,
     GeneralDatasheet,
-
+    Physicist,
+    TACRequest,
+    Technic,
+    Treatment,
 )
-
 from config.settings.base import FIELD_SEARCH_LOOKUP
 
 
 class PhysicistFilter(FilterSet):
-    ''' Filter Criteria for the Physicist Model '''
+    """Filter Criteria for the Physicist Model"""
+
     name = CharFilter(
         lookup_expr=f"{FIELD_SEARCH_LOOKUP}",
         widget=TextInput(
@@ -32,8 +31,10 @@ class PhysicistFilter(FilterSet):
             "name",
         ]
 
+
 class DosimetristFilter(FilterSet):
-    ''' Filter Criteria for the Dosimetrist Model '''
+    """Filter Criteria for the Dosimetrist Model"""
+
     name = CharFilter(
         lookup_expr=f"{FIELD_SEARCH_LOOKUP}",
         widget=TextInput(
@@ -47,12 +48,11 @@ class DosimetristFilter(FilterSet):
             "name",
         ]
 
+
 class TACRequestFilter(FilterSet):
     id_code = CharFilter(
         lookup_expr=f"{FIELD_SEARCH_LOOKUP}",
-        widget=TextInput(
-            attrs={"class": "form-control", "placeholder": "ID contiene"}
-        ),
+        widget=TextInput(attrs={"class": "form-control", "placeholder": "ID contiene"}),
         label="Código ID",
     )
 
@@ -79,7 +79,7 @@ class TACRequestFilter(FilterSet):
         ),
         label="Apellidos",
     )
-    
+
     patient__medical_record = CharFilter(
         lookup_expr=f"{FIELD_SEARCH_LOOKUP}",
         widget=TextInput(
@@ -123,7 +123,7 @@ class TACRequestFilter(FilterSet):
         ),
         label="Límite Superior",
     )
-    
+
     lower_limit = CharFilter(
         lookup_expr=f"{FIELD_SEARCH_LOOKUP}",
         widget=TextInput(
@@ -216,8 +216,10 @@ class TACRequestFilter(FilterSet):
             "dosimetrist",
         ]
 
+
 class TechnicFilter(FilterSet):
-    ''' Filter Criteria for the Technic Model '''
+    """Filter Criteria for the Technic Model"""
+
     name = CharFilter(
         lookup_expr=f"{FIELD_SEARCH_LOOKUP}",
         widget=TextInput(
@@ -231,8 +233,10 @@ class TechnicFilter(FilterSet):
             "name",
         ]
 
+
 class DiseaseFilter(FilterSet):
-    ''' Filter Criteria for the Disease Model '''
+    """Filter Criteria for the Disease Model"""
+
     name = CharFilter(
         lookup_expr=f"{FIELD_SEARCH_LOOKUP}",
         widget=TextInput(
@@ -246,8 +250,10 @@ class DiseaseFilter(FilterSet):
             "name",
         ]
 
+
 class TreatmentFilter(FilterSet):
-    ''' Filter Criteria for the Treatment Model '''
+    """Filter Criteria for the Treatment Model"""
+
     name = CharFilter(
         lookup_expr=f"{FIELD_SEARCH_LOOKUP}",
         widget=TextInput(
@@ -261,12 +267,11 @@ class TreatmentFilter(FilterSet):
             "name",
         ]
 
+
 class GeneralDatasheetFilter(FilterSet):
     id_code = CharFilter(
         lookup_expr=f"{FIELD_SEARCH_LOOKUP}",
-        widget=TextInput(
-            attrs={"class": "form-control", "placeholder": "ID contiene"}
-        ),
+        widget=TextInput(attrs={"class": "form-control", "placeholder": "ID contiene"}),
         label="Código ID",
     )
 
@@ -293,7 +298,7 @@ class GeneralDatasheetFilter(FilterSet):
         ),
         label="Apellidos",
     )
-    
+
     patient__medical_record = CharFilter(
         lookup_expr=f"{FIELD_SEARCH_LOOKUP}",
         widget=TextInput(

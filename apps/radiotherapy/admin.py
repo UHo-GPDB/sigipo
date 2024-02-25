@@ -1,16 +1,17 @@
 from django.contrib.admin import ModelAdmin, register
 
 from apps.radiotherapy.models import (
-    Physicist,
-    Dosimetrist,
-    Technic,
-    TACRequest,
     Disease,
-    Treatment,
+    Dosimetrist,
     GeneralDatasheet,
+    Physicist,
+    TACRequest,
+    Technic,
+    Treatment,
 )
 
 # Register your models here.
+
 
 @register(Physicist)
 class PhysicistAdmin(ModelAdmin):
@@ -20,6 +21,7 @@ class PhysicistAdmin(ModelAdmin):
 
     pass
 
+
 @register(Dosimetrist)
 class DosimetristAdmin(ModelAdmin):
     """
@@ -27,6 +29,7 @@ class DosimetristAdmin(ModelAdmin):
     """
 
     pass
+
 
 @register(Technic)
 class TechnicAdmin(ModelAdmin):
@@ -36,6 +39,7 @@ class TechnicAdmin(ModelAdmin):
 
     pass
 
+
 @register(TACRequest)
 class TACRequestAdmin(ModelAdmin):
     """
@@ -43,6 +47,7 @@ class TACRequestAdmin(ModelAdmin):
     """
 
     pass
+
 
 @register(Disease)
 class DiseaseAdmin(ModelAdmin):
@@ -52,6 +57,7 @@ class DiseaseAdmin(ModelAdmin):
 
     pass
 
+
 @register(Treatment)
 class TreatmentAdmin(ModelAdmin):
     """
@@ -59,6 +65,7 @@ class TreatmentAdmin(ModelAdmin):
     """
 
     pass
+
 
 @register(GeneralDatasheet)
 class GeneralDatasheetAdmin(ModelAdmin):

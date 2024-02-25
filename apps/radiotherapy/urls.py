@@ -1,57 +1,54 @@
 from django.urls import path
 
+from apps.core.views import PaginationFilterView, getUrl
+from apps.radiotherapy.filters import (
+    DiseaseFilter,
+    DosimetristFilter,
+    GeneralDatasheetFilter,
+    PhysicistFilter,
+    TACRequestFilter,
+    TechnicFilter,
+    TreatmentFilter,
+)
 from apps.radiotherapy.models import (
+    Disease,
     Dosimetrist,
+    GeneralDatasheet,
     Physicist,
     TACRequest,
     Technic,
-    Disease,
     Treatment,
-    GeneralDatasheet,
-    )
+)
 from apps.radiotherapy.views import (
-    PhysicistCreateView,
-    PhysicistUpdateView,
-    PhysicistDetailView,
-    PhysicistDeleteView,
+    DiseaseCreateView,
+    DiseaseDeleteView,
+    DiseaseDetailView,
+    DiseaseUpdateView,
     DosimetristCreateView,
+    DosimetristDeleteView,
     DosimetristDetailView,
     DosimetristUpdateView,
-    DosimetristDeleteView,
+    GeneralDatasheetCreateView,
+    GeneralDatasheetDeleteView,
+    GeneralDatasheetDetailView,
+    GeneralDatasheetUpdateView,
+    PhysicistCreateView,
+    PhysicistDeleteView,
+    PhysicistDetailView,
+    PhysicistUpdateView,
     TACRequestCreateView,
     TACRequestDeleteView,
     TACRequestDetailView,
     TACRequestUpdateView,
     TechnicCreateView,
-    TechnicDetailView,
     TechnicDeleteView,
+    TechnicDetailView,
     TechnicUpdateView,
-    DiseaseCreateView,
-    DiseaseDeleteView,
-    DiseaseDetailView,
-    DiseaseUpdateView,
     TreatmentCreateView,
     TreatmentDeleteView,
     TreatmentDetailView,
     TreatmentUpdateView,
-    GeneralDatasheetCreateView,
-    GeneralDatasheetDeleteView,
-    GeneralDatasheetDetailView,
-    GeneralDatasheetUpdateView,
-    )
-
-from apps.radiotherapy.filters import (
-    PhysicistFilter, 
-    DosimetristFilter,
-    TACRequestFilter,
-    TechnicFilter,
-    DiseaseFilter,
-    TreatmentFilter,
-    GeneralDatasheetFilter,
 )
-
-from apps.core.views import PaginationFilterView, getUrl
-
 
 app_name = "radiotherapy"
 urlpatterns = [
@@ -68,7 +65,6 @@ urlpatterns = [
     getUrl(PhysicistDetailView),
     getUrl(PhysicistUpdateView),
     getUrl(PhysicistDeleteView),
-
     # Dosimetrist URLs
     path(
         "dosimetrist/list/",
@@ -82,7 +78,6 @@ urlpatterns = [
     getUrl(DosimetristDetailView),
     getUrl(DosimetristUpdateView),
     getUrl(DosimetristDeleteView),
-
     # TACRequest URLs
     path(
         "tacrequest/list/",
@@ -96,7 +91,6 @@ urlpatterns = [
     getUrl(TACRequestDetailView),
     getUrl(TACRequestUpdateView),
     getUrl(TACRequestDeleteView),
-
     # Technic URLs
     path(
         "technic/list/",
@@ -110,7 +104,6 @@ urlpatterns = [
     getUrl(TechnicDetailView),
     getUrl(TechnicUpdateView),
     getUrl(TechnicDeleteView),
-
     # Disease URLs
     path(
         "disease/list/",
@@ -124,7 +117,6 @@ urlpatterns = [
     getUrl(DiseaseDetailView),
     getUrl(DiseaseUpdateView),
     getUrl(DiseaseDeleteView),
-
     # Treatment URLs
     path(
         "treatment/list/",
@@ -138,7 +130,6 @@ urlpatterns = [
     getUrl(TreatmentDetailView),
     getUrl(TreatmentUpdateView),
     getUrl(TreatmentDeleteView),
-
     # General Datasheets URLs
     path(
         "generalDatasheet/list/",
@@ -152,5 +143,4 @@ urlpatterns = [
     getUrl(GeneralDatasheetDetailView),
     getUrl(GeneralDatasheetUpdateView),
     getUrl(GeneralDatasheetDeleteView),
-
 ]
