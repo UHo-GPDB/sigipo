@@ -154,6 +154,40 @@
     </li>
 
     <li class="nav-item mb-1">
+      <button class="btn btn-toggle align-items-center rounded collapsed text-white" data-bs-toggle="collapse" data-bs-target="#radiotherapy" aria-expanded="false">
+        <i class="fa-solid fa-circle-radiation"></i> Radioterapia
+      </button>
+      <div class="collapse" id="radiotherapy">
+        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+          <li class="sub-menu nav-item mb-1">
+            <a href="{% url 'patient:oncologic_list' %}?module-name=radiotherapy" class="nav-link link-light rounded"><i class="fa-solid fa-hospital-user"></i> Paciente</a>
+          </li>
+          <li class="sub-menu nav-item mb-1">
+            <a href="{% url 'radiotherapy:physicist_list' %}" class="nav-link link-light rounded"><i class="fa-solid fa-user-doctor"></i> Físicos</a>
+          </li>
+          <li class="sub-menu nav-item mb-1">
+            <a href="{% url 'radiotherapy:dosimetrist_list' %}" class="nav-link link-light rounded"><i class="fa-solid fa-syringe"></i> Dosimetristas</a>
+          </li>
+          <li class="sub-menu nav-item mb-1">
+            <a href="{% url 'radiotherapy:technic_list' %}" class="nav-link link-light rounded"><i class="fa-solid fa-hospital-user"></i> Técnicos</a>
+          </li>
+          <li class="sub-menu nav-item mb-1">
+            <a href="{% url 'radiotherapy:disease_list' %}" class="nav-link link-light rounded"><i class="fa-solid fa-virus"></i> Enfermedades</a>
+          </li>
+          <li class="sub-menu nav-item mb-1">
+            <a href="{% url 'radiotherapy:treatment_list' %}" class="nav-link link-light rounded"><i class="fa-solid fa-pen-to-square"></i> Tratamientos</a>
+          </li>
+          <li class="sub-menu nav-item mb-1">
+            <a href="{% url 'radiotherapy:gd_list' %}" class="nav-link link-light rounded"><i class="fa-solid fa-address-book"></i> Datos Generales</a>
+          </li>
+          <li class="sub-menu nav-item mb-1">
+            <a href="{% url 'radiotherapy:tac_list' %}" class="nav-link link-light rounded"><i class="fa-solid fa-square-poll-horizontal"></i> Solicitud TAC Planificaci&oacuten</a>
+          </li>
+        </ul>
+      </div>
+    </li>
+
+    <li class="nav-item mb-1">
       <button class="btn btn-toggle align-items-center rounded collapsed text-white" data-bs-toggle="collapse" data-bs-target="#hospital" aria-expanded="false">
         <i class="fa-solid fa-hospital"></i> Hospital
       </button>
