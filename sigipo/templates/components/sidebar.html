@@ -169,7 +169,16 @@
             <a href="{% url 'radiotherapy:dosimetrist_list' %}" class="nav-link link-light rounded"><i class="fa-solid fa-syringe"></i> Dosimetristas</a>
           </li>
           <li class="sub-menu nav-item mb-1">
-            <a href="#" class="nav-link link-light rounded"><i class="fa-solid fa-address-book"></i> Datos Generales</a>
+            <a href="{% url 'radiotherapy:technic_list' %}" class="nav-link link-light rounded"><i class="fa-solid fa-hospital-user"></i> Técnicos</a>
+          </li>
+          <li class="sub-menu nav-item mb-1">
+            <a href="{% url 'radiotherapy:disease_list' %}" class="nav-link link-light rounded"><i class="fa-solid fa-virus"></i> Enfermedades</a>
+          </li>
+          <li class="sub-menu nav-item mb-1">
+            <a href="{% url 'radiotherapy:treatment_list' %}" class="nav-link link-light rounded"><i class="fa-solid fa-pen-to-square"></i> Tratamientos</a>
+          </li>
+          <li class="sub-menu nav-item mb-1">
+            <a href="{% url 'radiotherapy:gd_list' %}" class="nav-link link-light rounded"><i class="fa-solid fa-address-book"></i> Datos Generales</a>
           </li>
           <li class="sub-menu nav-item mb-1">
             <a href="{% url 'radiotherapy:tac_list' %}" class="nav-link link-light rounded"><i class="fa-solid fa-square-poll-horizontal"></i> Solicitud TAC Planificaci&oacuten</a>

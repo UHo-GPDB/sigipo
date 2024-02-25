@@ -6,7 +6,12 @@ from apps.employee.models import Doctor
 from apps.radiotherapy.models import (
     Physicist,
     Dosimetrist,
-    TACRequest
+    Technic,
+    TACRequest,
+    Disease,
+    Treatment,
+    GeneralDatasheet,
+
 )
 
 from config.settings.base import FIELD_SEARCH_LOOKUP
@@ -209,4 +214,103 @@ class TACRequestFilter(FilterSet):
             "medic_that_requests",
             "physicist",
             "dosimetrist",
+        ]
+
+class TechnicFilter(FilterSet):
+    ''' Filter Criteria for the Technic Model '''
+    name = CharFilter(
+        lookup_expr=f"{FIELD_SEARCH_LOOKUP}",
+        widget=TextInput(
+            attrs={"class": "form-control", "placeholder": "Nombre contiene"}
+        ),
+    )
+
+    class Meta:
+        model = Technic
+        fields = [
+            "name",
+        ]
+
+class DiseaseFilter(FilterSet):
+    ''' Filter Criteria for the Disease Model '''
+    name = CharFilter(
+        lookup_expr=f"{FIELD_SEARCH_LOOKUP}",
+        widget=TextInput(
+            attrs={"class": "form-control", "placeholder": "Nombre contiene"}
+        ),
+    )
+
+    class Meta:
+        model = Disease
+        fields = [
+            "name",
+        ]
+
+class TreatmentFilter(FilterSet):
+    ''' Filter Criteria for the Treatment Model '''
+    name = CharFilter(
+        lookup_expr=f"{FIELD_SEARCH_LOOKUP}",
+        widget=TextInput(
+            attrs={"class": "form-control", "placeholder": "Nombre contiene"}
+        ),
+    )
+
+    class Meta:
+        model = Treatment
+        fields = [
+            "name",
+        ]
+
+class GeneralDatasheetFilter(FilterSet):
+    id_code = CharFilter(
+        lookup_expr=f"{FIELD_SEARCH_LOOKUP}",
+        widget=TextInput(
+            attrs={"class": "form-control", "placeholder": "ID contiene"}
+        ),
+        label="Código ID",
+    )
+
+    patient__identity_card = CharFilter(
+        lookup_expr=f"{FIELD_SEARCH_LOOKUP}",
+        widget=TextInput(
+            attrs={"class": "form-control", "placeholder": "Carnet contiene"}
+        ),
+        label="Carnet",
+    )
+
+    patient__first_name = CharFilter(
+        lookup_expr=f"{FIELD_SEARCH_LOOKUP}",
+        widget=TextInput(
+            attrs={"class": "form-control", "placeholder": "Nombre contiene"}
+        ),
+        label="Nombres",
+    )
+
+    patient__last_name = CharFilter(
+        lookup_expr=f"{FIELD_SEARCH_LOOKUP}",
+        widget=TextInput(
+            attrs={"class": "form-control", "placeholder": "Apellidos contiene"}
+        ),
+        label="Apellidos",
+    )
+    
+    patient__medical_record = CharFilter(
+        lookup_expr=f"{FIELD_SEARCH_LOOKUP}",
+        widget=TextInput(
+            attrs={
+                "class": "form-control",
+                "placeholder": "No. historia clínica contiene",
+            }
+        ),
+        label="No. historia clínica",
+    )
+
+    class Meta:
+        model = GeneralDatasheet
+        fields = [
+            "id_code",
+            "patient__identity_card",
+            "patient__first_name",
+            "patient__last_name",
+            "patient__medical_record",
         ]
